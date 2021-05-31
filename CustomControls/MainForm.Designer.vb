@@ -1,0 +1,497 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class MainForm
+    Inherits System.Windows.Forms.Form
+
+    'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
+    <System.Diagnostics.DebuggerNonUserCode()>
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Windows フォーム デザイナーで必要です。
+    Private components As System.ComponentModel.IContainer
+
+    'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
+    'Windows フォーム デザイナーを使用して変更できます。  
+    'コード エディターを使って変更しないでください。
+    <System.Diagnostics.DebuggerStepThrough()>
+    Private Sub InitializeComponent()
+        Me.txtDebug = New System.Windows.Forms.TextBox()
+        Me.btnTooltip = New System.Windows.Forms.Button()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.btnFont = New System.Windows.Forms.Button()
+        Me.txtY = New System.Windows.Forms.TextBox()
+        Me.txtX = New System.Windows.Forms.TextBox()
+        Me.lblX = New System.Windows.Forms.Label()
+        Me.lblY = New System.Windows.Forms.Label()
+        Me.FontDialogTooltip = New System.Windows.Forms.FontDialog()
+        Me.txtTooltip = New System.Windows.Forms.TextBox()
+        Me.btnFormTooltip = New System.Windows.Forms.Button()
+        Me.panelSplash = New System.Windows.Forms.Panel()
+        Me.combDuration = New System.Windows.Forms.ComboBox()
+        Me.lblFontSplash = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblTooltipForm = New System.Windows.Forms.Label()
+        Me.btnFormTooltipClose = New System.Windows.Forms.Button()
+        Me.btnLogClear = New System.Windows.Forms.Button()
+        Me.panelToggle = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblFont = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtToggleHeight = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtToggleWidth = New System.Windows.Forms.TextBox()
+        Me.btnToggleFonts = New System.Windows.Forms.Button()
+        Me.btnFalseColor = New System.Windows.Forms.Button()
+        Me.btnTrueColor = New System.Windows.Forms.Button()
+        Me.txtFalse = New System.Windows.Forms.TextBox()
+        Me.txtTrue = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
+        Me.FontDialogToggle = New System.Windows.Forms.FontDialog()
+        Me.panelWrappers = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lstGeneric = New System.Windows.Forms.ListBox()
+        Me.combGeneric = New System.Windows.Forms.ComboBox()
+        Me.btnGenericSet = New System.Windows.Forms.Button()
+        Me.ToggleSwitch1 = New SpecialControls.ToggleSwitch()
+        Me.panelSplash.SuspendLayout()
+        Me.panelToggle.SuspendLayout()
+        Me.panelWrappers.SuspendLayout()
+        CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'txtDebug
+        '
+        Me.txtDebug.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtDebug.Location = New System.Drawing.Point(13, 432)
+        Me.txtDebug.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtDebug.Multiline = True
+        Me.txtDebug.Name = "txtDebug"
+        Me.txtDebug.ReadOnly = True
+        Me.txtDebug.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtDebug.Size = New System.Drawing.Size(866, 143)
+        Me.txtDebug.TabIndex = 4
+        '
+        'btnTooltip
+        '
+        Me.btnTooltip.Location = New System.Drawing.Point(297, 108)
+        Me.btnTooltip.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnTooltip.Name = "btnTooltip"
+        Me.btnTooltip.Size = New System.Drawing.Size(149, 29)
+        Me.btnTooltip.TabIndex = 6
+        Me.btnTooltip.Text = "テキストツールチップ表示"
+        Me.btnTooltip.UseVisualStyleBackColor = True
+        '
+        'btnFont
+        '
+        Me.btnFont.Location = New System.Drawing.Point(145, 35)
+        Me.btnFont.Name = "btnFont"
+        Me.btnFont.Size = New System.Drawing.Size(80, 29)
+        Me.btnFont.TabIndex = 10
+        Me.btnFont.Text = "フォント設定"
+        Me.btnFont.UseVisualStyleBackColor = True
+        '
+        'txtY
+        '
+        Me.txtY.Location = New System.Drawing.Point(39, 66)
+        Me.txtY.Name = "txtY"
+        Me.txtY.Size = New System.Drawing.Size(100, 23)
+        Me.txtY.TabIndex = 11
+        Me.txtY.Text = "500"
+        '
+        'txtX
+        '
+        Me.txtX.Location = New System.Drawing.Point(39, 37)
+        Me.txtX.Name = "txtX"
+        Me.txtX.Size = New System.Drawing.Size(100, 23)
+        Me.txtX.TabIndex = 12
+        Me.txtX.Text = "500"
+        '
+        'lblX
+        '
+        Me.lblX.AutoSize = True
+        Me.lblX.Location = New System.Drawing.Point(18, 45)
+        Me.lblX.Name = "lblX"
+        Me.lblX.Size = New System.Drawing.Size(15, 15)
+        Me.lblX.TabIndex = 13
+        Me.lblX.Text = "X"
+        '
+        'lblY
+        '
+        Me.lblY.AutoSize = True
+        Me.lblY.Location = New System.Drawing.Point(18, 69)
+        Me.lblY.Name = "lblY"
+        Me.lblY.Size = New System.Drawing.Size(15, 15)
+        Me.lblY.TabIndex = 14
+        Me.lblY.Text = "Y"
+        '
+        'txtTooltip
+        '
+        Me.txtTooltip.Location = New System.Drawing.Point(14, 97)
+        Me.txtTooltip.Multiline = True
+        Me.txtTooltip.Name = "txtTooltip"
+        Me.txtTooltip.Size = New System.Drawing.Size(276, 40)
+        Me.txtTooltip.TabIndex = 15
+        Me.txtTooltip.Text = "クリップボードにコピーしました"
+        '
+        'btnFormTooltip
+        '
+        Me.btnFormTooltip.Location = New System.Drawing.Point(123, 156)
+        Me.btnFormTooltip.Name = "btnFormTooltip"
+        Me.btnFormTooltip.Size = New System.Drawing.Size(86, 23)
+        Me.btnFormTooltip.TabIndex = 16
+        Me.btnFormTooltip.Text = "永続表示"
+        Me.btnFormTooltip.UseVisualStyleBackColor = True
+        '
+        'panelSplash
+        '
+        Me.panelSplash.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panelSplash.Controls.Add(Me.combDuration)
+        Me.panelSplash.Controls.Add(Me.lblFontSplash)
+        Me.panelSplash.Controls.Add(Me.Label6)
+        Me.panelSplash.Controls.Add(Me.lblTooltipForm)
+        Me.panelSplash.Controls.Add(Me.btnFormTooltipClose)
+        Me.panelSplash.Controls.Add(Me.txtTooltip)
+        Me.panelSplash.Controls.Add(Me.btnFormTooltip)
+        Me.panelSplash.Controls.Add(Me.btnTooltip)
+        Me.panelSplash.Controls.Add(Me.btnFont)
+        Me.panelSplash.Controls.Add(Me.lblY)
+        Me.panelSplash.Controls.Add(Me.txtY)
+        Me.panelSplash.Controls.Add(Me.lblX)
+        Me.panelSplash.Controls.Add(Me.txtX)
+        Me.panelSplash.Location = New System.Drawing.Point(18, 202)
+        Me.panelSplash.Name = "panelSplash"
+        Me.panelSplash.Size = New System.Drawing.Size(452, 194)
+        Me.panelSplash.TabIndex = 17
+        '
+        'combDuration
+        '
+        Me.combDuration.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.combDuration.FormattingEnabled = True
+        Me.combDuration.Location = New System.Drawing.Point(145, 69)
+        Me.combDuration.Name = "combDuration"
+        Me.combDuration.Size = New System.Drawing.Size(80, 23)
+        Me.combDuration.TabIndex = 23
+        '
+        'lblFontSplash
+        '
+        Me.lblFontSplash.AutoSize = True
+        Me.lblFontSplash.Location = New System.Drawing.Point(231, 42)
+        Me.lblFontSplash.Name = "lblFontSplash"
+        Me.lblFontSplash.Size = New System.Drawing.Size(70, 15)
+        Me.lblFontSplash.TabIndex = 22
+        Me.lblFontSplash.Text = "フォント名など"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label6.Location = New System.Drawing.Point(3, 6)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(180, 26)
+        Me.Label6.TabIndex = 21
+        Me.Label6.Text = "スプラッシュメッセージ"
+        '
+        'lblTooltipForm
+        '
+        Me.lblTooltipForm.AutoSize = True
+        Me.lblTooltipForm.Location = New System.Drawing.Point(30, 160)
+        Me.lblTooltipForm.Name = "lblTooltipForm"
+        Me.lblTooltipForm.Size = New System.Drawing.Size(85, 15)
+        Me.lblTooltipForm.TabIndex = 18
+        Me.lblTooltipForm.Text = "ツールチップ表示"
+        '
+        'btnFormTooltipClose
+        '
+        Me.btnFormTooltipClose.Location = New System.Drawing.Point(215, 156)
+        Me.btnFormTooltipClose.Name = "btnFormTooltipClose"
+        Me.btnFormTooltipClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnFormTooltipClose.TabIndex = 17
+        Me.btnFormTooltipClose.Text = "閉じる"
+        Me.btnFormTooltipClose.UseVisualStyleBackColor = True
+        '
+        'btnLogClear
+        '
+        Me.btnLogClear.Location = New System.Drawing.Point(13, 402)
+        Me.btnLogClear.Name = "btnLogClear"
+        Me.btnLogClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnLogClear.TabIndex = 18
+        Me.btnLogClear.Text = "クリア"
+        Me.btnLogClear.UseVisualStyleBackColor = True
+        '
+        'panelToggle
+        '
+        Me.panelToggle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panelToggle.Controls.Add(Me.Label5)
+        Me.panelToggle.Controls.Add(Me.lblFont)
+        Me.panelToggle.Controls.Add(Me.Label3)
+        Me.panelToggle.Controls.Add(Me.txtToggleHeight)
+        Me.panelToggle.Controls.Add(Me.ToggleSwitch1)
+        Me.panelToggle.Controls.Add(Me.Label4)
+        Me.panelToggle.Controls.Add(Me.txtToggleWidth)
+        Me.panelToggle.Controls.Add(Me.btnToggleFonts)
+        Me.panelToggle.Controls.Add(Me.btnFalseColor)
+        Me.panelToggle.Controls.Add(Me.btnTrueColor)
+        Me.panelToggle.Controls.Add(Me.txtFalse)
+        Me.panelToggle.Controls.Add(Me.txtTrue)
+        Me.panelToggle.Controls.Add(Me.Label2)
+        Me.panelToggle.Controls.Add(Me.Label1)
+        Me.panelToggle.Location = New System.Drawing.Point(18, 12)
+        Me.panelToggle.Name = "panelToggle"
+        Me.panelToggle.Size = New System.Drawing.Size(452, 184)
+        Me.panelToggle.TabIndex = 19
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label5.Location = New System.Drawing.Point(3, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(184, 26)
+        Me.Label5.TabIndex = 20
+        Me.Label5.Text = "モダンなトグルスイッチ"
+        '
+        'lblFont
+        '
+        Me.lblFont.AutoSize = True
+        Me.lblFont.Location = New System.Drawing.Point(325, 95)
+        Me.lblFont.Name = "lblFont"
+        Me.lblFont.Size = New System.Drawing.Size(70, 15)
+        Me.lblFont.TabIndex = 20
+        Me.lblFont.Text = "フォント名など"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(236, 156)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(27, 15)
+        Me.Label3.TabIndex = 19
+        Me.Label3.Text = "高さ"
+        '
+        'txtToggleHeight
+        '
+        Me.txtToggleHeight.Location = New System.Drawing.Point(269, 153)
+        Me.txtToggleHeight.Name = "txtToggleHeight"
+        Me.txtToggleHeight.Size = New System.Drawing.Size(100, 23)
+        Me.txtToggleHeight.TabIndex = 16
+        Me.txtToggleHeight.Text = "200"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(236, 132)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(19, 15)
+        Me.Label4.TabIndex = 18
+        Me.Label4.Text = "幅"
+        '
+        'txtToggleWidth
+        '
+        Me.txtToggleWidth.Location = New System.Drawing.Point(269, 124)
+        Me.txtToggleWidth.Name = "txtToggleWidth"
+        Me.txtToggleWidth.Size = New System.Drawing.Size(100, 23)
+        Me.txtToggleWidth.TabIndex = 17
+        Me.txtToggleWidth.Text = "100"
+        '
+        'btnToggleFonts
+        '
+        Me.btnToggleFonts.Location = New System.Drawing.Point(239, 88)
+        Me.btnToggleFonts.Name = "btnToggleFonts"
+        Me.btnToggleFonts.Size = New System.Drawing.Size(80, 29)
+        Me.btnToggleFonts.TabIndex = 15
+        Me.btnToggleFonts.Text = "フォント設定"
+        Me.btnToggleFonts.UseVisualStyleBackColor = True
+        '
+        'btnFalseColor
+        '
+        Me.btnFalseColor.Location = New System.Drawing.Point(123, 124)
+        Me.btnFalseColor.Name = "btnFalseColor"
+        Me.btnFalseColor.Size = New System.Drawing.Size(75, 23)
+        Me.btnFalseColor.TabIndex = 14
+        Me.btnFalseColor.Text = "OFFの色"
+        Me.btnFalseColor.UseVisualStyleBackColor = True
+        '
+        'btnTrueColor
+        '
+        Me.btnTrueColor.Location = New System.Drawing.Point(15, 124)
+        Me.btnTrueColor.Name = "btnTrueColor"
+        Me.btnTrueColor.Size = New System.Drawing.Size(75, 23)
+        Me.btnTrueColor.TabIndex = 13
+        Me.btnTrueColor.Text = "ONの色"
+        Me.btnTrueColor.UseVisualStyleBackColor = True
+        '
+        'txtFalse
+        '
+        Me.txtFalse.Location = New System.Drawing.Point(120, 94)
+        Me.txtFalse.Name = "txtFalse"
+        Me.txtFalse.Size = New System.Drawing.Size(100, 23)
+        Me.txtFalse.TabIndex = 12
+        '
+        'txtTrue
+        '
+        Me.txtTrue.Location = New System.Drawing.Point(14, 94)
+        Me.txtTrue.Name = "txtTrue"
+        Me.txtTrue.Size = New System.Drawing.Size(100, 23)
+        Me.txtTrue.TabIndex = 11
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(120, 76)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(57, 15)
+        Me.Label2.TabIndex = 10
+        Me.Label2.Text = "OFFのとき"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(14, 76)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(52, 15)
+        Me.Label1.TabIndex = 9
+        Me.Label1.Text = "ONのとき"
+        '
+        'panelWrappers
+        '
+        Me.panelWrappers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panelWrappers.Controls.Add(Me.btnGenericSet)
+        Me.panelWrappers.Controls.Add(Me.combGeneric)
+        Me.panelWrappers.Controls.Add(Me.lstGeneric)
+        Me.panelWrappers.Controls.Add(Me.Label7)
+        Me.panelWrappers.Location = New System.Drawing.Point(476, 13)
+        Me.panelWrappers.Name = "panelWrappers"
+        Me.panelWrappers.Size = New System.Drawing.Size(409, 183)
+        Me.panelWrappers.TabIndex = 20
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label7.Location = New System.Drawing.Point(3, 9)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(352, 26)
+        Me.Label7.TabIndex = 21
+        Me.Label7.Text = "任意の型のコレクションを紐付けるラッパー"
+        '
+        'lstGeneric
+        '
+        Me.lstGeneric.FormattingEnabled = True
+        Me.lstGeneric.ItemHeight = 15
+        Me.lstGeneric.Location = New System.Drawing.Point(186, 44)
+        Me.lstGeneric.Name = "lstGeneric"
+        Me.lstGeneric.Size = New System.Drawing.Size(216, 124)
+        Me.lstGeneric.TabIndex = 22
+        '
+        'combGeneric
+        '
+        Me.combGeneric.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.combGeneric.FormattingEnabled = True
+        Me.combGeneric.Location = New System.Drawing.Point(8, 44)
+        Me.combGeneric.Name = "combGeneric"
+        Me.combGeneric.Size = New System.Drawing.Size(163, 23)
+        Me.combGeneric.TabIndex = 23
+        '
+        'btnGenericSet
+        '
+        Me.btnGenericSet.Location = New System.Drawing.Point(8, 151)
+        Me.btnGenericSet.Name = "btnGenericSet"
+        Me.btnGenericSet.Size = New System.Drawing.Size(75, 23)
+        Me.btnGenericSet.TabIndex = 24
+        Me.btnGenericSet.Text = "データセット"
+        Me.btnGenericSet.UseVisualStyleBackColor = True
+        '
+        'ToggleSwitch1
+        '
+        Me.ToggleSwitch1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ToggleSwitch1.FalseColor = System.Drawing.Color.DarkGray
+        Me.ToggleSwitch1.FalseText = "左クリック無効"
+        Me.ToggleSwitch1.FontName = "Meiryo UI"
+        Me.ToggleSwitch1.FontSize = 14.0!
+        Me.ToggleSwitch1.FontStyle = System.Drawing.FontStyle.Bold
+        Me.ToggleSwitch1.IsChecked = False
+        Me.ToggleSwitch1.Location = New System.Drawing.Point(17, 29)
+        Me.ToggleSwitch1.Name = "ToggleSwitch1"
+        Me.ToggleSwitch1.Size = New System.Drawing.Size(186, 39)
+        Me.ToggleSwitch1.TabIndex = 8
+        Me.ToggleSwitch1.TabStop = False
+        Me.ToggleSwitch1.TrueColor = System.Drawing.Color.Lime
+        Me.ToggleSwitch1.TrueText = "左クリック有効"
+        '
+        'MainForm
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(897, 588)
+        Me.Controls.Add(Me.panelWrappers)
+        Me.Controls.Add(Me.panelToggle)
+        Me.Controls.Add(Me.btnLogClear)
+        Me.Controls.Add(Me.panelSplash)
+        Me.Controls.Add(Me.txtDebug)
+        Me.Font = New System.Drawing.Font("Meiryo UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.Name = "MainForm"
+        Me.Text = "コントロール見本"
+        Me.panelSplash.ResumeLayout(False)
+        Me.panelSplash.PerformLayout()
+        Me.panelToggle.ResumeLayout(False)
+        Me.panelToggle.PerformLayout()
+        Me.panelWrappers.ResumeLayout(False)
+        Me.panelWrappers.PerformLayout()
+        CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+    Friend WithEvents txtDebug As TextBox
+    Friend WithEvents btnTooltip As Button
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents ToggleSwitch1 As SpecialControls.ToggleSwitch
+    Friend WithEvents btnFont As Button
+    Friend WithEvents txtY As TextBox
+    Friend WithEvents txtX As TextBox
+    Friend WithEvents lblX As Label
+    Friend WithEvents lblY As Label
+    Friend WithEvents FontDialogTooltip As FontDialog
+    Friend WithEvents txtTooltip As TextBox
+    Friend WithEvents btnFormTooltip As Button
+    Friend WithEvents panelSplash As Panel
+    Friend WithEvents btnLogClear As Button
+    Friend WithEvents btnFormTooltipClose As Button
+    Friend WithEvents panelToggle As Panel
+    Friend WithEvents btnToggleFonts As Button
+    Friend WithEvents btnFalseColor As Button
+    Friend WithEvents btnTrueColor As Button
+    Friend WithEvents txtFalse As TextBox
+    Friend WithEvents txtTrue As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents ColorDialog1 As ColorDialog
+    Friend WithEvents FontDialogToggle As FontDialog
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtToggleHeight As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txtToggleWidth As TextBox
+    Friend WithEvents lblFont As Label
+    Friend WithEvents lblTooltipForm As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents lblFontSplash As Label
+    Friend WithEvents combDuration As ComboBox
+    Friend WithEvents panelWrappers As Panel
+    Friend WithEvents Label7 As Label
+    Friend WithEvents combGeneric As ComboBox
+    Friend WithEvents lstGeneric As ListBox
+    Friend WithEvents btnGenericSet As Button
+End Class
