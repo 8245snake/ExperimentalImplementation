@@ -71,6 +71,9 @@
     <Compile Include="Buttons\ToggleSwitch.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CollectionViews\StrictComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GenericWrappers\GenericComboBoxWrapper.vb" />
     <Compile Include="GenericWrappers\GenericListBoxWrapper.vb" />
     <Compile Include="Messaging\SplashMessage.vb" />
