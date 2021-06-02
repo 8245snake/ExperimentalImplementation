@@ -131,7 +131,34 @@ Public Class ExTextBox
     ' エラーのアイコン
     Private _Icon As PictureBox
     ' エラーのツールチップ
-    Dim tooltipError As SplashMessage = New SplashMessage()
+    Private _ErrorToolTip As SplashMessage = New SplashMessage()
+
+
+    Private _LastValue As String
+
+    ''' <summary>
+    ''' 前回入力値。
+    ''' Validatedのたびに更新される。
+    ''' ValidatingやValidatedのHandlerで参照することで前回の値との比較ができる。
+    ''' </summary>
+    Public ReadOnly Property LastValue As String
+        Get
+            Return _LastValue
+        End Get
+    End Property
+
+    Private _LastValidValue As String
+
+    ''' <summary>
+    ''' 前回の有効な入力値。
+    ''' Validatedのたびに更新される。
+    ''' ValidatingやValidatedのHandlerで参照することで前回の値との比較ができる。
+    ''' </summary>
+    Public ReadOnly Property LastValidValue As String
+        Get
+            Return _LastValidValue
+        End Get
+    End Property
 
     Protected Overrides Sub WndProc(ByRef m As Message)
         MyBase.WndProc(m)
@@ -203,12 +230,12 @@ Public Class ExTextBox
         ' ツールチップ表示
         Dim bmt As Bitmap = SplashMessage.CreateTextImage(ErrorText, Me.Font, Color.Red, Color.Yellow)
         Dim p = Me.Parent.PointToScreen(New Point(_Icon.Right, _Icon.Bottom))
-        tooltipError.Show(bmt, p.X, p.Y, SplashMessage.DisplayDuration.Endless)
+        _ErrorToolTip.Show(bmt, p.X, p.Y, SplashMessage.DisplayDuration.Endless)
     End Sub
 
     Private Sub Iconlabel_MouseLeave(sender As Object, e As EventArgs)
         ' ツールチップ終了
-        tooltipError.Hide()
+        _ErrorToolTip.Hide()
     End Sub
 
     ''' <summary>
@@ -271,6 +298,11 @@ Public Class ExTextBox
         MyBase.OnValidated(e)
         If _ValidateFunction IsNot Nothing AndAlso ValidationTrigger = ValidationTriggerType.FocusLeave Then
             errorCheck()
+        End If
+        ' 値を憶えておく
+        _LastValue = Me.Text
+        If Not _IsError Then
+            _LastValidValue = Me.Text
         End If
     End Sub
 

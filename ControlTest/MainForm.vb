@@ -116,7 +116,6 @@ Public Class MainForm
     End Sub
 #End Region
 
-
 #Region "SplashMessage"
     Private Sub btnTooltip_Click(sender As Object, e As EventArgs) Handles btnTooltip.Click
         Dim tooltip As SplashMessage = New SplashMessage()
@@ -149,7 +148,6 @@ Public Class MainForm
     End Sub
 
 #End Region
-
 
 #Region "ラッパー"
     Private Sub btnGenericSet_Click(sender As Object, e As EventArgs) Handles btnGenericSet.Click
@@ -190,7 +188,6 @@ Public Class MainForm
     End Sub
 #End Region
 
-
 #Region "ExTextBox"
     Private Function isNumber(text As String) As Boolean
         If String.IsNullOrWhiteSpace(text) Then Return True
@@ -203,6 +200,13 @@ Public Class MainForm
     End Sub
     Private Sub combErrorPosition_SelectedIndexChanged(sender As Object, e As EventArgs) Handles combErrorPosition.SelectedIndexChanged
         txtNumber.ErrorDisplayPosition = combErrorPositionWrapper.GetSelectedValue()
+    End Sub
+
+    Private Sub txtNumber_Validated(sender As Object, e As EventArgs) Handles txtNumber.Validated
+        If txtNumber.IsError Then
+            Console.WriteLine($"{txtNumber.Text} が入力されたが不正だったので前回の有効な値を復元")
+            txtNumber.Text = txtNumber.LastValidValue
+        End If
     End Sub
 #End Region
 
