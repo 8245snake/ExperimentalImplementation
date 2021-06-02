@@ -101,10 +101,10 @@ Partial Class MessageForm
         Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.Label1)
         Me.Font = New System.Drawing.Font("Meiryo UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Location = New System.Drawing.Point(-10000, -10000)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "MessageForm"
         Me.Text = "MessageForm"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Normal
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

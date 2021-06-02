@@ -45,6 +45,7 @@ Partial Class MainForm
         Me.lblFont = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtToggleHeight = New System.Windows.Forms.TextBox()
+        Me.ToggleSwitch1 = New SpecialControls.ToggleSwitch()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtToggleWidth = New System.Windows.Forms.TextBox()
         Me.btnToggleFonts = New System.Windows.Forms.Button()
@@ -57,15 +58,27 @@ Partial Class MainForm
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
         Me.FontDialogToggle = New System.Windows.Forms.FontDialog()
         Me.panelWrappers = New System.Windows.Forms.Panel()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.lstGeneric = New System.Windows.Forms.ListBox()
-        Me.combGeneric = New System.Windows.Forms.ComboBox()
         Me.btnGenericSet = New System.Windows.Forms.Button()
-        Me.ToggleSwitch1 = New SpecialControls.ToggleSwitch()
+        Me.combGeneric = New System.Windows.Forms.ComboBox()
+        Me.lstGeneric = New System.Windows.Forms.ListBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.StrictComboBox1 = New SpecialControls.StrictComboBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.combErrorPosition = New SpecialControls.StrictComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.combTrigger = New SpecialControls.StrictComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtNumber = New SpecialControls.ExTextBox()
         Me.panelSplash.SuspendLayout()
         Me.panelToggle.SuspendLayout()
-        Me.panelWrappers.SuspendLayout()
         CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.panelWrappers.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtDebug
@@ -79,7 +92,7 @@ Partial Class MainForm
         Me.txtDebug.Name = "txtDebug"
         Me.txtDebug.ReadOnly = True
         Me.txtDebug.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtDebug.Size = New System.Drawing.Size(866, 143)
+        Me.txtDebug.Size = New System.Drawing.Size(1130, 143)
         Me.txtDebug.TabIndex = 4
         '
         'btnTooltip
@@ -287,6 +300,23 @@ Partial Class MainForm
         Me.txtToggleHeight.TabIndex = 16
         Me.txtToggleHeight.Text = "200"
         '
+        'ToggleSwitch1
+        '
+        Me.ToggleSwitch1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ToggleSwitch1.FalseColor = System.Drawing.Color.DarkGray
+        Me.ToggleSwitch1.FalseText = "左クリック無効"
+        Me.ToggleSwitch1.FontName = "Meiryo UI"
+        Me.ToggleSwitch1.FontSize = 14.0!
+        Me.ToggleSwitch1.FontStyle = System.Drawing.FontStyle.Bold
+        Me.ToggleSwitch1.IsChecked = False
+        Me.ToggleSwitch1.Location = New System.Drawing.Point(17, 29)
+        Me.ToggleSwitch1.Name = "ToggleSwitch1"
+        Me.ToggleSwitch1.Size = New System.Drawing.Size(186, 39)
+        Me.ToggleSwitch1.TabIndex = 8
+        Me.ToggleSwitch1.TabStop = False
+        Me.ToggleSwitch1.TrueColor = System.Drawing.Color.Lime
+        Me.ToggleSwitch1.TrueText = "左クリック有効"
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
@@ -372,8 +402,35 @@ Partial Class MainForm
         Me.panelWrappers.Controls.Add(Me.Label7)
         Me.panelWrappers.Location = New System.Drawing.Point(476, 13)
         Me.panelWrappers.Name = "panelWrappers"
-        Me.panelWrappers.Size = New System.Drawing.Size(409, 183)
+        Me.panelWrappers.Size = New System.Drawing.Size(529, 117)
         Me.panelWrappers.TabIndex = 20
+        '
+        'btnGenericSet
+        '
+        Me.btnGenericSet.Location = New System.Drawing.Point(8, 87)
+        Me.btnGenericSet.Name = "btnGenericSet"
+        Me.btnGenericSet.Size = New System.Drawing.Size(75, 23)
+        Me.btnGenericSet.TabIndex = 24
+        Me.btnGenericSet.Text = "データセット"
+        Me.btnGenericSet.UseVisualStyleBackColor = True
+        '
+        'combGeneric
+        '
+        Me.combGeneric.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.combGeneric.FormattingEnabled = True
+        Me.combGeneric.Location = New System.Drawing.Point(8, 44)
+        Me.combGeneric.Name = "combGeneric"
+        Me.combGeneric.Size = New System.Drawing.Size(163, 23)
+        Me.combGeneric.TabIndex = 23
+        '
+        'lstGeneric
+        '
+        Me.lstGeneric.FormattingEnabled = True
+        Me.lstGeneric.ItemHeight = 15
+        Me.lstGeneric.Location = New System.Drawing.Point(186, 44)
+        Me.lstGeneric.Name = "lstGeneric"
+        Me.lstGeneric.Size = New System.Drawing.Size(216, 64)
+        Me.lstGeneric.TabIndex = 22
         '
         'Label7
         '
@@ -385,55 +442,130 @@ Partial Class MainForm
         Me.Label7.TabIndex = 21
         Me.Label7.Text = "任意の型のコレクションを紐付けるラッパー"
         '
-        'lstGeneric
+        'Button1
         '
-        Me.lstGeneric.FormattingEnabled = True
-        Me.lstGeneric.ItemHeight = 15
-        Me.lstGeneric.Location = New System.Drawing.Point(186, 44)
-        Me.lstGeneric.Name = "lstGeneric"
-        Me.lstGeneric.Size = New System.Drawing.Size(216, 124)
-        Me.lstGeneric.TabIndex = 22
+        Me.Button1.Location = New System.Drawing.Point(240, 51)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(116, 23)
+        Me.Button1.TabIndex = 21
+        Me.Button1.Text = "インデックス＋１"
+        Me.Button1.UseVisualStyleBackColor = True
         '
-        'combGeneric
+        'Panel1
         '
-        Me.combGeneric.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.combGeneric.FormattingEnabled = True
-        Me.combGeneric.Location = New System.Drawing.Point(8, 44)
-        Me.combGeneric.Name = "combGeneric"
-        Me.combGeneric.Size = New System.Drawing.Size(163, 23)
-        Me.combGeneric.TabIndex = 23
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.Label8)
+        Me.Panel1.Controls.Add(Me.StrictComboBox1)
+        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Location = New System.Drawing.Point(476, 137)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(529, 89)
+        Me.Panel1.TabIndex = 23
         '
-        'btnGenericSet
+        'Label8
         '
-        Me.btnGenericSet.Location = New System.Drawing.Point(8, 151)
-        Me.btnGenericSet.Name = "btnGenericSet"
-        Me.btnGenericSet.Size = New System.Drawing.Size(75, 23)
-        Me.btnGenericSet.TabIndex = 24
-        Me.btnGenericSet.Text = "データセット"
-        Me.btnGenericSet.UseVisualStyleBackColor = True
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label8.Location = New System.Drawing.Point(4, 8)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(494, 26)
+        Me.Label8.TabIndex = 23
+        Me.Label8.Text = "IndexChangedが手動か自動か区別できるコンボボックス"
         '
-        'ToggleSwitch1
+        'StrictComboBox1
         '
-        Me.ToggleSwitch1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ToggleSwitch1.FalseColor = System.Drawing.Color.DarkGray
-        Me.ToggleSwitch1.FalseText = "左クリック無効"
-        Me.ToggleSwitch1.FontName = "Meiryo UI"
-        Me.ToggleSwitch1.FontSize = 14.0!
-        Me.ToggleSwitch1.FontStyle = System.Drawing.FontStyle.Bold
-        Me.ToggleSwitch1.IsChecked = False
-        Me.ToggleSwitch1.Location = New System.Drawing.Point(17, 29)
-        Me.ToggleSwitch1.Name = "ToggleSwitch1"
-        Me.ToggleSwitch1.Size = New System.Drawing.Size(186, 39)
-        Me.ToggleSwitch1.TabIndex = 8
-        Me.ToggleSwitch1.TabStop = False
-        Me.ToggleSwitch1.TrueColor = System.Drawing.Color.Lime
-        Me.ToggleSwitch1.TrueText = "左クリック有効"
+        Me.StrictComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.StrictComboBox1.FormattingEnabled = True
+        Me.StrictComboBox1.IntegralHeight = False
+        Me.StrictComboBox1.IsStrictOccuration = False
+        Me.StrictComboBox1.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7"})
+        Me.StrictComboBox1.Location = New System.Drawing.Point(9, 51)
+        Me.StrictComboBox1.Name = "StrictComboBox1"
+        Me.StrictComboBox1.Size = New System.Drawing.Size(199, 23)
+        Me.StrictComboBox1.TabIndex = 22
+        '
+        'Panel2
+        '
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.Label11)
+        Me.Panel2.Controls.Add(Me.combErrorPosition)
+        Me.Panel2.Controls.Add(Me.Label10)
+        Me.Panel2.Controls.Add(Me.combTrigger)
+        Me.Panel2.Controls.Add(Me.Label9)
+        Me.Panel2.Controls.Add(Me.txtNumber)
+        Me.Panel2.Location = New System.Drawing.Point(476, 232)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(529, 98)
+        Me.Panel2.TabIndex = 25
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(267, 34)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(103, 15)
+        Me.Label11.TabIndex = 29
+        Me.Label11.Text = "エラーメッセージ位置"
+        '
+        'combErrorPosition
+        '
+        Me.combErrorPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.combErrorPosition.FormattingEnabled = True
+        Me.combErrorPosition.IntegralHeight = False
+        Me.combErrorPosition.IsStrictOccuration = False
+        Me.combErrorPosition.Location = New System.Drawing.Point(382, 31)
+        Me.combErrorPosition.Name = "combErrorPosition"
+        Me.combErrorPosition.Size = New System.Drawing.Size(129, 23)
+        Me.combErrorPosition.TabIndex = 28
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(267, 8)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(111, 15)
+        Me.Label10.TabIndex = 27
+        Me.Label10.Text = "バリデーションタイミング"
+        '
+        'combTrigger
+        '
+        Me.combTrigger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.combTrigger.FormattingEnabled = True
+        Me.combTrigger.IntegralHeight = False
+        Me.combTrigger.IsStrictOccuration = False
+        Me.combTrigger.Location = New System.Drawing.Point(382, 5)
+        Me.combTrigger.Name = "combTrigger"
+        Me.combTrigger.Size = New System.Drawing.Size(129, 23)
+        Me.combTrigger.TabIndex = 26
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label9.Location = New System.Drawing.Point(4, 9)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(196, 26)
+        Me.Label9.TabIndex = 25
+        Me.Label9.Text = "便利なテキストボックス"
+        '
+        'txtNumber
+        '
+        Me.txtNumber.ErrorDisplayPosition = SpecialControls.ExTextBox.ErrorDisplayPositionType.Bottom
+        Me.txtNumber.ErrorText = "整数値ではありません"
+        Me.txtNumber.Location = New System.Drawing.Point(8, 55)
+        Me.txtNumber.Name = "txtNumber"
+        Me.txtNumber.Size = New System.Drawing.Size(199, 23)
+        Me.txtNumber.TabIndex = 24
+        Me.txtNumber.ValidationTrigger = SpecialControls.ExTextBox.ValidationTriggerType.FocusLeave
+        Me.txtNumber.WatermarkText = "整数値を入力してください"
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(897, 588)
+        Me.ClientSize = New System.Drawing.Size(1161, 588)
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.panelWrappers)
         Me.Controls.Add(Me.panelToggle)
         Me.Controls.Add(Me.btnLogClear)
@@ -447,9 +579,13 @@ Partial Class MainForm
         Me.panelSplash.PerformLayout()
         Me.panelToggle.ResumeLayout(False)
         Me.panelToggle.PerformLayout()
+        CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelWrappers.ResumeLayout(False)
         Me.panelWrappers.PerformLayout()
-        CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -494,4 +630,15 @@ Partial Class MainForm
     Friend WithEvents combGeneric As ComboBox
     Friend WithEvents lstGeneric As ListBox
     Friend WithEvents btnGenericSet As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents StrictComboBox1 As SpecialControls.StrictComboBox
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Label8 As Label
+    Friend WithEvents txtNumber As SpecialControls.ExTextBox
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Label10 As Label
+    Friend WithEvents combTrigger As SpecialControls.StrictComboBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents combErrorPosition As SpecialControls.StrictComboBox
 End Class

@@ -13,6 +13,10 @@ Public Class MainForm
     Dim combSampleWrapper As GenericComboBoxWrapper(Of Country)
     Dim lstSampleWrapper As GenericListBoxWrapper(Of City)
 
+    Dim combTriggerWrapper As GenericComboBoxWrapper(Of ExTextBox.ValidationTriggerType)
+    Dim combErrorPositionWrapper As GenericComboBoxWrapper(Of ExTextBox.ErrorDisplayPositionType)
+
+
     Sub New()
 
         ' この呼び出しはデザイナーで必要です。
@@ -36,7 +40,24 @@ Public Class MainForm
         combDurationWrapper.Add("約1秒", SplashMessage.DisplayDuration.ShortTime)
         combDurationWrapper.Add("約3秒", SplashMessage.DisplayDuration.LongTime)
         combDurationWrapper.Add("無限", SplashMessage.DisplayDuration.Endless)
+
+        combTriggerWrapper = New GenericComboBoxWrapper(Of ExTextBox.ValidationTriggerType)(DirectCast(combTrigger, ComboBox))
+        combTriggerWrapper.Add("フォーカスが外れたとき", ExTextBox.ValidationTriggerType.FocusLeave)
+        combTriggerWrapper.Add("テキストが変わったとき", ExTextBox.ValidationTriggerType.TextChange)
+        combTrigger.SelectedIndex = 1
+        combErrorPositionWrapper = New GenericComboBoxWrapper(Of ExTextBox.ErrorDisplayPositionType)(DirectCast(combErrorPosition, ComboBox))
+        combErrorPositionWrapper.Add("下", ExTextBox.ErrorDisplayPositionType.Bottom)
+        combErrorPositionWrapper.Add("右", ExTextBox.ErrorDisplayPositionType.Right)
+        combErrorPositionWrapper.Add("右（アイコン）", ExTextBox.ErrorDisplayPositionType.RightToolTip)
+        combErrorPosition.SelectedIndex = 0
+
+        txtNumber.ValidationTrigger = combTriggerWrapper.GetSelectedValue()
+        txtNumber.ErrorDisplayPosition = combErrorPositionWrapper.GetSelectedValue()
+
+        txtNumber.ValidateFunction = AddressOf isNumber
+
     End Sub
+
 
 #Region "ToggleSwitch"
 
@@ -154,9 +175,40 @@ Public Class MainForm
     End Sub
 #End Region
 
+#Region "StrictComboBox"
+    Private Sub StrictComboBox1_SelectedIndexChangedAutomatically(sender As StrictComboBox, e As EventArgs, lastIndex As Integer, currentIndex As Integer) Handles StrictComboBox1.SelectedIndexChangedAutomatically
+        Console.WriteLine($"自動でインデックスが変更されました。{lastIndex}→{currentIndex}")
+    End Sub
+
+    Private Sub StrictComboBox1_SelectedIndexChangedManually(sender As StrictComboBox, e As EventArgs, lastIndex As Integer, currentIndex As Integer) Handles StrictComboBox1.SelectedIndexChangedManually
+        Console.WriteLine($"手動でインデックスを変更しました。{lastIndex}→{currentIndex}")
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim maxIndex As Integer = StrictComboBox1.Items.Count - 1
+        StrictComboBox1.SelectedIndex = If(StrictComboBox1.SelectedIndex = maxIndex, 0, StrictComboBox1.SelectedIndex + 1)
+    End Sub
+#End Region
+
+
+#Region "ExTextBox"
+    Private Function isNumber(text As String) As Boolean
+        If String.IsNullOrWhiteSpace(text) Then Return True
+        Dim num As Integer
+        Return Integer.TryParse(text, num)
+    End Function
+
+    Private Sub combTrigger_SelectedIndexChanged(sender As Object, e As EventArgs) Handles combTrigger.SelectedIndexChanged
+        txtNumber.ValidationTrigger = combTriggerWrapper.GetSelectedValue()
+    End Sub
+    Private Sub combErrorPosition_SelectedIndexChanged(sender As Object, e As EventArgs) Handles combErrorPosition.SelectedIndexChanged
+        txtNumber.ErrorDisplayPosition = combErrorPositionWrapper.GetSelectedValue()
+    End Sub
+#End Region
+
+
     Private Sub btnLogClear_Click(sender As Object, e As EventArgs) Handles btnLogClear.Click
         txtDebug.Text = ""
     End Sub
-
 
 End Class

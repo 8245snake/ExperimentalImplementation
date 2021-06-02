@@ -34,7 +34,6 @@ Public Class SplashMessageForm
         Me.StartPosition = FormStartPosition.Manual
         Me.Location = New Point(-10000, -10000)
         Me.ShowInTaskbar = False
-
     End Sub
 
     Private Sub ShowSplash()
