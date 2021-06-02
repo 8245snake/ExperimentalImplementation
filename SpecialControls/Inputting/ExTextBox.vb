@@ -13,9 +13,15 @@ Public Class ExTextBox
     ' ウォーターマーク文言
     Private _WatermarkText As String = ""
     ' エラーか否か
-    Private _IsHighlighting As Boolean = False
+    Private _IsError As Boolean = False
     ' エラー時の先の太さ
     Private _LineWidth As Integer = 3
+
+    ''' <summary>
+    ''' チェックエラーが検出されたときに発火します。
+    ''' チェックが走るタイミングはValidationTriggerプロパティによります。
+    ''' </summary>
+    Public Event ErrorDetected As EventHandler
 
     ''' <summary>
     ''' Textが空のときに表示されるヒントテキスト
@@ -28,6 +34,16 @@ Public Class ExTextBox
             _WatermarkText = Value
             Me.Invalidate()
         End Set
+    End Property
+
+    ''' <summary>
+    ''' チェックエラーが発生しているか否か
+    ''' </summary>
+    ''' <returns>True；エラー、False：正常</returns>
+    Public ReadOnly Property IsError As Boolean
+        Get
+            Return _IsError
+        End Get
     End Property
 
     ''' <summary>
@@ -108,7 +124,7 @@ Public Class ExTextBox
     ''' <returns>True：必要、False：不要</returns>
     Private ReadOnly Property NeedDisplayError As Boolean
         Get
-            Return Not String.IsNullOrWhiteSpace(ErrorText) AndAlso _IsHighlighting
+            Return Not String.IsNullOrWhiteSpace(ErrorText) AndAlso _IsError
         End Get
     End Property
 
@@ -124,18 +140,16 @@ Public Class ExTextBox
             Case WM_PAINT
                 ' ウォーターマーク表示
                 tryToDisplayWatermark()
-                ' ハイライト
-                If _IsHighlighting Then
-                    ShowHighlight()
-                End If
-                ' エラーチェック
-                showErrorMessage()
+                ' 赤枠で囲う
+                tryToHighlight()
+                ' エラーテキスト表示
+                tryToDisplayError()
             Case Else
         End Select
     End Sub
 
     ''' <summary>
-    ''' ウォーターマークを表示する
+    ''' 可能ならばウォーターマークを表示する
     ''' </summary>
     Private Sub tryToDisplayWatermark()
         If (Me.Enabled AndAlso String.IsNullOrEmpty(Me.Text) AndAlso Not String.IsNullOrEmpty(WatermarkText)) Then
@@ -148,10 +162,12 @@ Public Class ExTextBox
     End Sub
 
     ''' <summary>
-    ''' テキストボックスの外周に赤い枠線を描く
+    ''' エラーが出ていたらテキストボックスの外周に赤い枠線を描く
     ''' </summary>
-    Public Sub ShowHighlight()
-        _IsHighlighting = True
+    Private Sub tryToHighlight()
+
+        If Not _IsError Then Return
+
         ' テキストボックス内は狭いので親コントロールに描画する
         Using g As Graphics = Me.Parent.CreateGraphics
             Dim pen As Pen = New Pen(Color.Red, _LineWidth)
@@ -198,7 +214,7 @@ Public Class ExTextBox
     ''' <summary>
     ''' エラーテキストを表示する
     ''' </summary>
-    Private Sub showErrorMessage()
+    Private Sub tryToDisplayError()
 
         createIcon()
 
@@ -266,21 +282,28 @@ Public Class ExTextBox
     End Sub
 
     ''' <summary>
-    ''' エラーチェック関数して結果を描画する
+    ''' エラーチェックして結果を描画する
     ''' </summary>
     Private Sub errorCheck()
-        _IsHighlighting = Not _ValidateFunction(Me.Text)
+        ' 判定
+        _IsError = Not _ValidateFunction(Me.Text)
+        ' 再描画
         UpdateDisplay()
-        Dim rect As Rectangle = getErrorMessageRectangle()
-        Me.Parent.Invalidate(rect, False)
+        ' エラーが検出されたらイベント発火
+        If _IsError Then
+            RaiseEvent ErrorDetected(Me, New EventArgs())
+        End If
     End Sub
 
     ''' <summary>
     ''' 表示を更新する
     ''' </summary>
     Private Sub UpdateDisplay()
+        ' 自身を再描画
         Me.Invalidate()
-        Me.Parent.Invalidate(New Rectangle(Me.Left - _LineWidth, Me.Top - _LineWidth, Me.Width + _LineWidth * 2, Me.Height + _LineWidth * 2))
+        ' 親（赤枠）を再描画
+        Me.Parent.Invalidate(New Rectangle(Me.Left - _LineWidth, Me.Top - _LineWidth, Me.Width + _LineWidth * 2, Me.Height + _LineWidth * 2), False)
+        ' 親（テキスト）を再描画
         Dim rect As Rectangle = getErrorMessageRectangle()
         Me.Parent.Invalidate(rect, False)
     End Sub
