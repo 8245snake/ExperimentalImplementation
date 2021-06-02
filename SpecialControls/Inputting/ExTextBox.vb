@@ -58,6 +58,7 @@ Public Class ExTextBox
     ''' エラーチェック関数。
     ''' エラーの場合はFalseを返す。
     ''' </summary>
+    ''' <remarks>Nothingの場合はエラーチェックしない</remarks>
     Public WriteOnly Property ValidateFunction As ValidateFunctionDelegate
         Set
             _ValidateFunction = Value
@@ -72,8 +73,9 @@ Public Class ExTextBox
     Delegate Function ValidateFunctionDelegate(text As String) As Boolean
 
     ''' <summary>
-    ''' エラーテキスト
+    ''' チェックエラーの際にテキストボックスの近くに表示されるメッセージ
     ''' </summary>
+    ''' <remarks>前提としてValidateFunctionが必要。空文字の場合は何も表示されない。</remarks>
     Public Property ErrorText As String = ""
 
     ''' <summary>

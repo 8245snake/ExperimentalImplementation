@@ -55,11 +55,10 @@ Public Class SplashMessage
     End Enum
 
 
-    Declare Function GetDesktopWindow Lib "user32" () As IntPtr
-    Declare Function GetWindowDC Lib "user32" (ByVal hWnd As Long) As Long
     Declare Function GetDC Lib "user32.dll" (ByVal hWnd As IntPtr) As IntPtr
     Declare Function CreateCompatibleDC Lib "gdi32.dll" (hdc As IntPtr) As IntPtr
     Declare Function DeleteDC Lib "gdi32" (ByVal hDC As IntPtr) As IntPtr
+    Declare Function ReleaseDC Lib "user32" (ByVal hwnd As IntPtr, ByVal hDC As IntPtr) As IntPtr
 
     Declare Function BitBlt Lib "gdi32.dll" (ByVal hdc As IntPtr, ByVal nXDest As Integer,
                                              ByVal nYDest As Integer,
@@ -87,12 +86,19 @@ Public Class SplashMessage
 
     Declare Function SelectObject Lib "gdi32.dll" (ByVal prmlngHDc As IntPtr, ByVal hObject As IntPtr) As IntPtr
 
-    Declare Function InvalidateRect Lib "user32" (ByVal hwnd As IntPtr, lpRect As IntPtr, ByVal bErase As Boolean) As IntPtr
-    Declare Function UpdateWindow Lib "user32" (ByVal hWnd As IntPtr) As IntPtr
+    Declare Function InvalidateRect Lib "User32" (ByVal hWnd As IntPtr, ByRef lpRect As RECT, ByVal bErase As Boolean) As Boolean
+
 
     <System.Runtime.InteropServices.DllImport("User32.dll")>
     Private Shared Function PrintWindow(ByVal hwnd As IntPtr, ByVal hDC As IntPtr, ByVal nFlags As Integer) As Boolean
     End Function
+
+    Public Structure RECT
+        Public Left As Long
+        Public Top As Long
+        Public Right As Long
+        Public Bottom As Long
+    End Structure
 
 #End Region
 
@@ -198,10 +204,15 @@ Public Class SplashMessage
 
         ' 後始末
         DeleteDC(hsrc)
+        ReleaseDC(IntPtr.Zero, hdc)
 
         ' メッセージを消す
-        InvalidateRect(IntPtr.Zero, IntPtr.Zero, True)
-
+        Dim rect As RECT
+        rect.Left = x
+        rect.Top = y
+        rect.Right = x + width
+        rect.Bottom = y + height
+        InvalidateRect(IntPtr.Zero, rect, True)
     End Sub
 
     ''' <summary>
