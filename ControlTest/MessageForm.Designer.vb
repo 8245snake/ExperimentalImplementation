@@ -2,7 +2,7 @@
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MessageForm
-    Inherits SplashMessageForm
+    Inherits Messaging.SplashMessageForm
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
     <System.Diagnostics.DebuggerNonUserCode()>

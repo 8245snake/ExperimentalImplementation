@@ -1,7 +1,7 @@
 ﻿Imports SpecialControls
 
 Public Class MessageForm
-    Inherits SplashMessageForm
+    Inherits Messaging.SplashMessageForm
     Sub New()
 
         ' この呼び出しはデザイナーで必要です。

@@ -68,11 +68,11 @@ Partial Class MainForm
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.combErrorPosition = New SpecialControls.StrictComboBox()
-        Me.combTrigger = New SpecialControls.StrictComboBox()
-        Me.txtNumber = New SpecialControls.ExTextBox()
-        Me.StrictComboBox1 = New SpecialControls.StrictComboBox()
-        Me.ToggleSwitch1 = New SpecialControls.ToggleSwitch()
+        Me.combErrorPosition = New SpecialControls.CollectionViews.StrictComboBox()
+        Me.combTrigger = New SpecialControls.CollectionViews.StrictComboBox()
+        Me.txtNumber = New SpecialControls.Inputting.ExTextBox()
+        Me.StrictComboBox1 = New SpecialControls.CollectionViews.StrictComboBox()
+        Me.ToggleSwitch1 = New SpecialControls.Switches.ToggleSwitch()
         Me.panelSplash.SuspendLayout()
         Me.panelToggle.SuspendLayout()
         Me.panelWrappers.SuspendLayout()
@@ -521,13 +521,13 @@ Partial Class MainForm
         '
         'txtNumber
         '
-        Me.txtNumber.ErrorDisplayPosition = SpecialControls.ExTextBox.ErrorDisplayPositionType.Bottom
+        Me.txtNumber.ErrorDisplayPosition = SpecialControls.Inputting.ExTextBox.ErrorDisplayPositionType.Bottom
         Me.txtNumber.ErrorText = "整数値ではありません"
         Me.txtNumber.Location = New System.Drawing.Point(8, 55)
         Me.txtNumber.Name = "txtNumber"
         Me.txtNumber.Size = New System.Drawing.Size(199, 23)
         Me.txtNumber.TabIndex = 24
-        Me.txtNumber.ValidationTrigger = SpecialControls.ExTextBox.ValidationTriggerType.FocusLeave
+        Me.txtNumber.ValidationTrigger = SpecialControls.Inputting.ExTextBox.ValidationTriggerType.FocusLeave
         Me.txtNumber.WatermarkText = "整数値を入力してください"
         '
         'StrictComboBox1
@@ -593,7 +593,7 @@ Partial Class MainForm
     Friend WithEvents txtDebug As TextBox
     Friend WithEvents btnTooltip As Button
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
-    Friend WithEvents ToggleSwitch1 As SpecialControls.ToggleSwitch
+    Friend WithEvents ToggleSwitch1 As SpecialControls.Switches.ToggleSwitch
     Friend WithEvents btnFont As Button
     Friend WithEvents txtY As TextBox
     Friend WithEvents txtX As TextBox
@@ -631,14 +631,14 @@ Partial Class MainForm
     Friend WithEvents lstGeneric As ListBox
     Friend WithEvents btnGenericSet As Button
     Friend WithEvents Button1 As Button
-    Friend WithEvents StrictComboBox1 As SpecialControls.StrictComboBox
+    Friend WithEvents StrictComboBox1 As SpecialControls.CollectionViews.StrictComboBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label8 As Label
-    Friend WithEvents txtNumber As SpecialControls.ExTextBox
+    Friend WithEvents txtNumber As SpecialControls.Inputting.ExTextBox
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label10 As Label
-    Friend WithEvents combTrigger As SpecialControls.StrictComboBox
+    Friend WithEvents combTrigger As SpecialControls.CollectionViews.StrictComboBox
     Friend WithEvents Label9 As Label
     Friend WithEvents Label11 As Label
-    Friend WithEvents combErrorPosition As SpecialControls.StrictComboBox
+    Friend WithEvents combErrorPosition As SpecialControls.CollectionViews.StrictComboBox
 End Class

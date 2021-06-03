@@ -1,7 +1,11 @@
 ﻿Option Explicit On
 Option Strict On
 
-Imports SpecialControls
+Imports SpecialControls.CollectionViews
+Imports SpecialControls.GenericWrappers
+Imports SpecialControls.Inputting
+Imports SpecialControls.Messaging
+Imports SpecialControls.Switches
 
 
 Public Class MainForm
