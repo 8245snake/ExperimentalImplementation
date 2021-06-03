@@ -130,10 +130,8 @@ Namespace Inputting
             End Get
         End Property
 
-        ' エラーのアイコン
-        Private _Icon As PictureBox
-        ' エラーのツールチップ
-        Private _ErrorToolTip As Messaging.SplashMessage = New Messaging.SplashMessage()
+        ' エラー表示用
+        Private _ErrorProvider As ErrorProvider = New ErrorProvider()
 
 
         Private _LastValue As String
@@ -204,68 +202,25 @@ Namespace Inputting
             End Using
         End Sub
 
-        ''' <summary>
-        ''' エラーアイコンを作成する
-        ''' </summary>
-        Private Sub createIcon()
-            If _Icon IsNot Nothing Then Return
-
-            _Icon = New PictureBox
-            _Icon.Visible = False
-            _Icon.Location = New Point(0, 0)
-            _Icon.AutoSize = False
-            _Icon.Size = New Size(30, 30)
-            _Icon.BackColor = Color.Transparent
-            AddHandler _Icon.MouseHover, AddressOf Iconlabel_MouseHover
-            AddHandler _Icon.MouseLeave, AddressOf Iconlabel_MouseLeave
-            AddHandler _Icon.Paint, AddressOf Iconlabel_Paint
-        End Sub
-
-        Private Sub Iconlabel_Paint(sender As Object, e As PaintEventArgs)
-            ' エラーアイコンの描画
-            If ErrorDisplayPosition = ErrorDisplayPositionType.RightToolTip AndAlso NeedDisplayError Then
-                e.Graphics.DrawIcon(SystemIcons.Exclamation, 0, 0)
-            End If
-        End Sub
-
-        Private Sub Iconlabel_MouseHover(sender As Object, e As EventArgs)
-            ' ツールチップ表示
-            Dim bmt As Bitmap = Messaging.SplashMessage.CreateTextImage(ErrorText, Me.Font, Color.Red, Color.Yellow)
-            Dim p = Me.Parent.PointToScreen(New Point(_Icon.Right, _Icon.Bottom))
-            _ErrorToolTip.Show(bmt, p.X, p.Y, Messaging.SplashMessage.DisplayDuration.Endless)
-        End Sub
-
-        Private Sub Iconlabel_MouseLeave(sender As Object, e As EventArgs)
-            ' ツールチップ終了
-            _ErrorToolTip.Hide()
-        End Sub
 
         ''' <summary>
         ''' エラーテキストを表示する
         ''' </summary>
         Private Sub tryToDisplayError()
 
-            createIcon()
-
             If Not NeedDisplayError Then
                 ' エラーなしならアイコンを外して終了
-                If Me.Parent.Controls.Contains(_Icon) Then
-                    Me.Parent.Controls.Remove(_Icon)
-                End If
-                _Icon.Visible = False
+                _ErrorProvider.SetError(Me, "")
                 Return
             End If
 
             Dim rect As Rectangle = getErrorMessageRectangle()
 
             If ErrorDisplayPosition = ErrorDisplayPositionType.RightToolTip Then
-                ' アイコン表示
-                If Not Me.Parent.Controls.Contains(_Icon) Then
-                    Me.Parent.Controls.Add(_Icon)
-                End If
-                _Icon.Visible = True
-                _Icon.Location = New Point(rect.X, rect.Y)
-                _Icon.Invalidate()
+                '' アイコン表示
+                _ErrorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink
+                _ErrorProvider.SetIconPadding(Me, _LineWidth)
+                _ErrorProvider.SetError(Me, ErrorText)
             Else
                 ' テキスト表示
                 Using g As Graphics = Me.Parent.CreateGraphics
@@ -286,11 +241,8 @@ Namespace Inputting
             Select Case ErrorDisplayPosition
                 Case ErrorDisplayPositionType.Bottom
                     rect.Y = Me.Bottom + _LineWidth
-                Case ErrorDisplayPositionType.Right
+                Case ErrorDisplayPositionType.Right, ErrorDisplayPositionType.RightToolTip
                     rect.X = Me.Right + _LineWidth
-                Case ErrorDisplayPositionType.RightToolTip
-                    rect.X = Me.Right + _LineWidth
-                    rect.Y -= 5
             End Select
 
             Return rect
