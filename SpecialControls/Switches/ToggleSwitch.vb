@@ -1,7 +1,9 @@
 ﻿Option Explicit On
 Option Strict On
 
-Imports System.Drawing.Drawing2D
+Imports SpecialControls.Painting
+Imports SpecialControls.Painting.Character
+
 
 Namespace Switches
 
@@ -11,9 +13,16 @@ Namespace Switches
     Public Class ToggleSwitch
         Inherits PictureBox
 
+        ''' <summary>
+        ''' チェック状態が変化したときに発火する
+        ''' </summary>
         Public Event CheckedChanged As EventHandler
 
         Private _IsChecked As Boolean = False
+        Private _FontName As String
+        Private _FontSize As Single
+        Private _FontStyle As FontStyle
+        Private _ValueProgress As Single
 
         ''' <summary>
         ''' チェック状態を取得または設定します
@@ -26,6 +35,8 @@ Namespace Switches
             Set(value As Boolean)
                 Dim blChanged As Boolean = _IsChecked <> value
                 _IsChecked = value
+                ' アニメーション不要なのでいきなり0→1のように遷移する
+                _ValueProgress = If(_IsChecked, 1, 0)
                 Me.Invalidate()
                 If blChanged Then
                     RaiseEvent CheckedChanged(Me, New EventArgs())
@@ -34,27 +45,29 @@ Namespace Switches
         End Property
 
         ''' <summary>
-        ''' IsCheckedがTrueのときのキャプション
+        ''' <seealso cref="IsChecked"/>がTrueのときのキャプション
         ''' </summary>
         Public Property TrueText As String
 
         ''' <summary>
-        ''' IsCheckedがTrueのときの背景色
+        ''' <seealso cref="IsChecked"/>がTrueのときの背景色
         ''' </summary>
         Public Property TrueColor As Color
 
         ''' <summary>
-        ''' IsCheckedがFalseのときのキャプション
+        ''' <seealso cref="IsChecked"/>がFalseのときのキャプション
         ''' </summary>
         Public Property FalseText As String
 
         ''' <summary>
-        ''' IsCheckedがFalseのときの背景色
+        ''' <seealso cref="IsChecked"/>がFalseのときの背景色
         ''' </summary>
         Public Property FalseColor As Color
 
-        Private _FontName As String
 
+        ''' <summary>
+        ''' フォント名
+        ''' </summary>
         Public Property FontName As String
             Get
                 Return _FontName
@@ -65,7 +78,9 @@ Namespace Switches
             End Set
         End Property
 
-        Private _FontSize As Single
+        ''' <summary>
+        ''' フォントサイズ
+        ''' </summary>
         Public Property FontSize As Single
             Get
                 Return _FontSize
@@ -76,8 +91,9 @@ Namespace Switches
             End Set
         End Property
 
-        Private _FontStyle As FontStyle
-
+        ''' <summary>
+        ''' フォントスタイル
+        ''' </summary>
         Public Property FontStyle As FontStyle
             Get
                 Return _FontStyle
@@ -86,6 +102,91 @@ Namespace Switches
                 _FontStyle = Value
                 Me.Invalidate()
             End Set
+        End Property
+
+        ''' <summary>
+        ''' スイッチの位置（0.0～1.0）
+        ''' </summary>
+        Protected Property ValueProgress As Single
+            Get
+                Return _ValueProgress
+            End Get
+            Set(value As Single)
+                _ValueProgress = value
+            End Set
+        End Property
+
+        ''' <summary>
+        ''' スイッチの位置の最小X座標値
+        ''' </summary>
+        Protected Overridable ReadOnly Property MinValue As Integer
+            Get
+                Return CInt(Me.Height * 0.1)
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' スイッチの位置の最大X座標値
+        ''' </summary>
+        Protected Overridable ReadOnly Property MaxValue As Integer
+            Get
+                Return Width - Height
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' チェックした際にアニメーションを表示ずるか
+        ''' </summary>
+        Public Property EnableAnimation As Boolean = True
+
+        ''' <summary>
+        ''' コントロールの外枠の<seealso cref="Shape"/>
+        ''' </summary>
+        Protected Overridable ReadOnly Property OutlineShape As Shape
+            Get
+                Dim body As ExpandedCircle = New ExpandedCircle
+                body.Coloring = Shape.ColoringType.Fill
+                body.BrushColor = If(IsChecked, TrueColor, FalseColor)
+                body.Rect = New Rectangle(0, 0, Me.Width, Me.Height)
+                Return body
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' スイッチの部分の<seealso cref="Shape"/>
+        ''' </summary>
+        Protected Overridable ReadOnly Property SwitchShape As Shape
+            Get
+                Dim circle As Circle = New Circle()
+                circle.Coloring = Shape.ColoringType.Fill
+                circle.BrushColor = Color.White
+                ' 位置は_ValueProgressによって変化する
+                circle.X = CInt(MinValue + (MaxValue - MinValue) * _ValueProgress)
+                circle.Y = CInt(Height * 0.1 / 2.0)
+                circle.Height = CInt(Me.Height * 0.9)
+                circle.Width = CInt(Me.Height * 0.9)
+                Return circle
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' OnとOffの文言表示ラベルの<seealso cref="Shape"/>
+        ''' </summary>
+        Protected Overridable ReadOnly Property TextShape As Shape
+            Get
+                Dim label As Character = New Character()
+                label.Coloring = Shape.ColoringType.Fill
+                label.BrushColor = Color.White
+                label.TextHorizontalAlignment = HorizontalAlignmentType.Center
+                label.TextVerticalAlignment = VerticalAlignmentType.Center
+                label.Text = If(IsChecked, TrueText, FalseText)
+                label.Font = If(Not String.IsNullOrWhiteSpace(FontName) And FontSize > 0, New Font(FontName, FontSize, FontStyle), Me.Font)
+                label.X = If(IsChecked, 0, CInt(Me.Height * 0.9))
+                label.Y = 0
+                label.Height = Me.Height
+                label.Width = Me.Width - CInt(Me.Height * 0.9)
+                Return label
+            End Get
         End Property
 
         Sub New()
@@ -97,92 +198,39 @@ Namespace Switches
             Me.Cursor = Cursors.Hand
         End Sub
 
-        ''' <summary>
-        ''' 円形の画像を描画する
-        ''' </summary>
-        ''' <param name="width"></param>
-        ''' <param name="height"></param>
-        ''' <param name="brush"></param>
-        ''' <returns></returns>
-        Private Function createCircleImage(width As Integer, height As Integer, brush As Brush) As Bitmap
-            Dim canvas = New Bitmap(width, height)
-            Dim x As Single = 0
-            Dim y As Single = 0
-            Dim rectWidth As Single = width - height
-
-            Using g As Graphics = Graphics.FromImage(canvas)
-                g.SmoothingMode = SmoothingMode.AntiAlias
-                g.FillPie(brush, x, y, height, height, 90, 180)
-                If rectWidth > 0 Then
-                    g.FillRectangle(brush, x + CSng(height) / 2 - 1, y, rectWidth, CSng(height))
-                End If
-                g.FillPie(brush, x + rectWidth - 2, y, height, height, 270, 180)
-            End Using
-
-            Return canvas
-        End Function
-
-        ''' <summary>
-        ''' 文字を描画する
-        ''' </summary>
-        ''' <param name="width"></param>
-        ''' <param name="height"></param>
-        ''' <param name="brush"></param>
-        ''' <param name="measuredSize"></param>
-        ''' <returns></returns>
-        Private Function createTextImage(width As Integer, height As Integer, brush As Brush, ByRef measuredSize As Size) As Bitmap
-            Dim canvas As New Bitmap(width, height)
-            Using g As Graphics = Graphics.FromImage(canvas)
-                g.SmoothingMode = SmoothingMode.AntiAlias
-                Dim text As String
-                If IsChecked Then
-                    text = TrueText
-                Else
-                    text = FalseText
-                End If
-
-                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias
-                Dim font As Font = Me.Font
-                If Not String.IsNullOrWhiteSpace(FontName) And FontSize > 0 Then
-                    font = New Font(FontName, FontSize, FontStyle)
-                End If
-                g.DrawString(text, font, brush, 0, 0)
-                measuredSize = TextRenderer.MeasureText(g, text, font, New Size(1000, 1000), TextFormatFlags.NoPadding)
-            End Using
-            Return canvas
-        End Function
 
         Protected Overrides Sub OnPaint(pe As PaintEventArgs)
-
             Dim g As Graphics = pe.Graphics
             g.Clear(Control.DefaultBackColor)
-
-            Dim circle As Bitmap = createCircleImage(CInt(Height * 0.9), CInt(Height * 0.9), Brushes.White)
-            Dim top As Single = CSng(Height * 0.1 / 2.0)
-            If IsChecked Then
-                g.DrawImage(createCircleImage(Width, Height, New SolidBrush(TrueColor)), 0, 0)
-                Dim left As Single = Width - Height
-                g.DrawImage(circle, left, top)
-                Dim textSize As Size
-                Dim label As Bitmap = createTextImage(Width, Height, Brushes.White, textSize)
-                g.DrawImage(label, CSng(Width - Height - textSize.Width) / 2, CSng(Height - textSize.Height) / 2)
-            Else
-                g.DrawImage(createCircleImage(Width, Height, New SolidBrush(FalseColor)), 0, 0)
-                Dim left As Single = CSng(Height * 0.1)
-                g.DrawImage(circle, left, top)
-                Dim textSize As Size
-                Dim label As Bitmap = createTextImage(Width, Height, Brushes.White, textSize)
-                g.DrawImage(label, CSng(Width - Height - textSize.Width) / 2 + CSng(Height * 0.9), CSng(Height - textSize.Height) / 2)
-            End If
+            OutlineShape.Draw(g)
+            SwitchShape.Draw(g)
+            TextShape.Draw(g)
         End Sub
 
         Protected Overrides Sub OnClick(e As EventArgs)
+
+            If EnableAnimation Then
+                CheckedChangeWithAnimation()
+            End If
+
             IsChecked = Not IsChecked
-            Me.Invalidate()
             MyBase.OnClick(e)
         End Sub
 
-
+        ''' <summary>
+        ''' 少しずつチェック状態が遷移するアニメーションの処理。
+        ''' ValueProgress値を変えながら再描画する。
+        ''' </summary>
+        Protected Overridable Sub CheckedChangeWithAnimation()
+            Dim stepOfValue As Single = If(IsChecked, -0.2F, 0.2F)
+            _ValueProgress = If(IsChecked, 1.0F, 0.0F)
+            For index = 1 To 5
+                _ValueProgress += stepOfValue
+                Me.Invalidate()
+                Threading.Thread.Sleep(10)
+                Application.DoEvents()
+            Next
+        End Sub
 
     End Class
 

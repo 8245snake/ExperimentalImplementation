@@ -546,18 +546,18 @@ Partial Class MainForm
         '
         Me.ToggleSwitch1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ToggleSwitch1.FalseColor = System.Drawing.Color.DarkGray
-        Me.ToggleSwitch1.FalseText = "左クリック無効"
+        Me.ToggleSwitch1.FalseText = "無効"
         Me.ToggleSwitch1.FontName = "Meiryo UI"
         Me.ToggleSwitch1.FontSize = 14.0!
         Me.ToggleSwitch1.FontStyle = System.Drawing.FontStyle.Bold
-        Me.ToggleSwitch1.IsChecked = False
+        Me.ToggleSwitch1.IsChecked = True
         Me.ToggleSwitch1.Location = New System.Drawing.Point(17, 29)
         Me.ToggleSwitch1.Name = "ToggleSwitch1"
-        Me.ToggleSwitch1.Size = New System.Drawing.Size(186, 39)
+        Me.ToggleSwitch1.Size = New System.Drawing.Size(97, 39)
         Me.ToggleSwitch1.TabIndex = 8
         Me.ToggleSwitch1.TabStop = False
         Me.ToggleSwitch1.TrueColor = System.Drawing.Color.Lime
-        Me.ToggleSwitch1.TrueText = "左クリック有効"
+        Me.ToggleSwitch1.TrueText = "有効"
         '
         'MainForm
         '

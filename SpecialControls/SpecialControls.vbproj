@@ -71,6 +71,12 @@
     <Compile Include="Inputting\ExTextBox.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Painting\Character.vb" />
+    <Compile Include="Painting\Circle.vb" />
+    <Compile Include="Painting\CircularSector.vb" />
+    <Compile Include="Painting\ExpandedCircle.vb" />
+    <Compile Include="Painting\Shape.vb" />
+    <Compile Include="Painting\Tetragon.vb" />
     <Compile Include="Switches\ToggleSwitch.vb">
       <SubType>Component</SubType>
     </Compile>
