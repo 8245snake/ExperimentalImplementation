@@ -14,6 +14,32 @@ Namespace GenericWrappers
         Private Const DispColName = "disp"
         Private Const ValueColName = "value"
 
+        Public Property ListBox As ListBox
+            Get
+                Return _ListBox
+            End Get
+            Set(value As ListBox)
+                _ListBox = value
+            End Set
+        End Property
+
+        Public Property SelectedValue As T
+            Get
+                Return DirectCast(_ListBox.SelectedValue, T)
+            End Get
+            Set(value As T)
+                _ListBox.SelectedValue = value
+            End Set
+        End Property
+
+        Public Property SelectedIndex As Integer
+            Get
+                Return _ListBox.SelectedIndex
+            End Get
+            Set(value As Integer)
+                _ListBox.SelectedIndex = value
+            End Set
+        End Property
         Sub New(ByRef listbox As ListBox)
             _ListBox = listbox
             ' バインド用のデータテーブルを作成する
@@ -40,14 +66,6 @@ Namespace GenericWrappers
         Public Sub Add(ByVal dispText As String, ByRef value As T)
             _DataTable.Rows.Add(dispText, value)
         End Sub
-
-        ''' <summary>
-        ''' 選択されている値を取得する
-        ''' </summary>
-        ''' <returns>選択項目に紐付くオブジェクト</returns>
-        Public Function GetSelectedValue() As T
-            Return DirectCast(_ListBox.SelectedValue, T)
-        End Function
 
     End Class
 

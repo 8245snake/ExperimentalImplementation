@@ -15,6 +15,34 @@ Namespace GenericWrappers
         Private Const DispColName = "disp"
         Private Const ValueColName = "value"
 
+        Public Property ComboBox As ComboBox
+            Get
+                Return _ComboBox
+            End Get
+            Set(value As ComboBox)
+                _ComboBox = value
+            End Set
+        End Property
+
+        Public Property SelectedValue As T
+            Get
+                Return DirectCast(_ComboBox.SelectedValue, T)
+            End Get
+            Set(value As T)
+                _ComboBox.SelectedValue = value
+            End Set
+        End Property
+
+        Public Property SelectedIndex As Integer
+            Get
+                Return _ComboBox.SelectedIndex
+            End Get
+            Set(value As Integer)
+                _ComboBox.SelectedIndex = value
+            End Set
+        End Property
+
+
         Sub New(ByRef combobox As ComboBox)
             _ComboBox = combobox
             ' バインド用のデータテーブルを作成する
@@ -42,13 +70,6 @@ Namespace GenericWrappers
             _DataTable.Rows.Add(dispText, value)
         End Sub
 
-        ''' <summary>
-        ''' 選択されている値を取得する
-        ''' </summary>
-        ''' <returns>選択項目に紐付くオブジェクト</returns>
-        Public Function GetSelectedValue() As T
-            Return DirectCast(_ComboBox.SelectedValue, T)
-        End Function
 
     End Class
 

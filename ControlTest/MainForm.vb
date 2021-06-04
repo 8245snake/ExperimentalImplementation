@@ -14,7 +14,7 @@ Public Class MainForm
     Dim tooltipForm As SplashMessage = New SplashMessage()
     Dim combDurationWrapper As GenericComboBoxWrapper(Of SplashMessage.DisplayDuration)
 
-    Dim combSampleWrapper As GenericComboBoxWrapper(Of Country)
+    Dim combSampleWrapper As GenericComboBoxWrapper(Of Country) 
     Dim lstSampleWrapper As GenericListBoxWrapper(Of City)
 
     Dim combTriggerWrapper As GenericComboBoxWrapper(Of ExTextBox.ValidationTriggerType)
@@ -48,15 +48,15 @@ Public Class MainForm
         combTriggerWrapper = New GenericComboBoxWrapper(Of ExTextBox.ValidationTriggerType)(DirectCast(combTrigger, ComboBox))
         combTriggerWrapper.Add("フォーカスが外れたとき", ExTextBox.ValidationTriggerType.FocusLeave)
         combTriggerWrapper.Add("テキストが変わったとき", ExTextBox.ValidationTriggerType.TextChange)
-        combTrigger.SelectedIndex = 1
+        combTriggerWrapper.SelectedValue = ExTextBox.ValidationTriggerType.TextChange
         combErrorPositionWrapper = New GenericComboBoxWrapper(Of ExTextBox.ErrorDisplayPositionType)(DirectCast(combErrorPosition, ComboBox))
         combErrorPositionWrapper.Add("下", ExTextBox.ErrorDisplayPositionType.Bottom)
         combErrorPositionWrapper.Add("右", ExTextBox.ErrorDisplayPositionType.Right)
         combErrorPositionWrapper.Add("右（アイコン）", ExTextBox.ErrorDisplayPositionType.RightToolTip)
-        combErrorPosition.SelectedIndex = 0
+        combErrorPositionWrapper.SelectedValue = ExTextBox.ErrorDisplayPositionType.Bottom
 
-        txtNumber.ValidationTrigger = combTriggerWrapper.GetSelectedValue()
-        txtNumber.ErrorDisplayPosition = combErrorPositionWrapper.GetSelectedValue()
+        txtNumber.ValidationTrigger = combTriggerWrapper.SelectedValue
+        txtNumber.ErrorDisplayPosition = combErrorPositionWrapper.SelectedValue
 
         txtNumber.ValidateFunction = AddressOf checkNumber
 
@@ -124,7 +124,7 @@ Public Class MainForm
     Private Sub btnTooltip_Click(sender As Object, e As EventArgs) Handles btnTooltip.Click
         Dim tooltip As SplashMessage = New SplashMessage()
         Dim bmt As Bitmap = SplashMessage.CreateTextImage(txtTooltip.Text, FontDialogTooltip.Font)
-        tooltip.Show(bmt, Integer.Parse(txtX.Text), Integer.Parse(txtY.Text), combDurationWrapper.GetSelectedValue())
+        tooltip.Show(bmt, Integer.Parse(txtX.Text), Integer.Parse(txtY.Text), combDurationWrapper.SelectedValue)
     End Sub
 
     Private Sub btnFont_Click(sender As Object, e As EventArgs) Handles btnFont.Click
@@ -159,20 +159,20 @@ Public Class MainForm
         For Each country As Country In SampleClass.CreateCountries()
             combSampleWrapper.Add(country.Name, country)
         Next
-        combGeneric.SelectedIndex = -1
-        combGeneric.SelectedIndex = 0
+        combSampleWrapper.SelectedIndex = -1
+        combSampleWrapper.SelectedIndex = 0
     End Sub
 
     Private Sub combGeneric_SelectedIndexChanged(sender As Object, e As EventArgs) Handles combGeneric.SelectedIndexChanged
         lstSampleWrapper = New GenericListBoxWrapper(Of City)(lstGeneric)
-        If combSampleWrapper.GetSelectedValue() Is Nothing Then Return
-        For Each city As City In combSampleWrapper.GetSelectedValue().Cities
+        If combSampleWrapper.SelectedValue Is Nothing Then Return
+        For Each city As City In combSampleWrapper.SelectedValue.Cities
             lstSampleWrapper.Add(city.Name, city)
         Next
     End Sub
     Private Sub lstGeneric_SelectedValueChanged(sender As Object, e As EventArgs) Handles lstGeneric.SelectedValueChanged
-        If lstSampleWrapper?.GetSelectedValue() Is Nothing Then Return
-        Dim city As City = lstSampleWrapper.GetSelectedValue()
+        If lstSampleWrapper?.SelectedValue Is Nothing Then Return
+        Dim city As City = lstSampleWrapper.SelectedValue
         Console.WriteLine($"City{{ Name = {city.Name} }}")
     End Sub
 #End Region
@@ -221,10 +221,10 @@ Public Class MainForm
     End Sub
 
     Private Sub combTrigger_SelectedIndexChanged(sender As Object, e As EventArgs) Handles combTrigger.SelectedIndexChanged
-        txtNumber.ValidationTrigger = combTriggerWrapper.GetSelectedValue()
+        txtNumber.ValidationTrigger = combTriggerWrapper.SelectedValue
     End Sub
     Private Sub combErrorPosition_SelectedIndexChanged(sender As Object, e As EventArgs) Handles combErrorPosition.SelectedIndexChanged
-        txtNumber.ErrorDisplayPosition = combErrorPositionWrapper.GetSelectedValue()
+        txtNumber.ErrorDisplayPosition = combErrorPositionWrapper.SelectedValue
     End Sub
 
     Private Sub txtNumber_Validated(sender As Object, e As EventArgs) Handles txtNumber.Validated
