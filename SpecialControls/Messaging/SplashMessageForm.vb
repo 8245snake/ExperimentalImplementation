@@ -7,8 +7,10 @@ Imports System.Threading
 Namespace Messaging
 
     ''' <summary>
-    ''' スプラッシュメッセージとして表示可能なフォーム
+    ''' スプラッシュメッセージとして表示可能なフォーム。
+    ''' デザインはサブクラスで行う。
     ''' </summary>
+    ''' <remarks>ShowWithoutActivation=Trueになっているので普通のモードレスダイアログとしての利用には適さない</remarks>
     Public Class SplashMessageForm
         Inherits Form
 
@@ -28,8 +30,16 @@ Namespace Messaging
                 Return _Delay
             End Get
             Set(value As Integer)
+                ' 最低でも300ミリ秒は必要
                 _Delay = CInt(IIf(value >= 300, value, 300))
             End Set
+        End Property
+
+        Protected Overrides ReadOnly Property ShowWithoutActivation As Boolean
+            Get
+                ' フォーカスを奪わないためにTrueとしたい
+                Return True
+            End Get
         End Property
 
         Sub New()
