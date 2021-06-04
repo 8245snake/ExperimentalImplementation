@@ -53,13 +53,13 @@ Namespace Inputting
         ''' </summary>
         Public Enum ValidationTriggerType
             ''' <summary>
-            ''' フォーカスが外れたとき
-            ''' </summary>
-            FocusLeave
-            ''' <summary>
             ''' テキストが変更されたとき
             ''' </summary>
             TextChange
+            ''' <summary>
+            ''' フォーカスが外れたとき
+            ''' </summary>
+            FocusLeave
         End Enum
 
         ''' <summary>
@@ -87,14 +87,13 @@ Namespace Inputting
         ''' エラーチェック関数のデリゲート
         ''' </summary>
         ''' <param name="text">検証対象のテキスト</param>
-        ''' <returns>True：OK、False：NG</returns>
-        Delegate Function ValidateFunctionDelegate(text As String) As Boolean
+        ''' <param name="result">結果返却用</param>
+        Delegate Sub ValidateFunctionDelegate(ByVal text As String, ByRef result As ValidationResult)
 
         ''' <summary>
         ''' チェックエラーの際にテキストボックスの近くに表示されるメッセージ
         ''' </summary>
-        ''' <remarks>前提としてValidateFunctionが必要。空文字の場合は何も表示されない。</remarks>
-        Public Property ErrorText As String = ""
+        Private _ErrorText As String = ""
 
         ''' <summary>
         ''' エラーテキストの表示位置
@@ -126,7 +125,7 @@ Namespace Inputting
         ''' <returns>True：必要、False：不要</returns>
         Private ReadOnly Property NeedDisplayError As Boolean
             Get
-                Return Not String.IsNullOrWhiteSpace(ErrorText) AndAlso _IsError
+                Return Not String.IsNullOrWhiteSpace(_ErrorText) AndAlso _IsError
             End Get
         End Property
 
@@ -220,11 +219,11 @@ Namespace Inputting
                 '' アイコン表示
                 _ErrorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink
                 _ErrorProvider.SetIconPadding(Me, _LineWidth)
-                _ErrorProvider.SetError(Me, ErrorText)
+                _ErrorProvider.SetError(Me, _ErrorText)
             Else
                 ' テキスト表示
                 Using g As Graphics = Me.Parent.CreateGraphics
-                    TextRenderer.DrawText(g, ErrorText, Me.Font, rect, Color.Red, TextFormatFlags.Left)
+                    TextRenderer.DrawText(g, _ErrorText, Me.Font, rect, Color.Red, TextFormatFlags.Left)
                 End Using
             End If
 
@@ -271,8 +270,11 @@ Namespace Inputting
         ''' エラーチェックして結果を描画する
         ''' </summary>
         Private Sub errorCheck()
+            Dim result As ValidationResult = New ValidationResult()
             ' 判定
-            _IsError = Not _ValidateFunction(Me.Text)
+            _ValidateFunction(Me.Text, result)
+            _IsError = Not result.Pass
+            _ErrorText = result.ErrorText
             ' 再描画
             UpdateDisplay()
             ' エラーが検出されたらイベント発火
@@ -293,6 +295,25 @@ Namespace Inputting
             Dim rect As Rectangle = getErrorMessageRectangle()
             Me.Parent.Invalidate(rect, False)
         End Sub
+
+    End Class
+
+    ''' <summary>
+    ''' エラーチェック結果を格納するクラス
+    ''' </summary>
+    Public Class ValidationResult
+
+        ''' <summary>
+        ''' チェック結果
+        ''' </summary>
+        ''' <returns>True：OK、False：NG</returns>
+        Public Property Pass As Boolean = True
+
+        ''' <summary>
+        ''' エラーの文言
+        ''' </summary>
+        ''' <returns>エラーとして表示される文字列</returns>
+        Public Property ErrorText As String = ""
 
     End Class
 

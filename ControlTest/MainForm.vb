@@ -58,7 +58,7 @@ Public Class MainForm
         txtNumber.ValidationTrigger = combTriggerWrapper.GetSelectedValue()
         txtNumber.ErrorDisplayPosition = combErrorPositionWrapper.GetSelectedValue()
 
-        txtNumber.ValidateFunction = AddressOf isNumber
+        txtNumber.ValidateFunction = AddressOf checkNumber
 
     End Sub
 
@@ -193,11 +193,32 @@ Public Class MainForm
 #End Region
 
 #Region "ExTextBox"
-    Private Function isNumber(text As String) As Boolean
-        If String.IsNullOrWhiteSpace(text) Then Return True
+
+    ''' <summary>
+    ''' テキストボックスのチェック関数
+    ''' </summary>
+    ''' <param name="text">検証対象の文字列</param>
+    ''' <param name="result">結果返却用オブジェクト</param>
+    Private Sub checkNumber(ByVal text As String, ByRef result As ValidationResult)
+        If String.IsNullOrWhiteSpace(text) Then
+            result.Pass = True
+            Return
+        End If
+
         Dim num As Integer
-        Return Integer.TryParse(text, num)
-    End Function
+        If Not Integer.TryParse(text, num) Then
+            result.Pass = False
+            result.ErrorText = "整数値ではありません"
+            Return
+        End If
+
+        If num < 0 Then
+            result.Pass = False
+            result.ErrorText = "0以上の値を入力してください"
+            Return
+        End If
+
+    End Sub
 
     Private Sub combTrigger_SelectedIndexChanged(sender As Object, e As EventArgs) Handles combTrigger.SelectedIndexChanged
         txtNumber.ValidationTrigger = combTriggerWrapper.GetSelectedValue()
