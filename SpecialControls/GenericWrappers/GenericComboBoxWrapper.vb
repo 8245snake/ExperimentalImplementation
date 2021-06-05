@@ -70,6 +70,13 @@ Namespace GenericWrappers
             _DataTable.Rows.Add(dispText, value)
         End Sub
 
+        ''' <summary>
+        ''' コンボボックスの中身をクリアする
+        ''' </summary>
+        Public Sub Clear()
+            _DataTable.Rows.Clear()
+            _ComboBox.Items.Clear()
+        End Sub
 
     End Class
 

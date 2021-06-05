@@ -15,8 +15,11 @@ Namespace Painting
             Select Case Coloring
                 Case ColoringType.Fill
                     g.FillRectangle(New SolidBrush(BrushColor), Rect)
+                    If BorderWidth > 0 Then
+                        g.DrawRectangle(New Pen(New SolidBrush(BorderColor), BorderWidth), Rect)
+                    End If
                 Case ColoringType.Outline
-                    g.DrawRectangle(New Pen(New SolidBrush(BrushColor), BorderWidth), Rect)
+                    g.DrawRectangle(New Pen(New SolidBrush(BorderColor), BorderWidth), Rect)
             End Select
         End Sub
 

@@ -5,7 +5,7 @@ Imports SpecialControls.CollectionViews
 Imports SpecialControls.GenericWrappers
 Imports SpecialControls.Inputting
 Imports SpecialControls.Messaging
-Imports SpecialControls.Switches
+Imports SpecialControls.Services
 
 
 Public Class MainForm
@@ -21,6 +21,8 @@ Public Class MainForm
     Dim combErrorPositionWrapper As GenericComboBoxWrapper(Of ExTextBox.ErrorDisplayPositionType)
 
     Dim radioButtons As GenericRadioButtonWrapper(Of CheckState) = New GenericRadioButtonWrapper(Of CheckState)()
+
+    Dim hightlightingService As ControlHighlightingService = New ControlHighlightingService()
 
     Sub New()
 
@@ -241,9 +243,14 @@ Public Class MainForm
 
     Private Sub btnLogClear_Click(sender As Object, e As EventArgs) Handles btnLogClear.Click
         txtDebug.Text = ""
+        hightlightingService.HighlightingControl = btnHighlight
     End Sub
 
     Private Sub checkedChanged(sender As Object, e As EventArgs) Handles optChecked.CheckedChanged, optUnchecked.CheckedChanged, optIndeterminate.CheckedChanged
         chkLarge.CheckState = radioButtons.SelectedValue
+    End Sub
+
+    Private Sub btnHighlight_Click(sender As Object, e As EventArgs) Handles btnHighlight.Click
+        hightlightingService.HighlightingControl = btnLogClear
     End Sub
 End Class

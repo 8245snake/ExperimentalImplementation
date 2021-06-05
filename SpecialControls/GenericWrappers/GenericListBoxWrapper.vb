@@ -67,6 +67,14 @@ Namespace GenericWrappers
             _DataTable.Rows.Add(dispText, value)
         End Sub
 
+        ''' <summary>
+        ''' リストボックスの中身をクリアする
+        ''' </summary>
+        Public Sub Clear()
+            _DataTable.Rows.Clear()
+            _ListBox.Items.Clear()
+        End Sub
+
     End Class
 
 End Namespace

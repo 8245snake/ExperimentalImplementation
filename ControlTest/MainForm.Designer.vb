@@ -69,8 +69,8 @@ Partial Class MainForm
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.optIndeterminate = New SpecialControls.Switches.LargeRadioButton()
         Me.optUnchecked = New SpecialControls.Switches.LargeRadioButton()
         Me.optChecked = New SpecialControls.Switches.LargeRadioButton()
@@ -80,6 +80,7 @@ Partial Class MainForm
         Me.txtNumber = New SpecialControls.Inputting.ExTextBox()
         Me.StrictComboBox1 = New SpecialControls.CollectionViews.StrictComboBox()
         Me.ToggleSwitch1 = New SpecialControls.Switches.ToggleSwitch()
+        Me.btnHighlight = New System.Windows.Forms.Button()
         Me.panelSplash.SuspendLayout()
         Me.panelToggle.SuspendLayout()
         Me.panelWrappers.SuspendLayout()
@@ -519,16 +520,6 @@ Partial Class MainForm
         Me.Panel3.Size = New System.Drawing.Size(529, 89)
         Me.Panel3.TabIndex = 31
         '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label14.Location = New System.Drawing.Point(4, 9)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(183, 26)
-        Me.Label14.TabIndex = 25
-        Me.Label14.Text = "大きなチェックボックス"
-        '
         'Label12
         '
         Me.Label12.AutoSize = True
@@ -538,6 +529,16 @@ Partial Class MainForm
         Me.Label12.Size = New System.Drawing.Size(163, 26)
         Me.Label12.TabIndex = 34
         Me.Label12.Text = "大きなラジオボタン"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label14.Location = New System.Drawing.Point(4, 9)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(183, 26)
+        Me.Label14.TabIndex = 25
+        Me.Label14.Text = "大きなチェックボックス"
         '
         'optIndeterminate
         '
@@ -649,11 +650,21 @@ Partial Class MainForm
         Me.ToggleSwitch1.TrueColor = System.Drawing.Color.Lime
         Me.ToggleSwitch1.TrueText = "有効"
         '
+        'btnHighlight
+        '
+        Me.btnHighlight.Location = New System.Drawing.Point(126, 402)
+        Me.btnHighlight.Name = "btnHighlight"
+        Me.btnHighlight.Size = New System.Drawing.Size(75, 23)
+        Me.btnHighlight.TabIndex = 32
+        Me.btnHighlight.Text = "Button2"
+        Me.btnHighlight.UseVisualStyleBackColor = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1161, 588)
+        Me.Controls.Add(Me.btnHighlight)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
@@ -741,4 +752,5 @@ Partial Class MainForm
     Friend WithEvents optChecked As SpecialControls.Switches.LargeRadioButton
     Friend WithEvents Label14 As Label
     Friend WithEvents Label12 As Label
+    Friend WithEvents btnHighlight As Button
 End Class
