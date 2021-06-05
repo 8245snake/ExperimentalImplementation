@@ -45,7 +45,6 @@ Partial Class MainForm
         Me.lblFont = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtToggleHeight = New System.Windows.Forms.TextBox()
-        Me.ToggleSwitch1 = New SpecialControls.Switches.ToggleSwitch()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtToggleWidth = New System.Windows.Forms.TextBox()
         Me.btnToggleFonts = New System.Windows.Forms.Button()
@@ -65,20 +64,29 @@ Partial Class MainForm
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.StrictComboBox1 = New SpecialControls.CollectionViews.StrictComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.combErrorPosition = New SpecialControls.CollectionViews.StrictComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.combTrigger = New SpecialControls.CollectionViews.StrictComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.optIndeterminate = New SpecialControls.Switches.LargeRadioButton()
+        Me.optUnchecked = New SpecialControls.Switches.LargeRadioButton()
+        Me.optChecked = New SpecialControls.Switches.LargeRadioButton()
+        Me.chkLarge = New SpecialControls.Switches.LargeCheckBox()
+        Me.combErrorPosition = New SpecialControls.CollectionViews.StrictComboBox()
+        Me.combTrigger = New SpecialControls.CollectionViews.StrictComboBox()
         Me.txtNumber = New SpecialControls.Inputting.ExTextBox()
+        Me.StrictComboBox1 = New SpecialControls.CollectionViews.StrictComboBox()
+        Me.ToggleSwitch1 = New SpecialControls.Switches.ToggleSwitch()
         Me.panelSplash.SuspendLayout()
         Me.panelToggle.SuspendLayout()
-        CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelWrappers.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtDebug
@@ -300,24 +308,6 @@ Partial Class MainForm
         Me.txtToggleHeight.TabIndex = 16
         Me.txtToggleHeight.Text = "200"
         '
-        'ToggleSwitch1
-        '
-        Me.ToggleSwitch1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ToggleSwitch1.EnableAnimation = True
-        Me.ToggleSwitch1.FalseColor = System.Drawing.Color.DarkGray
-        Me.ToggleSwitch1.FalseText = "無効"
-        Me.ToggleSwitch1.FontName = "Meiryo UI"
-        Me.ToggleSwitch1.FontSize = 14.0!
-        Me.ToggleSwitch1.FontStyle = System.Drawing.FontStyle.Bold
-        Me.ToggleSwitch1.IsChecked = True
-        Me.ToggleSwitch1.Location = New System.Drawing.Point(17, 29)
-        Me.ToggleSwitch1.Name = "ToggleSwitch1"
-        Me.ToggleSwitch1.Size = New System.Drawing.Size(97, 39)
-        Me.ToggleSwitch1.TabIndex = 8
-        Me.ToggleSwitch1.TabStop = False
-        Me.ToggleSwitch1.TrueColor = System.Drawing.Color.Lime
-        Me.ToggleSwitch1.TrueText = "有効"
-        '
         'Label4
         '
         Me.Label4.AutoSize = True
@@ -473,18 +463,6 @@ Partial Class MainForm
         Me.Label8.TabIndex = 23
         Me.Label8.Text = "IndexChangedが手動か自動か区別できるコンボボックス"
         '
-        'StrictComboBox1
-        '
-        Me.StrictComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.StrictComboBox1.FormattingEnabled = True
-        Me.StrictComboBox1.IntegralHeight = False
-        Me.StrictComboBox1.IsStrictOccuration = False
-        Me.StrictComboBox1.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7"})
-        Me.StrictComboBox1.Location = New System.Drawing.Point(9, 51)
-        Me.StrictComboBox1.Name = "StrictComboBox1"
-        Me.StrictComboBox1.Size = New System.Drawing.Size(199, 23)
-        Me.StrictComboBox1.TabIndex = 22
-        '
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -508,6 +486,107 @@ Partial Class MainForm
         Me.Label11.TabIndex = 29
         Me.Label11.Text = "エラーメッセージ位置"
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(267, 8)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(111, 15)
+        Me.Label10.TabIndex = 27
+        Me.Label10.Text = "バリデーションタイミング"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label9.Location = New System.Drawing.Point(4, 9)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(196, 26)
+        Me.Label9.TabIndex = 25
+        Me.Label9.Text = "便利なテキストボックス"
+        '
+        'Panel3
+        '
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.Label12)
+        Me.Panel3.Controls.Add(Me.optIndeterminate)
+        Me.Panel3.Controls.Add(Me.optUnchecked)
+        Me.Panel3.Controls.Add(Me.optChecked)
+        Me.Panel3.Controls.Add(Me.chkLarge)
+        Me.Panel3.Controls.Add(Me.Label14)
+        Me.Panel3.Location = New System.Drawing.Point(476, 336)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(529, 89)
+        Me.Panel3.TabIndex = 31
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label14.Location = New System.Drawing.Point(4, 9)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(183, 26)
+        Me.Label14.TabIndex = 25
+        Me.Label14.Text = "大きなチェックボックス"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label12.Location = New System.Drawing.Point(235, 9)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(163, 26)
+        Me.Label12.TabIndex = 34
+        Me.Label12.Text = "大きなラジオボタン"
+        '
+        'optIndeterminate
+        '
+        Me.optIndeterminate.AutoSize = True
+        Me.optIndeterminate.CircleBorderWidth = 1
+        Me.optIndeterminate.Font = New System.Drawing.Font("Meiryo UI", 12.0!)
+        Me.optIndeterminate.Location = New System.Drawing.Point(311, 46)
+        Me.optIndeterminate.Name = "optIndeterminate"
+        Me.optIndeterminate.Size = New System.Drawing.Size(59, 24)
+        Me.optIndeterminate.TabIndex = 33
+        Me.optIndeterminate.Text = "中間"
+        Me.optIndeterminate.UseVisualStyleBackColor = True
+        '
+        'optUnchecked
+        '
+        Me.optUnchecked.AutoSize = True
+        Me.optUnchecked.CircleBorderWidth = 1
+        Me.optUnchecked.Font = New System.Drawing.Font("Meiryo UI", 12.0!)
+        Me.optUnchecked.Location = New System.Drawing.Point(382, 46)
+        Me.optUnchecked.Name = "optUnchecked"
+        Me.optUnchecked.Size = New System.Drawing.Size(75, 24)
+        Me.optUnchecked.TabIndex = 32
+        Me.optUnchecked.Text = "非選択"
+        Me.optUnchecked.UseVisualStyleBackColor = True
+        '
+        'optChecked
+        '
+        Me.optChecked.AutoSize = True
+        Me.optChecked.Checked = True
+        Me.optChecked.CircleBorderWidth = 1
+        Me.optChecked.Font = New System.Drawing.Font("Meiryo UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.optChecked.Location = New System.Drawing.Point(240, 46)
+        Me.optChecked.Name = "optChecked"
+        Me.optChecked.Size = New System.Drawing.Size(59, 24)
+        Me.optChecked.TabIndex = 31
+        Me.optChecked.TabStop = True
+        Me.optChecked.Text = "選択"
+        Me.optChecked.UseVisualStyleBackColor = True
+        '
+        'chkLarge
+        '
+        Me.chkLarge.Font = New System.Drawing.Font("Meiryo UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.chkLarge.Location = New System.Drawing.Point(9, 38)
+        Me.chkLarge.Name = "chkLarge"
+        Me.chkLarge.Size = New System.Drawing.Size(127, 32)
+        Me.chkLarge.TabIndex = 30
+        Me.chkLarge.Text = "高さMax"
+        Me.chkLarge.UseVisualStyleBackColor = True
+        '
         'combErrorPosition
         '
         Me.combErrorPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -518,15 +597,6 @@ Partial Class MainForm
         Me.combErrorPosition.Name = "combErrorPosition"
         Me.combErrorPosition.Size = New System.Drawing.Size(129, 23)
         Me.combErrorPosition.TabIndex = 28
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(267, 8)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(111, 15)
-        Me.Label10.TabIndex = 27
-        Me.Label10.Text = "バリデーションタイミング"
         '
         'combTrigger
         '
@@ -539,16 +609,6 @@ Partial Class MainForm
         Me.combTrigger.Size = New System.Drawing.Size(129, 23)
         Me.combTrigger.TabIndex = 26
         '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label9.Location = New System.Drawing.Point(4, 9)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(196, 26)
-        Me.Label9.TabIndex = 25
-        Me.Label9.Text = "便利なテキストボックス"
-        '
         'txtNumber
         '
         Me.txtNumber.ErrorDisplayPosition = SpecialControls.Inputting.ExTextBox.ErrorDisplayPositionType.Bottom
@@ -559,11 +619,42 @@ Partial Class MainForm
         Me.txtNumber.ValidationTrigger = SpecialControls.Inputting.ExTextBox.ValidationTriggerType.FocusLeave
         Me.txtNumber.WatermarkText = "整数値を入力してください"
         '
+        'StrictComboBox1
+        '
+        Me.StrictComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.StrictComboBox1.FormattingEnabled = True
+        Me.StrictComboBox1.IntegralHeight = False
+        Me.StrictComboBox1.IsStrictOccuration = False
+        Me.StrictComboBox1.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7"})
+        Me.StrictComboBox1.Location = New System.Drawing.Point(9, 51)
+        Me.StrictComboBox1.Name = "StrictComboBox1"
+        Me.StrictComboBox1.Size = New System.Drawing.Size(199, 23)
+        Me.StrictComboBox1.TabIndex = 22
+        '
+        'ToggleSwitch1
+        '
+        Me.ToggleSwitch1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ToggleSwitch1.EnableAnimation = True
+        Me.ToggleSwitch1.FalseColor = System.Drawing.Color.DarkGray
+        Me.ToggleSwitch1.FalseText = "無効"
+        Me.ToggleSwitch1.FontName = "Meiryo UI"
+        Me.ToggleSwitch1.FontSize = 14.0!
+        Me.ToggleSwitch1.FontStyle = System.Drawing.FontStyle.Bold
+        Me.ToggleSwitch1.IsChecked = True
+        Me.ToggleSwitch1.Location = New System.Drawing.Point(17, 29)
+        Me.ToggleSwitch1.Name = "ToggleSwitch1"
+        Me.ToggleSwitch1.Size = New System.Drawing.Size(97, 39)
+        Me.ToggleSwitch1.TabIndex = 8
+        Me.ToggleSwitch1.TabStop = False
+        Me.ToggleSwitch1.TrueColor = System.Drawing.Color.Lime
+        Me.ToggleSwitch1.TrueText = "有効"
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1161, 588)
+        Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.panelWrappers)
@@ -579,13 +670,15 @@ Partial Class MainForm
         Me.panelSplash.PerformLayout()
         Me.panelToggle.ResumeLayout(False)
         Me.panelToggle.PerformLayout()
-        CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelWrappers.ResumeLayout(False)
         Me.panelWrappers.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -641,4 +734,11 @@ Partial Class MainForm
     Friend WithEvents Label9 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents combErrorPosition As SpecialControls.CollectionViews.StrictComboBox
+    Friend WithEvents chkLarge As SpecialControls.Switches.LargeCheckBox
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents optIndeterminate As SpecialControls.Switches.LargeRadioButton
+    Friend WithEvents optUnchecked As SpecialControls.Switches.LargeRadioButton
+    Friend WithEvents optChecked As SpecialControls.Switches.LargeRadioButton
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label12 As Label
 End Class

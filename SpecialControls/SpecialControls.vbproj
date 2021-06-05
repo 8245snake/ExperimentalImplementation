@@ -68,6 +68,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenericWrappers\GenericRadioButtonWrapper.vb" />
     <Compile Include="Inputting\ExTextBox.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -77,6 +78,12 @@
     <Compile Include="Painting\ExpandedCircle.vb" />
     <Compile Include="Painting\Shape.vb" />
     <Compile Include="Painting\Tetragon.vb" />
+    <Compile Include="Switches\LargeCheckBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Switches\LargeRadioButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Switches\ToggleSwitch.vb">
       <SubType>Component</SubType>
     </Compile>

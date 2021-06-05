@@ -20,6 +20,7 @@ Public Class MainForm
     Dim combTriggerWrapper As GenericComboBoxWrapper(Of ExTextBox.ValidationTriggerType)
     Dim combErrorPositionWrapper As GenericComboBoxWrapper(Of ExTextBox.ErrorDisplayPositionType)
 
+    Dim radioButtons As GenericRadioButtonWrapper(Of CheckState) = New GenericRadioButtonWrapper(Of CheckState)()
 
     Sub New()
 
@@ -57,9 +58,11 @@ Public Class MainForm
 
         txtNumber.ValidationTrigger = combTriggerWrapper.SelectedValue
         txtNumber.ErrorDisplayPosition = combErrorPositionWrapper.SelectedValue
-
         txtNumber.ValidateFunction = AddressOf checkNumber
 
+        radioButtons.AddBinding(DirectCast(optChecked, RadioButton), CheckState.Checked)
+        radioButtons.AddBinding(DirectCast(optUnchecked, RadioButton), CheckState.Unchecked)
+        radioButtons.AddBinding(DirectCast(optIndeterminate, RadioButton), CheckState.Indeterminate)
     End Sub
 
 
@@ -240,4 +243,7 @@ Public Class MainForm
         txtDebug.Text = ""
     End Sub
 
+    Private Sub checkedChanged(sender As Object, e As EventArgs) Handles optChecked.CheckedChanged, optUnchecked.CheckedChanged, optIndeterminate.CheckedChanged
+        chkLarge.CheckState = radioButtons.SelectedValue
+    End Sub
 End Class
