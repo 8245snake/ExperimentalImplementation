@@ -2,7 +2,6 @@
 Option Strict On
 
 Imports SpecialControls.Painting
-Imports Utility
 
 Namespace Services
 
@@ -17,12 +16,9 @@ Namespace Services
         ''' </summary>
         Public Event HighlightingControlChanged As EventHandler
 
-
-        Public Property HighlightLineColor As Color
-        Public Property HighlightLineWidth As Integer
-        Public Property BlinkStyle As ErrorBlinkStyle
-
-
+        ''' <summary>
+        ''' ハイライト対象のコントロール
+        ''' </summary>
         Public Property HighlightingControl As Control
             Get
                 Return _HighlightingControl
@@ -30,21 +26,18 @@ Namespace Services
             Set
                 If _HighlightingControl IsNot Value Then
                     If _HighlightingControl IsNot Nothing Then
-                        WndProcHooker.UnhookWndProc(_HighlightingControl, True)
+                        RemoveHandler _HighlightingControl.Paint, AddressOf TargetPaint
                         _HighlightingControl.Invalidate()
                     End If
                     _HighlightingControl = Value
-                    WndProcHooker.HookWndProc(_HighlightingControl, AddressOf Highlight, &HF, WndProcHooker.HookedProcInformation.BaseWndProcTiming.BeforeNew)
+                    AddHandler _HighlightingControl.Paint, AddressOf TargetPaint
                     _HighlightingControl.Invalidate()
                     RaiseEvent HighlightingControlChanged(Me, New EventArgs())
                 End If
             End Set
         End Property
 
-
-        Public Function Highlight(hwnd As IntPtr, msg As UInteger, wParam As UInteger, lParam As Integer, ByRef handled As Boolean) As Integer
-            If _HighlightingControl Is Nothing Then Return 0
-
+        Private Sub TargetPaint(sender As Object, e As PaintEventArgs)
             Dim tetragon As Tetragon = New Tetragon()
             tetragon.X = 0
             tetragon.Y = 0
@@ -53,13 +46,8 @@ Namespace Services
             tetragon.Coloring = Shape.ColoringType.Outline
             tetragon.BorderColor = Color.Red
             tetragon.BorderWidth = 4
-
-            Using g As Graphics = Graphics.FromHwnd(_HighlightingControl.Handle)
-                tetragon.Draw(g)
-            End Using
-
-            Return 0
-        End Function
+            tetragon.Draw(e.Graphics)
+        End Sub
 
     End Class
 End Namespace
