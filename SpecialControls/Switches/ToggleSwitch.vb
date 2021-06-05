@@ -23,6 +23,7 @@ Namespace Switches
         Private _FontSize As Single
         Private _FontStyle As FontStyle
         Private _ValueProgress As Single
+        Private _IsMouseHovering As Boolean = False
 
         ''' <summary>
         ''' チェック状態を取得または設定します
@@ -153,6 +154,20 @@ Namespace Switches
         End Property
 
         ''' <summary>
+        ''' マウスホバーしたときに追加で表示される枠線
+        ''' </summary>
+        Protected Overridable ReadOnly Property BorderShape As Shape
+            Get
+                Dim body As ExpandedCircle = New ExpandedCircle
+                body.Coloring = Shape.ColoringType.Outline
+                body.BorderColor = Color.CadetBlue
+                body.BorderWidth = 1
+                body.Rect = New Rectangle(0, 0, Me.Width, Me.Height)
+                Return body
+            End Get
+        End Property
+
+        ''' <summary>
         ''' スイッチの部分の<seealso cref="Shape"/>
         ''' </summary>
         Protected Overridable ReadOnly Property SwitchShape As Shape
@@ -205,6 +220,21 @@ Namespace Switches
             OutlineShape.Draw(g)
             SwitchShape.Draw(g)
             TextShape.Draw(g)
+            If _IsMouseHovering Then
+                BorderShape.Draw(g)
+            End If
+        End Sub
+
+        Protected Overrides Sub OnMouseEnter(e As EventArgs)
+            MyBase.OnMouseEnter(e)
+            _IsMouseHovering = True
+            Me.Invalidate()
+        End Sub
+
+        Protected Overrides Sub OnMouseLeave(e As EventArgs)
+            MyBase.OnMouseLeave(e)
+            _IsMouseHovering = False
+            Me.Invalidate()
         End Sub
 
         Protected Overrides Sub OnClick(e As EventArgs)

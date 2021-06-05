@@ -1,5 +1,6 @@
 ﻿Option Explicit On
 Option Strict On
+Imports SpecialControls.Painting
 
 Namespace Switches
 
@@ -9,10 +10,43 @@ Namespace Switches
     Public Class LargeCheckBox
         Inherits CheckBox
 
+        Private _IsMouseHovering As Boolean = False
+
+        ''' <summary>
+        ''' マウスホバーしたときの背景色
+        ''' </summary>
+        Public Property HoverColor As Color = ColorTranslator.FromHtml("#110000FF")
+
         Sub New()
             Me.AutoSize = False
             Me.TextAlign = ContentAlignment.MiddleLeft
             Me.Cursor = Cursors.Hand
+        End Sub
+
+        ''' <summary>
+        ''' マウスホバーしたときに追加で表示される枠線
+        ''' </summary>
+        Protected Overridable ReadOnly Property BorderShape As Shape
+            Get
+                Dim body As Tetragon = New Tetragon
+                body.Coloring = Shape.ColoringType.Fill
+                body.BrushColor = HoverColor
+                body.BorderWidth = 0
+                body.Rect = New Rectangle(0, 0, Me.Width, Me.Height)
+                Return body
+            End Get
+        End Property
+
+        Protected Overrides Sub OnMouseEnter(e As EventArgs)
+            MyBase.OnMouseEnter(e)
+            _IsMouseHovering = True
+            Me.Invalidate()
+        End Sub
+
+        Protected Overrides Sub OnMouseLeave(e As EventArgs)
+            MyBase.OnMouseLeave(e)
+            _IsMouseHovering = False
+            Me.Invalidate()
         End Sub
 
         Protected Overrides Sub OnPaint(pevent As PaintEventArgs)
@@ -22,6 +56,10 @@ Namespace Switches
             ' オリジナルの描画を消して自前で描く
             g.Clear(Me.BackColor)
             g.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+
+            If _IsMouseHovering Then
+                BorderShape.Draw(g)
+            End If
 
             Dim sideLength As Integer = Me.Height
             Dim margin As Integer = CInt(sideLength / 4)
@@ -48,6 +86,7 @@ Namespace Switches
             End Select
 
             TextRenderer.DrawText(g, Me.Text, Me.Font, New Point(left, top), Me.ForeColor)
+
         End Sub
 
     End Class
