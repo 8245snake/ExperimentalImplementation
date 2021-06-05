@@ -32,10 +32,16 @@ Namespace Services
                         RemoveHandler _HighlightingControl.Parent.Paint, AddressOf TargetPaint
                         _HighlightingControl.Parent.Invalidate()
                     End If
+
                     _HighlightingControl = Value
-                    AddHandler _HighlightingControl.Parent.Paint, AddressOf TargetPaint
-                    _HighlightingControl.Parent.Invalidate()
+
+                    If _HighlightingControl IsNot Nothing Then
+                        AddHandler _HighlightingControl.Parent.Paint, AddressOf TargetPaint
+                        _HighlightingControl.Parent.Invalidate()
+                    End If
+
                     RaiseEvent HighlightingControlChanged(Me, New EventArgs())
+
                 End If
             End Set
         End Property

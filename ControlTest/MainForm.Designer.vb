@@ -81,6 +81,7 @@ Partial Class MainForm
         Me.txtNumber = New SpecialControls.Inputting.ExTextBox()
         Me.StrictComboBox1 = New SpecialControls.CollectionViews.StrictComboBox()
         Me.ToggleSwitch1 = New SpecialControls.Switches.ToggleSwitch()
+        Me.btnHighlightEnd = New System.Windows.Forms.Button()
         Me.panelSplash.SuspendLayout()
         Me.panelToggle.SuspendLayout()
         Me.panelWrappers.SuspendLayout()
@@ -553,6 +554,7 @@ Partial Class MainForm
         '
         Me.optIndeterminate.AutoSize = True
         Me.optIndeterminate.CircleBorderWidth = 1
+        Me.optIndeterminate.Cursor = System.Windows.Forms.Cursors.Hand
         Me.optIndeterminate.Font = New System.Drawing.Font("Meiryo UI", 12.0!)
         Me.optIndeterminate.Location = New System.Drawing.Point(311, 46)
         Me.optIndeterminate.Name = "optIndeterminate"
@@ -565,6 +567,7 @@ Partial Class MainForm
         '
         Me.optUnchecked.AutoSize = True
         Me.optUnchecked.CircleBorderWidth = 1
+        Me.optUnchecked.Cursor = System.Windows.Forms.Cursors.Hand
         Me.optUnchecked.Font = New System.Drawing.Font("Meiryo UI", 12.0!)
         Me.optUnchecked.Location = New System.Drawing.Point(382, 46)
         Me.optUnchecked.Name = "optUnchecked"
@@ -578,6 +581,7 @@ Partial Class MainForm
         Me.optChecked.AutoSize = True
         Me.optChecked.Checked = True
         Me.optChecked.CircleBorderWidth = 1
+        Me.optChecked.Cursor = System.Windows.Forms.Cursors.Hand
         Me.optChecked.Font = New System.Drawing.Font("Meiryo UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.optChecked.Location = New System.Drawing.Point(240, 46)
         Me.optChecked.Name = "optChecked"
@@ -589,6 +593,7 @@ Partial Class MainForm
         '
         'chkLarge
         '
+        Me.chkLarge.Cursor = System.Windows.Forms.Cursors.Hand
         Me.chkLarge.Font = New System.Drawing.Font("Meiryo UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.chkLarge.Location = New System.Drawing.Point(9, 38)
         Me.chkLarge.Name = "chkLarge"
@@ -634,7 +639,7 @@ Partial Class MainForm
         Me.StrictComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.StrictComboBox1.FormattingEnabled = True
         Me.StrictComboBox1.IntegralHeight = False
-        Me.StrictComboBox1.IsStrictOccuration = False
+        Me.StrictComboBox1.IsStrictOccuration = True
         Me.StrictComboBox1.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7"})
         Me.StrictComboBox1.Location = New System.Drawing.Point(9, 51)
         Me.StrictComboBox1.Name = "StrictComboBox1"
@@ -659,11 +664,21 @@ Partial Class MainForm
         Me.ToggleSwitch1.TrueColor = System.Drawing.Color.Lime
         Me.ToggleSwitch1.TrueText = "有効"
         '
+        'btnHighlightEnd
+        '
+        Me.btnHighlightEnd.Location = New System.Drawing.Point(220, 402)
+        Me.btnHighlightEnd.Name = "btnHighlightEnd"
+        Me.btnHighlightEnd.Size = New System.Drawing.Size(118, 23)
+        Me.btnHighlightEnd.TabIndex = 33
+        Me.btnHighlightEnd.Text = "ハイライト削除"
+        Me.btnHighlightEnd.UseVisualStyleBackColor = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1161, 588)
+        Me.Controls.Add(Me.btnHighlightEnd)
         Me.Controls.Add(Me.btnHighlight)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
@@ -753,4 +768,5 @@ Partial Class MainForm
     Friend WithEvents Label14 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents btnHighlight As Button
+    Friend WithEvents btnHighlightEnd As Button
 End Class

@@ -256,4 +256,8 @@ Public Class MainForm
     Private Sub btnHighlight_Click(sender As Object, e As EventArgs) Handles btnHighlight.Click
         hightlightingService.HighlightingControl = btnLogClear
     End Sub
+
+    Private Sub btnHighlightEnd_Click(sender As Object, e As EventArgs) Handles btnHighlightEnd.Click
+        hightlightingService.HighlightingControl = Nothing
+    End Sub
 End Class

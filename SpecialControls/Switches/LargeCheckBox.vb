@@ -12,6 +12,7 @@ Namespace Switches
         Sub New()
             Me.AutoSize = False
             Me.TextAlign = ContentAlignment.MiddleLeft
+            Me.Cursor = Cursors.Hand
         End Sub
 
         Protected Overrides Sub OnPaint(pevent As PaintEventArgs)

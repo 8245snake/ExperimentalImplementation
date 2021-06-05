@@ -46,6 +46,10 @@ Namespace Switches
             End Get
         End Property
 
+        Sub New()
+            Me.Cursor = Cursors.Hand
+        End Sub
+
         Protected Overrides Sub OnPaint(pevent As PaintEventArgs)
             MyBase.OnPaint(pevent)
 
