@@ -6,7 +6,7 @@ Imports SpecialControls.Painting
 Namespace Services
 
     ''' <summary>
-    ''' コントロールをハイライトする機能のマネージャクラス（未完成）
+    ''' コントロールをハイライトする機能のマネージャクラス
     ''' </summary>
     Public Class ControlHighlightingService
         Private _HighlightingControl As Control
@@ -15,6 +15,9 @@ Namespace Services
         ''' ハイライトするコントロールが変化したときに発火する
         ''' </summary>
         Public Event HighlightingControlChanged As EventHandler
+
+        Public Property HighlightLineColor As Color = Color.Red
+        Public Property HighlightLineWidth As Integer = 4
 
         ''' <summary>
         ''' ハイライト対象のコントロール
@@ -26,12 +29,12 @@ Namespace Services
             Set
                 If _HighlightingControl IsNot Value Then
                     If _HighlightingControl IsNot Nothing Then
-                        RemoveHandler _HighlightingControl.Paint, AddressOf TargetPaint
-                        _HighlightingControl.Invalidate()
+                        RemoveHandler _HighlightingControl.Parent.Paint, AddressOf TargetPaint
+                        _HighlightingControl.Parent.Invalidate()
                     End If
                     _HighlightingControl = Value
-                    AddHandler _HighlightingControl.Paint, AddressOf TargetPaint
-                    _HighlightingControl.Invalidate()
+                    AddHandler _HighlightingControl.Parent.Paint, AddressOf TargetPaint
+                    _HighlightingControl.Parent.Invalidate()
                     RaiseEvent HighlightingControlChanged(Me, New EventArgs())
                 End If
             End Set
@@ -39,13 +42,13 @@ Namespace Services
 
         Private Sub TargetPaint(sender As Object, e As PaintEventArgs)
             Dim tetragon As Tetragon = New Tetragon()
-            tetragon.X = 0
-            tetragon.Y = 0
-            tetragon.Width = _HighlightingControl.Size.Width - 1
-            tetragon.Height = _HighlightingControl.Size.Height - 1
+            tetragon.X = _HighlightingControl.Location.X - 2
+            tetragon.Y = _HighlightingControl.Location.Y - 2
+            tetragon.Width = _HighlightingControl.Size.Width + HighlightLineWidth
+            tetragon.Height = _HighlightingControl.Size.Height + HighlightLineWidth
             tetragon.Coloring = Shape.ColoringType.Outline
-            tetragon.BorderColor = Color.Red
-            tetragon.BorderWidth = 4
+            tetragon.BorderColor = HighlightLineColor
+            tetragon.BorderWidth = HighlightLineWidth
             tetragon.Draw(e.Graphics)
         End Sub
 

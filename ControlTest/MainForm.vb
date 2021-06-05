@@ -65,6 +65,8 @@ Public Class MainForm
         radioButtons.AddBinding(DirectCast(optChecked, RadioButton), CheckState.Checked)
         radioButtons.AddBinding(DirectCast(optUnchecked, RadioButton), CheckState.Unchecked)
         radioButtons.AddBinding(DirectCast(optIndeterminate, RadioButton), CheckState.Indeterminate)
+
+        hightlightingService.HighlightingControl = btnGenericSet
     End Sub
 
 
@@ -166,6 +168,7 @@ Public Class MainForm
         Next
         combSampleWrapper.SelectedIndex = -1
         combSampleWrapper.SelectedIndex = 0
+        hightlightingService.HighlightingControl = combGeneric
     End Sub
 
     Private Sub combGeneric_SelectedIndexChanged(sender As Object, e As EventArgs) Handles combGeneric.SelectedIndexChanged
@@ -174,11 +177,16 @@ Public Class MainForm
         For Each city As City In combSampleWrapper.SelectedValue.Cities
             lstSampleWrapper.Add(city.Name, city)
         Next
+        hightlightingService.HighlightingControl = lstGeneric
     End Sub
     Private Sub lstGeneric_SelectedValueChanged(sender As Object, e As EventArgs) Handles lstGeneric.SelectedValueChanged
         If lstSampleWrapper?.SelectedValue Is Nothing Then Return
         Dim city As City = lstSampleWrapper.SelectedValue
         Console.WriteLine($"City{{ Name = {city.Name} }}")
+        hightlightingService.HighlightingControl = txtDebug
+    End Sub
+    Private Sub checkedChanged(sender As Object, e As EventArgs) Handles optChecked.CheckedChanged, optUnchecked.CheckedChanged, optIndeterminate.CheckedChanged
+        chkLarge.CheckState = radioButtons.SelectedValue
     End Sub
 #End Region
 
@@ -243,11 +251,6 @@ Public Class MainForm
 
     Private Sub btnLogClear_Click(sender As Object, e As EventArgs) Handles btnLogClear.Click
         txtDebug.Text = ""
-        hightlightingService.HighlightingControl = btnHighlight
-    End Sub
-
-    Private Sub checkedChanged(sender As Object, e As EventArgs) Handles optChecked.CheckedChanged, optUnchecked.CheckedChanged, optIndeterminate.CheckedChanged
-        chkLarge.CheckState = radioButtons.SelectedValue
     End Sub
 
     Private Sub btnHighlight_Click(sender As Object, e As EventArgs) Handles btnHighlight.Click

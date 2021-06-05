@@ -71,6 +71,7 @@ Partial Class MainForm
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.btnHighlight = New System.Windows.Forms.Button()
         Me.optIndeterminate = New SpecialControls.Switches.LargeRadioButton()
         Me.optUnchecked = New SpecialControls.Switches.LargeRadioButton()
         Me.optChecked = New SpecialControls.Switches.LargeRadioButton()
@@ -80,7 +81,6 @@ Partial Class MainForm
         Me.txtNumber = New SpecialControls.Inputting.ExTextBox()
         Me.StrictComboBox1 = New SpecialControls.CollectionViews.StrictComboBox()
         Me.ToggleSwitch1 = New SpecialControls.Switches.ToggleSwitch()
-        Me.btnHighlight = New System.Windows.Forms.Button()
         Me.panelSplash.SuspendLayout()
         Me.panelToggle.SuspendLayout()
         Me.panelWrappers.SuspendLayout()
@@ -540,6 +540,15 @@ Partial Class MainForm
         Me.Label14.TabIndex = 25
         Me.Label14.Text = "大きなチェックボックス"
         '
+        'btnHighlight
+        '
+        Me.btnHighlight.Location = New System.Drawing.Point(94, 402)
+        Me.btnHighlight.Name = "btnHighlight"
+        Me.btnHighlight.Size = New System.Drawing.Size(118, 23)
+        Me.btnHighlight.TabIndex = 32
+        Me.btnHighlight.Text = "←ハイライトする"
+        Me.btnHighlight.UseVisualStyleBackColor = True
+        '
         'optIndeterminate
         '
         Me.optIndeterminate.AutoSize = True
@@ -649,15 +658,6 @@ Partial Class MainForm
         Me.ToggleSwitch1.TabStop = False
         Me.ToggleSwitch1.TrueColor = System.Drawing.Color.Lime
         Me.ToggleSwitch1.TrueText = "有効"
-        '
-        'btnHighlight
-        '
-        Me.btnHighlight.Location = New System.Drawing.Point(126, 402)
-        Me.btnHighlight.Name = "btnHighlight"
-        Me.btnHighlight.Size = New System.Drawing.Size(75, 23)
-        Me.btnHighlight.TabIndex = 32
-        Me.btnHighlight.Text = "Button2"
-        Me.btnHighlight.UseVisualStyleBackColor = True
         '
         'MainForm
         '
