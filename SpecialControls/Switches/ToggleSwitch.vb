@@ -191,10 +191,10 @@ Namespace Switches
 
         Sub New()
             ' デザイン時の初期値
-            Me.Height = 20
-            Me.Width = 60
-            TrueColor = Color.Green
-            FalseColor = Color.Red
+            Me.Height = 23
+            Me.Width = 50
+            TrueColor = Color.Lime
+            FalseColor = Color.DarkGray
             Me.Cursor = Cursors.Hand
         End Sub
 
