@@ -73,6 +73,7 @@ Partial Class MainForm
         Me.Label14 = New System.Windows.Forms.Label()
         Me.btnHighlight = New System.Windows.Forms.Button()
         Me.btnHighlightEnd = New System.Windows.Forms.Button()
+        Me.btnDialog = New System.Windows.Forms.Button()
         Me.optIndeterminate = New SpecialControls.Switches.LargeRadioButton()
         Me.optUnchecked = New SpecialControls.Switches.LargeRadioButton()
         Me.optChecked = New SpecialControls.Switches.LargeRadioButton()
@@ -559,6 +560,15 @@ Partial Class MainForm
         Me.btnHighlightEnd.Text = "ハイライト削除"
         Me.btnHighlightEnd.UseVisualStyleBackColor = True
         '
+        'btnDialog
+        '
+        Me.btnDialog.Location = New System.Drawing.Point(1011, 13)
+        Me.btnDialog.Name = "btnDialog"
+        Me.btnDialog.Size = New System.Drawing.Size(138, 39)
+        Me.btnDialog.TabIndex = 34
+        Me.btnDialog.Text = "カスタムメッセージボックス"
+        Me.btnDialog.UseVisualStyleBackColor = True
+        '
         'optIndeterminate
         '
         Me.optIndeterminate.AutoSize = True
@@ -682,6 +692,7 @@ Partial Class MainForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1161, 588)
+        Me.Controls.Add(Me.btnDialog)
         Me.Controls.Add(Me.btnHighlightEnd)
         Me.Controls.Add(Me.btnHighlight)
         Me.Controls.Add(Me.Panel3)
@@ -773,4 +784,5 @@ Partial Class MainForm
     Friend WithEvents Label12 As Label
     Friend WithEvents btnHighlight As Button
     Friend WithEvents btnHighlightEnd As Button
+    Friend WithEvents btnDialog As Button
 End Class

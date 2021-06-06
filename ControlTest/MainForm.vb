@@ -248,16 +248,25 @@ Public Class MainForm
     End Sub
 #End Region
 
-
-    Private Sub btnLogClear_Click(sender As Object, e As EventArgs) Handles btnLogClear.Click
-        txtDebug.Text = ""
-    End Sub
-
+#Region "ハイライト"
     Private Sub btnHighlight_Click(sender As Object, e As EventArgs) Handles btnHighlight.Click
         hightlightingService.HighlightingControl = btnLogClear
     End Sub
 
     Private Sub btnHighlightEnd_Click(sender As Object, e As EventArgs) Handles btnHighlightEnd.Click
         hightlightingService.HighlightingControl = Nothing
+    End Sub
+
+#End Region
+
+    Private Sub btnLogClear_Click(sender As Object, e As EventArgs) Handles btnLogClear.Click
+        txtDebug.Text = ""
+    End Sub
+
+
+    Private Sub btnDialog_Click(sender As Object, e As EventArgs) Handles btnDialog.Click
+        ExMessageBox.FileDirectory = "C:\Users\USER\Downloads\"
+        ExMessageBox.Compile()
+        ExMessageBox.Show("なんかが入力されました。保存しますか？")
     End Sub
 End Class

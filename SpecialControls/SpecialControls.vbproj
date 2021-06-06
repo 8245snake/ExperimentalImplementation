@@ -72,6 +72,17 @@
     <Compile Include="Inputting\ExTextBox.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Inputting\TransparentRichTextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Messaging\ExMessageBox.vb" />
+    <Compile Include="Messaging\TemplatePattern.vb" />
+    <Compile Include="Messaging\RichMessageDialog.Designer.vb">
+      <DependentUpon>RichMessageDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Messaging\RichMessageDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Painting\Character.vb" />
     <Compile Include="Painting\Circle.vb" />
     <Compile Include="Painting\CircularSector.vb" />
@@ -116,6 +127,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Messaging\RichMessageDialog.resx">
+      <DependentUpon>RichMessageDialog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
