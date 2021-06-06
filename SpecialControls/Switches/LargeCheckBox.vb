@@ -74,6 +74,11 @@ Namespace Switches
                 Case Else
             End Select
 
+
+            If Not Enabled Then
+                g.FillRectangle(New SolidBrush(ColorTranslator.FromHtml("#AAF0F0F0")), 0, 0, sideLength, sideLength)
+            End If
+
             Dim textSize As Size = TextRenderer.MeasureText(Me.Text, Me.Font)
             Dim top As Integer = 0
             Dim left As Integer = 0
@@ -85,7 +90,8 @@ Namespace Switches
                     Throw New Exception("LargeCheckBox.TextAlignにはMiddleLeftのみ設定可能です")
             End Select
 
-            TextRenderer.DrawText(g, Me.Text, Me.Font, New Point(left, top), Me.ForeColor)
+            Dim fontColor As Color = If(Enabled, Me.ForeColor, Color.Gray)
+            TextRenderer.DrawText(g, Me.Text, Me.Font, New Point(left, top), fontColor)
 
         End Sub
 

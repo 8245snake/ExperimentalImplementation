@@ -17,8 +17,8 @@ Namespace Painting
             Select Case Coloring
                 Case ColoringType.Fill
                     g.FillPie(New SolidBrush(BrushColor), X, Y, Height, Height, 90, 180)
-                    g.FillRectangle(New SolidBrush(BrushColor), X + CSng(Height) / 2 - 1, Y, rectWidth, CSng(Height))
-                    g.FillPie(New SolidBrush(BrushColor), X + rectWidth - 2, Y, Height, Height, 270, 180)
+                    g.FillRectangle(New SolidBrush(BrushColor), X + CSng(Height) / 2, Y, rectWidth, CSng(Height))
+                    g.FillPie(New SolidBrush(BrushColor), X + rectWidth, Y, Height, Height, 270, 180)
                     If BorderWidth > 0 Then
                         DrawBorder(g)
                     End If

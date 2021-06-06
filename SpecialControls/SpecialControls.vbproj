@@ -76,6 +76,7 @@
     <Compile Include="Painting\Circle.vb" />
     <Compile Include="Painting\CircularSector.vb" />
     <Compile Include="Painting\ExpandedCircle.vb" />
+    <Compile Include="Painting\Paint.vb" />
     <Compile Include="Painting\Shape.vb" />
     <Compile Include="Painting\Tetragon.vb" />
     <Compile Include="Services\ControlHighlightingService.vb" />

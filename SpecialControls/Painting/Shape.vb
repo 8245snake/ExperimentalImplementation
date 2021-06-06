@@ -99,10 +99,13 @@ Namespace Painting
             End Set
         End Property
 
-        Public ReadOnly Property Shapes As List(Of Shape)
+        Public Property Shapes As List(Of Shape)
             Get
                 Return _Shapes
             End Get
+            Set(value As List(Of Shape))
+                _Shapes = value
+            End Set
         End Property
 
 
@@ -112,6 +115,16 @@ Namespace Painting
                 shape.Draw(g)
             Next
         End Sub
+
+        Public Overridable Function DeepCopy() As Shape
+            Dim clone As Shape = DirectCast(Me.MemberwiseClone(), Shape)
+            Dim shapes As List(Of Shape) = New List(Of Shape)()
+            For Each item As Shape In _Shapes
+                shapes.Add(item.DeepCopy())
+            Next
+            clone.Shapes = shapes
+            Return clone
+        End Function
 
     End Class
 

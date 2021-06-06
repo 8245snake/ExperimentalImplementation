@@ -94,7 +94,7 @@ Namespace Switches
             g.Clear(Me.BackColor)
             g.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
 
-            If _IsMouseHovering Then
+            If _IsMouseHovering AndAlso Enabled Then
                 BorderShape.Draw(g)
             End If
 
@@ -102,6 +102,12 @@ Namespace Switches
             OuterCircle.Draw(g)
             If Me.Checked Then
                 InnerCircle.Draw(g)
+            End If
+
+            If Not Enabled Then
+                Dim grayCircle As Shape = OuterCircle.DeepCopy()
+                grayCircle.BrushColor = ColorTranslator.FromHtml("#AAE0E0E0")
+                grayCircle.Draw(g)
             End If
 
             Dim textSize As Size = TextRenderer.MeasureText(Me.Text, Me.Font)
@@ -116,7 +122,8 @@ Namespace Switches
                     Throw New Exception("LargeRadioButton.TextAlignにはMiddleLeftのみ設定可能です")
             End Select
 
-            TextRenderer.DrawText(g, Me.Text, Me.Font, New Point(left, top), Me.ForeColor)
+            Dim fontColor As Color = If(Enabled, Me.ForeColor, Color.Gray)
+            TextRenderer.DrawText(g, Me.Text, Me.Font, New Point(left, top), fontColor)
 
         End Sub
 

@@ -147,6 +147,7 @@ Namespace Switches
             Get
                 Dim body As ExpandedCircle = New ExpandedCircle
                 body.Coloring = Shape.ColoringType.Fill
+                body.BorderWidth = 0
                 body.BrushColor = If(IsChecked, TrueColor, FalseColor)
                 body.Rect = New Rectangle(0, 0, Me.Width, Me.Height)
                 Return body
@@ -213,16 +214,27 @@ Namespace Switches
             Me.Cursor = Cursors.Hand
         End Sub
 
-
+        ''' <summary>
+        ''' 描画処理
+        ''' </summary>
+        ''' <param name="pe"></param>
         Protected Overrides Sub OnPaint(pe As PaintEventArgs)
             Dim g As Graphics = pe.Graphics
             g.Clear(Control.DefaultBackColor)
+
             OutlineShape.Draw(g)
             SwitchShape.Draw(g)
             TextShape.Draw(g)
-            If _IsMouseHovering Then
+            If _IsMouseHovering AndAlso Enabled Then
                 BorderShape.Draw(g)
             End If
+
+            If Not Enabled Then
+                Dim overlay As Shape = OutlineShape.DeepCopy()
+                overlay.BrushColor = ColorTranslator.FromHtml("#AAE0E0E0")
+                overlay.Draw(g)
+            End If
+
         End Sub
 
         Protected Overrides Sub OnMouseEnter(e As EventArgs)
