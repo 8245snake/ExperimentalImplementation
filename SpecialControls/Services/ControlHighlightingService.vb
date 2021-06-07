@@ -2,6 +2,7 @@
 Option Strict On
 
 Imports SpecialControls.Painting
+Imports SpecialControls.Win32
 
 Namespace Services
 
