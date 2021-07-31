@@ -90,6 +90,7 @@
     <Compile Include="Painting\Paint.vb" />
     <Compile Include="Painting\Shape.vb" />
     <Compile Include="Painting\Tetragon.vb" />
+    <Compile Include="Services\WeakObserveble.vb" />
     <Compile Include="Services\ControlHighlightingService.vb" />
     <Compile Include="Switches\LargeCheckBox.vb">
       <SubType>Component</SubType>
