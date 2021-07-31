@@ -113,9 +113,6 @@
     <Compile Include="GenericWrappers\GenericComboBoxWrapper.vb" />
     <Compile Include="GenericWrappers\GenericListBoxWrapper.vb" />
     <Compile Include="Messaging\SplashMessage.vb" />
-    <Compile Include="Messaging\SplashMessageForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Messaging\TextBoxWriter.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
