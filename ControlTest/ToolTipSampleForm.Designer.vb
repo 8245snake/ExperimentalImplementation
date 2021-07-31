@@ -1,8 +1,9 @@
 ﻿Imports SpecialControls
+Imports SpecialControls.Messaging
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class MessageForm
-    Inherits Messaging.SplashMessageForm
+Partial Class ToolTipSampleForm
+    Inherits ToolTipForm
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
     <System.Diagnostics.DebuggerNonUserCode()>

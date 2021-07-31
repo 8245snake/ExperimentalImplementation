@@ -70,10 +70,10 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageForm.Designer.vb">
-      <DependentUpon>MessageForm.vb</DependentUpon>
+    <Compile Include="ToolTipSampleForm.Designer.vb">
+      <DependentUpon>ToolTipSampleForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="MessageForm.vb">
+    <Compile Include="ToolTipSampleForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SampleClass.vb" />
@@ -105,8 +105,8 @@
       <DependentUpon>MainForm.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MessageForm.resx">
-      <DependentUpon>MessageForm.vb</DependentUpon>
+    <EmbeddedResource Include="ToolTipSampleForm.resx">
+      <DependentUpon>ToolTipSampleForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
