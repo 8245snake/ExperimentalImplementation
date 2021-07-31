@@ -5,6 +5,7 @@ Namespace Messaging
     Public Class ToolTipForm
         Inherits Form
 
+        Private _CalledByGetBitmap As Boolean = False
         Private _Bitmap As Bitmap
 
         Protected Overrides ReadOnly Property ShowWithoutActivation As Boolean
@@ -22,12 +23,16 @@ Namespace Messaging
 
         Protected Overrides Sub OnShown(e As EventArgs)
             MyBase.OnShown(e)
-            _Bitmap = CreateFormImage(Me)
-            Me.Close()
+            If _CalledByGetBitmap Then
+                _Bitmap = CreateFormImage(Me)
+                Me.Close()
+            End If
         End Sub
 
         Public Function GetBitmap() As Bitmap
+            _CalledByGetBitmap = True
             Me.ShowDialog()
+            _CalledByGetBitmap = False
             Return _Bitmap
         End Function
 
@@ -37,7 +42,7 @@ Namespace Messaging
         ''' <param name="form">フォーム</param>
         ''' <param name="clientAreaOnly">クライアント領域のみに限定するか</param>
         ''' <returns>ビットマップ</returns>
-        Public Shared Function CreateFormImage(form As Form, Optional clientAreaOnly As Boolean = True) As Bitmap
+        Private Shared Function CreateFormImage(form As Form, Optional clientAreaOnly As Boolean = True) As Bitmap
 
             Dim bmt As Bitmap = CaptureControl(form)
 
@@ -60,7 +65,7 @@ Namespace Messaging
         ''' </summary>
         ''' <param name="ctrl">コントロール</param>
         ''' <returns>ビットマップ</returns>
-        Public Shared Function CaptureControl(ByVal ctrl As Control) As Bitmap
+        Private Shared Function CaptureControl(ByVal ctrl As Control) As Bitmap
             Dim img As New Bitmap(ctrl.Width, ctrl.Height)
             Using memg As Graphics = Graphics.FromImage(img)
                 Dim dc As IntPtr = memg.GetHdc()
