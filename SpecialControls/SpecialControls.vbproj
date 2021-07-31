@@ -83,6 +83,9 @@
     <Compile Include="Messaging\RichMessageDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Messaging\ToolTipEx.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Painting\Character.vb" />
     <Compile Include="Painting\Circle.vb" />
     <Compile Include="Painting\CircularSector.vb" />
