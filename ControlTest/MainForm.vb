@@ -1,6 +1,7 @@
 ﻿Option Explicit On
 Option Strict On
 
+Imports SpecialControls
 Imports SpecialControls.CollectionViews
 Imports SpecialControls.GenericWrappers
 Imports SpecialControls.Inputting
@@ -10,11 +11,9 @@ Imports SpecialControls.Services
 
 Public Class MainForm
 
-    Dim frm As MessageForm = New MessageForm()
-    Dim tooltipForm As SplashMessage = New SplashMessage()
     Dim combDurationWrapper As GenericComboBoxWrapper(Of SplashMessage.DisplayDuration)
 
-    Dim combSampleWrapper As GenericComboBoxWrapper(Of Country) 
+    Dim combSampleWrapper As GenericComboBoxWrapper(Of Country)
     Dim lstSampleWrapper As GenericListBoxWrapper(Of City)
 
     Dim combTriggerWrapper As GenericComboBoxWrapper(Of ExTextBox.ValidationTriggerType)
@@ -44,8 +43,8 @@ Public Class MainForm
         lblFontSplash.Text = $"{FontDialogTooltip.Font.Name}, {FontDialogTooltip.Font.Size}, {FontDialogTooltip.Font.Style}"
 
         combDurationWrapper = New GenericComboBoxWrapper(Of SplashMessage.DisplayDuration)(combDuration)
-        combDurationWrapper.Add("約1秒", SplashMessage.DisplayDuration.ShortTime)
-        combDurationWrapper.Add("約3秒", SplashMessage.DisplayDuration.LongTime)
+        combDurationWrapper.Add("1秒", SplashMessage.DisplayDuration.ShortTime)
+        combDurationWrapper.Add("3秒", SplashMessage.DisplayDuration.LongTime)
         combDurationWrapper.Add("無限", SplashMessage.DisplayDuration.Endless)
 
         combTriggerWrapper = New GenericComboBoxWrapper(Of ExTextBox.ValidationTriggerType)(DirectCast(combTrigger, ComboBox))
@@ -67,6 +66,13 @@ Public Class MainForm
         radioButtons.AddBinding(DirectCast(optIndeterminate, RadioButton), CheckState.Indeterminate)
 
         hightlightingService.HighlightingControl = btnGenericSet
+
+
+        Using frm = New ToolTipSampleForm()
+            Dim bitmap As Bitmap = frm.GetBitmap()
+            ToolTipMain.SetToolTipEx(lblTooltipForm, bitmap)
+            ToolTipMain.InitialDelay = 100
+        End Using
     End Sub
 
 
@@ -129,9 +135,8 @@ Public Class MainForm
 
 #Region "SplashMessage"
     Private Sub btnTooltip_Click(sender As Object, e As EventArgs) Handles btnTooltip.Click
-        Dim tooltip As SplashMessage = New SplashMessage()
-        Dim bmt As Bitmap = SplashMessage.CreateTextImage(txtTooltip.Text, FontDialogTooltip.Font)
-        tooltip.Show(bmt, Integer.Parse(txtX.Text), Integer.Parse(txtY.Text), combDurationWrapper.SelectedValue)
+        Dim bitmap As Bitmap = SplashMessage.CreateTextImage(txtTooltip.Text, FontDialogTooltip.Font)
+        ToolTipMain.ShowBitmap(bitmap, Me, Integer.Parse(txtX.Text), Integer.Parse(txtY.Text), combDurationWrapper.SelectedValue)
     End Sub
 
     Private Sub btnFont_Click(sender As Object, e As EventArgs) Handles btnFont.Click
@@ -142,20 +147,16 @@ Public Class MainForm
 
 
     Private Sub btnFormTooltip_Click(sender As Object, e As EventArgs) Handles btnFormTooltip.Click
-        frm.ShowSplash(Integer.Parse(txtX.Text), Integer.Parse(txtY.Text), SplashMessage.DisplayDuration.Endless)
+        Dim bitmap As Bitmap
+        Using frm = New ToolTipSampleForm()
+            bitmap = frm.GetBitmap()
+        End Using
+
+        ToolTipMain.ShowBitmap(bitmap, Me, 0, 0, Integer.MaxValue)
     End Sub
 
     Private Sub btnFormTooltipClose_Click(sender As Object, e As EventArgs) Handles btnFormTooltipClose.Click
-        tooltipForm.Hide()
-        frm.HideSplash()
-    End Sub
-
-    Private Sub lblTooltipForm_MouseEnter(sender As Object, e As EventArgs) Handles lblTooltipForm.MouseEnter
-        frm.ShowSplash(Integer.Parse(txtX.Text), Integer.Parse(txtY.Text), SplashMessage.DisplayDuration.Endless)
-    End Sub
-
-    Private Sub lblTooltipForm_MouseLeave(sender As Object, e As EventArgs) Handles lblTooltipForm.MouseLeave
-        frm.HideSplash()
+        ToolTipMain.Hide(Me)
     End Sub
 
 #End Region
@@ -269,4 +270,5 @@ Public Class MainForm
         ExMessageBox.Compile()
         ExMessageBox.Show("なんかが入力されました。保存しますか？")
     End Sub
+
 End Class

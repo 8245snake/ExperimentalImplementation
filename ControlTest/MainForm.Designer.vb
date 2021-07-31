@@ -45,6 +45,7 @@ Partial Class MainForm
         Me.lblFont = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtToggleHeight = New System.Windows.Forms.TextBox()
+        Me.ToggleSwitch1 = New SpecialControls.Switches.ToggleSwitch()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtToggleWidth = New System.Windows.Forms.TextBox()
         Me.btnToggleFonts = New System.Windows.Forms.Button()
@@ -64,32 +65,32 @@ Partial Class MainForm
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.StrictComboBox1 = New SpecialControls.CollectionViews.StrictComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.combErrorPosition = New SpecialControls.CollectionViews.StrictComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.combTrigger = New SpecialControls.CollectionViews.StrictComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtNumber = New SpecialControls.Inputting.ExTextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.btnHighlight = New System.Windows.Forms.Button()
-        Me.btnHighlightEnd = New System.Windows.Forms.Button()
-        Me.btnDialog = New System.Windows.Forms.Button()
         Me.optIndeterminate = New SpecialControls.Switches.LargeRadioButton()
         Me.optUnchecked = New SpecialControls.Switches.LargeRadioButton()
         Me.optChecked = New SpecialControls.Switches.LargeRadioButton()
         Me.chkLarge = New SpecialControls.Switches.LargeCheckBox()
-        Me.combErrorPosition = New SpecialControls.CollectionViews.StrictComboBox()
-        Me.combTrigger = New SpecialControls.CollectionViews.StrictComboBox()
-        Me.txtNumber = New SpecialControls.Inputting.ExTextBox()
-        Me.StrictComboBox1 = New SpecialControls.CollectionViews.StrictComboBox()
-        Me.ToggleSwitch1 = New SpecialControls.Switches.ToggleSwitch()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.btnHighlight = New System.Windows.Forms.Button()
+        Me.btnHighlightEnd = New System.Windows.Forms.Button()
+        Me.btnDialog = New System.Windows.Forms.Button()
+        Me.ToolTipMain = New SpecialControls.ToolTipEx()
         Me.panelSplash.SuspendLayout()
         Me.panelToggle.SuspendLayout()
+        CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelWrappers.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtDebug
@@ -311,6 +312,24 @@ Partial Class MainForm
         Me.txtToggleHeight.TabIndex = 16
         Me.txtToggleHeight.Text = "200"
         '
+        'ToggleSwitch1
+        '
+        Me.ToggleSwitch1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ToggleSwitch1.EnableAnimation = True
+        Me.ToggleSwitch1.FalseColor = System.Drawing.Color.DarkGray
+        Me.ToggleSwitch1.FalseText = "無効"
+        Me.ToggleSwitch1.FontName = "Meiryo UI"
+        Me.ToggleSwitch1.FontSize = 14.0!
+        Me.ToggleSwitch1.FontStyle = System.Drawing.FontStyle.Bold
+        Me.ToggleSwitch1.IsChecked = True
+        Me.ToggleSwitch1.Location = New System.Drawing.Point(17, 29)
+        Me.ToggleSwitch1.Name = "ToggleSwitch1"
+        Me.ToggleSwitch1.Size = New System.Drawing.Size(97, 39)
+        Me.ToggleSwitch1.TabIndex = 8
+        Me.ToggleSwitch1.TabStop = False
+        Me.ToggleSwitch1.TrueColor = System.Drawing.Color.Lime
+        Me.ToggleSwitch1.TrueText = "有効"
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
@@ -466,6 +485,18 @@ Partial Class MainForm
         Me.Label8.TabIndex = 23
         Me.Label8.Text = "IndexChangedが手動か自動か区別できるコンボボックス"
         '
+        'StrictComboBox1
+        '
+        Me.StrictComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.StrictComboBox1.FormattingEnabled = True
+        Me.StrictComboBox1.IntegralHeight = False
+        Me.StrictComboBox1.IsStrictOccuration = True
+        Me.StrictComboBox1.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7"})
+        Me.StrictComboBox1.Location = New System.Drawing.Point(9, 51)
+        Me.StrictComboBox1.Name = "StrictComboBox1"
+        Me.StrictComboBox1.Size = New System.Drawing.Size(199, 23)
+        Me.StrictComboBox1.TabIndex = 22
+        '
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -489,6 +520,17 @@ Partial Class MainForm
         Me.Label11.TabIndex = 29
         Me.Label11.Text = "エラーメッセージ位置"
         '
+        'combErrorPosition
+        '
+        Me.combErrorPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.combErrorPosition.FormattingEnabled = True
+        Me.combErrorPosition.IntegralHeight = False
+        Me.combErrorPosition.IsStrictOccuration = False
+        Me.combErrorPosition.Location = New System.Drawing.Point(382, 31)
+        Me.combErrorPosition.Name = "combErrorPosition"
+        Me.combErrorPosition.Size = New System.Drawing.Size(129, 23)
+        Me.combErrorPosition.TabIndex = 28
+        '
         'Label10
         '
         Me.Label10.AutoSize = True
@@ -497,6 +539,17 @@ Partial Class MainForm
         Me.Label10.Size = New System.Drawing.Size(111, 15)
         Me.Label10.TabIndex = 27
         Me.Label10.Text = "バリデーションタイミング"
+        '
+        'combTrigger
+        '
+        Me.combTrigger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.combTrigger.FormattingEnabled = True
+        Me.combTrigger.IntegralHeight = False
+        Me.combTrigger.IsStrictOccuration = False
+        Me.combTrigger.Location = New System.Drawing.Point(382, 5)
+        Me.combTrigger.Name = "combTrigger"
+        Me.combTrigger.Size = New System.Drawing.Size(129, 23)
+        Me.combTrigger.TabIndex = 26
         '
         'Label9
         '
@@ -507,6 +560,16 @@ Partial Class MainForm
         Me.Label9.Size = New System.Drawing.Size(196, 26)
         Me.Label9.TabIndex = 25
         Me.Label9.Text = "便利なテキストボックス"
+        '
+        'txtNumber
+        '
+        Me.txtNumber.ErrorDisplayPosition = SpecialControls.Inputting.ExTextBox.ErrorDisplayPositionType.Bottom
+        Me.txtNumber.Location = New System.Drawing.Point(8, 55)
+        Me.txtNumber.Name = "txtNumber"
+        Me.txtNumber.Size = New System.Drawing.Size(199, 23)
+        Me.txtNumber.TabIndex = 24
+        Me.txtNumber.ValidationTrigger = SpecialControls.Inputting.ExTextBox.ValidationTriggerType.FocusLeave
+        Me.txtNumber.WatermarkText = "整数値を入力してください"
         '
         'Panel3
         '
@@ -531,43 +594,6 @@ Partial Class MainForm
         Me.Label12.Size = New System.Drawing.Size(163, 26)
         Me.Label12.TabIndex = 34
         Me.Label12.Text = "大きなラジオボタン"
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label14.Location = New System.Drawing.Point(4, 9)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(183, 26)
-        Me.Label14.TabIndex = 25
-        Me.Label14.Text = "大きなチェックボックス"
-        '
-        'btnHighlight
-        '
-        Me.btnHighlight.Location = New System.Drawing.Point(94, 402)
-        Me.btnHighlight.Name = "btnHighlight"
-        Me.btnHighlight.Size = New System.Drawing.Size(118, 23)
-        Me.btnHighlight.TabIndex = 32
-        Me.btnHighlight.Text = "←ハイライトする"
-        Me.btnHighlight.UseVisualStyleBackColor = True
-        '
-        'btnHighlightEnd
-        '
-        Me.btnHighlightEnd.Location = New System.Drawing.Point(220, 402)
-        Me.btnHighlightEnd.Name = "btnHighlightEnd"
-        Me.btnHighlightEnd.Size = New System.Drawing.Size(118, 23)
-        Me.btnHighlightEnd.TabIndex = 33
-        Me.btnHighlightEnd.Text = "ハイライト削除"
-        Me.btnHighlightEnd.UseVisualStyleBackColor = True
-        '
-        'btnDialog
-        '
-        Me.btnDialog.Location = New System.Drawing.Point(1011, 13)
-        Me.btnDialog.Name = "btnDialog"
-        Me.btnDialog.Size = New System.Drawing.Size(138, 39)
-        Me.btnDialog.TabIndex = 34
-        Me.btnDialog.Text = "カスタムメッセージボックス"
-        Me.btnDialog.UseVisualStyleBackColor = True
         '
         'optIndeterminate
         '
@@ -625,67 +651,47 @@ Partial Class MainForm
         Me.chkLarge.Text = "高さMax"
         Me.chkLarge.UseVisualStyleBackColor = True
         '
-        'combErrorPosition
+        'Label14
         '
-        Me.combErrorPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.combErrorPosition.FormattingEnabled = True
-        Me.combErrorPosition.IntegralHeight = False
-        Me.combErrorPosition.IsStrictOccuration = False
-        Me.combErrorPosition.Location = New System.Drawing.Point(382, 31)
-        Me.combErrorPosition.Name = "combErrorPosition"
-        Me.combErrorPosition.Size = New System.Drawing.Size(129, 23)
-        Me.combErrorPosition.TabIndex = 28
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Meiryo UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label14.Location = New System.Drawing.Point(4, 9)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(183, 26)
+        Me.Label14.TabIndex = 25
+        Me.Label14.Text = "大きなチェックボックス"
         '
-        'combTrigger
+        'btnHighlight
         '
-        Me.combTrigger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.combTrigger.FormattingEnabled = True
-        Me.combTrigger.IntegralHeight = False
-        Me.combTrigger.IsStrictOccuration = False
-        Me.combTrigger.Location = New System.Drawing.Point(382, 5)
-        Me.combTrigger.Name = "combTrigger"
-        Me.combTrigger.Size = New System.Drawing.Size(129, 23)
-        Me.combTrigger.TabIndex = 26
+        Me.btnHighlight.Location = New System.Drawing.Point(94, 402)
+        Me.btnHighlight.Name = "btnHighlight"
+        Me.btnHighlight.Size = New System.Drawing.Size(118, 23)
+        Me.btnHighlight.TabIndex = 32
+        Me.btnHighlight.Text = "←ハイライトする"
+        Me.btnHighlight.UseVisualStyleBackColor = True
         '
-        'txtNumber
+        'btnHighlightEnd
         '
-        Me.txtNumber.ErrorDisplayPosition = SpecialControls.Inputting.ExTextBox.ErrorDisplayPositionType.Bottom
-        Me.txtNumber.Location = New System.Drawing.Point(8, 55)
-        Me.txtNumber.Name = "txtNumber"
-        Me.txtNumber.Size = New System.Drawing.Size(199, 23)
-        Me.txtNumber.TabIndex = 24
-        Me.txtNumber.ValidationTrigger = SpecialControls.Inputting.ExTextBox.ValidationTriggerType.FocusLeave
-        Me.txtNumber.WatermarkText = "整数値を入力してください"
+        Me.btnHighlightEnd.Location = New System.Drawing.Point(220, 402)
+        Me.btnHighlightEnd.Name = "btnHighlightEnd"
+        Me.btnHighlightEnd.Size = New System.Drawing.Size(118, 23)
+        Me.btnHighlightEnd.TabIndex = 33
+        Me.btnHighlightEnd.Text = "ハイライト削除"
+        Me.btnHighlightEnd.UseVisualStyleBackColor = True
         '
-        'StrictComboBox1
+        'btnDialog
         '
-        Me.StrictComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.StrictComboBox1.FormattingEnabled = True
-        Me.StrictComboBox1.IntegralHeight = False
-        Me.StrictComboBox1.IsStrictOccuration = True
-        Me.StrictComboBox1.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7"})
-        Me.StrictComboBox1.Location = New System.Drawing.Point(9, 51)
-        Me.StrictComboBox1.Name = "StrictComboBox1"
-        Me.StrictComboBox1.Size = New System.Drawing.Size(199, 23)
-        Me.StrictComboBox1.TabIndex = 22
+        Me.btnDialog.Location = New System.Drawing.Point(1011, 13)
+        Me.btnDialog.Name = "btnDialog"
+        Me.btnDialog.Size = New System.Drawing.Size(138, 39)
+        Me.btnDialog.TabIndex = 34
+        Me.btnDialog.Text = "カスタムメッセージボックス"
+        Me.btnDialog.UseVisualStyleBackColor = True
         '
-        'ToggleSwitch1
+        'ToolTipMain
         '
-        Me.ToggleSwitch1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ToggleSwitch1.EnableAnimation = True
-        Me.ToggleSwitch1.FalseColor = System.Drawing.Color.DarkGray
-        Me.ToggleSwitch1.FalseText = "無効"
-        Me.ToggleSwitch1.FontName = "Meiryo UI"
-        Me.ToggleSwitch1.FontSize = 14.0!
-        Me.ToggleSwitch1.FontStyle = System.Drawing.FontStyle.Bold
-        Me.ToggleSwitch1.IsChecked = True
-        Me.ToggleSwitch1.Location = New System.Drawing.Point(17, 29)
-        Me.ToggleSwitch1.Name = "ToggleSwitch1"
-        Me.ToggleSwitch1.Size = New System.Drawing.Size(97, 39)
-        Me.ToggleSwitch1.TabIndex = 8
-        Me.ToggleSwitch1.TabStop = False
-        Me.ToggleSwitch1.TrueColor = System.Drawing.Color.Lime
-        Me.ToggleSwitch1.TrueText = "有効"
+        Me.ToolTipMain.OwnerDraw = True
+        Me.ToolTipMain.ShowAlways = True
         '
         'MainForm
         '
@@ -711,6 +717,7 @@ Partial Class MainForm
         Me.panelSplash.PerformLayout()
         Me.panelToggle.ResumeLayout(False)
         Me.panelToggle.PerformLayout()
+        CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelWrappers.ResumeLayout(False)
         Me.panelWrappers.PerformLayout()
         Me.Panel1.ResumeLayout(False)
@@ -719,7 +726,6 @@ Partial Class MainForm
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -785,4 +791,5 @@ Partial Class MainForm
     Friend WithEvents btnHighlight As Button
     Friend WithEvents btnHighlightEnd As Button
     Friend WithEvents btnDialog As Button
+    Friend WithEvents ToolTipMain As SpecialControls.ToolTipEx
 End Class

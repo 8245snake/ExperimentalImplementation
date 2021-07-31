@@ -26,6 +26,10 @@ Public Class ToolTipEx
 
     End Sub
 
+    Public Sub SetToolTipEx(control As Control, bmp As Bitmap)
+        SetToolTipEx(control, "image", bmp)
+    End Sub
+
     Public Sub SetToolTipEx(control As Control, caption As String, font As Font, Optional fontColor As Color = Nothing, Optional backColor As Color = Nothing)
         Dim bmp = SplashMessage.CreateTextImage("クリアしました", font, fontColor, backColor)
         SetToolTipEx(control, caption, bmp)

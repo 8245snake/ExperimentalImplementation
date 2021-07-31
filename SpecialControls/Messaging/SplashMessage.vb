@@ -19,13 +19,13 @@ Namespace Messaging
         ''' </summary>
         Public Enum DisplayDuration
             ''' <summary>
-            ''' 短時間（約1秒）
+            ''' 短時間（1秒）
             ''' </summary>
-            ShortTime = 300
+            ShortTime = 1000
             ''' <summary>
-            ''' 長時間（約3秒）
+            ''' 長時間（3秒）
             ''' </summary>
-            LongTime = 1000
+            LongTime = 3000
             ''' <summary>
             ''' 消えない
             ''' </summary>
