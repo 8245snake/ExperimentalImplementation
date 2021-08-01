@@ -67,12 +67,8 @@ Public Class MainForm
 
         hightlightingService.HighlightingControl = btnGenericSet
 
+        ToolTipMain.SetToolTipEx(lblTooltipForm, SplashMessage.CreateFormImage(Of ToolTipSampleForm)())
 
-        Using frm = New ToolTipSampleForm()
-            Dim bitmap As Bitmap = frm.GetBitmap()
-            ToolTipMain.SetToolTipEx(lblTooltipForm, bitmap)
-            ToolTipMain.InitialDelay = 100
-        End Using
     End Sub
 
 
@@ -135,7 +131,7 @@ Public Class MainForm
 
 #Region "SplashMessage"
     Private Sub btnTooltip_Click(sender As Object, e As EventArgs) Handles btnTooltip.Click
-        Dim bitmap As Bitmap = SplashMessage.CreateTextImage(txtTooltip.Text, FontDialogTooltip.Font)
+        Dim bitmap As Bitmap = SplashMessage.CreateTextImage(txtTooltip.Text, FontDialogTooltip.Font, backgroundColor:=Color.Yellow)
         ToolTipMain.ShowBitmap(bitmap, Me, Integer.Parse(txtX.Text), Integer.Parse(txtY.Text), combDurationWrapper.SelectedValue)
     End Sub
 
@@ -147,12 +143,7 @@ Public Class MainForm
 
 
     Private Sub btnFormTooltip_Click(sender As Object, e As EventArgs) Handles btnFormTooltip.Click
-        Dim bitmap As Bitmap
-        Using frm = New ToolTipSampleForm()
-            bitmap = frm.GetBitmap()
-        End Using
-
-        ToolTipMain.ShowBitmap(bitmap, Me, 0, 0, Integer.MaxValue)
+        ToolTipMain.ShowBitmap(Of ToolTipSampleForm)(Me, 0, 0, Integer.MaxValue)
     End Sub
 
     Private Sub btnFormTooltipClose_Click(sender As Object, e As EventArgs) Handles btnFormTooltipClose.Click

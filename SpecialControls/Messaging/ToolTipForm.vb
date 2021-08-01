@@ -2,7 +2,11 @@
 Imports SpecialControls.Win32
 
 Namespace Messaging
-    Public Class ToolTipForm
+
+    ''' <summary>
+    ''' BitmapにしたいFormが継承する基底クラス
+    ''' </summary>
+    Public MustInherit Class ToolTipForm
         Inherits Form
 
         Private _CalledByGetBitmap As Boolean = False
@@ -24,17 +28,24 @@ Namespace Messaging
         Protected Overrides Sub OnShown(e As EventArgs)
             MyBase.OnShown(e)
             If _CalledByGetBitmap Then
+                ' Shown後じゃないと画面のスクショが撮れないためここで実行する
                 _Bitmap = CreateFormImage(Me)
                 Me.Close()
             End If
         End Sub
 
+        ''' <summary>
+        ''' フォームを実体化しスクリーンショット（Bitmap）を撮影する
+        ''' </summary>
+        ''' <returns>画面のスクリーンショット</returns>
         Public Function GetBitmap() As Bitmap
             _CalledByGetBitmap = True
+            ' 同期処理にしたいのでShowDialogとする。OnShownですぐに閉じるのでフリーズはしないはず。
             Me.ShowDialog()
             _CalledByGetBitmap = False
             Return _Bitmap
         End Function
+
 
         ''' <summary>
         ''' 指定したフォームのビットマップを作成する

@@ -1,7 +1,7 @@
 ﻿Option Explicit On
 Option Strict On
 
-Imports System.Drawing.Drawing2D
+Imports SpecialControls.Painting
 
 
 Namespace Messaging
@@ -27,7 +27,7 @@ Namespace Messaging
             ''' <summary>
             ''' 消えない
             ''' </summary>
-            Endless = -1
+            Endless = Short.MaxValue
         End Enum
 
         ''' <summary>
@@ -43,8 +43,8 @@ Namespace Messaging
         ''' <param name="height">高さ</param>
         ''' <param name="sizeToFit">幅と高さを自動で合わせるか（widthとheight引数は無視されます）</param>
         ''' <returns>ビットマップ</returns>
-        Public Shared Function CreateTextImage(text As String,
-                                               font As Font,
+        Public Shared Function CreateTextImage(ByVal text As String,
+                                               ByVal font As Font,
                                                Optional ByVal fontColor As Color = Nothing,
                                                Optional ByVal backgroundColor As Color = Nothing,
                                                Optional ByVal paddingX As Single = 5,
@@ -52,29 +52,38 @@ Namespace Messaging
                                                Optional ByVal width As Integer = 100,
                                                Optional ByVal height As Integer = 100,
                                                Optional ByVal sizeToFit As Boolean = True) As Bitmap
-            Dim measuredSize As Size
+
+            Dim character = New Character()
+            character.Text = text
+            character.Font = font
+            ' 文字色
+            character.BrushColor = If(fontColor = Nothing, Color.Black, fontColor)
+            ' 中央寄せ
+            character.TextHorizontalAlignment = Character.HorizontalAlignmentType.Center
+            character.TextVerticalAlignment = Character.VerticalAlignmentType.Center
+
             ' テキストのサイズを見積もる
+            Dim measuredSize As Size
             If sizeToFit Then
-                Dim dummy As Bitmap = New Bitmap(1000, 1000)
-                Using g As Graphics = Graphics.FromImage(dummy)
-                    g.SmoothingMode = SmoothingMode.AntiAlias
-                    g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias
-                    measuredSize = TextRenderer.MeasureText(g, text, font, New Size(1000, 1000), TextFormatFlags.NoPadding)
+                Using dummy = New Bitmap(1000, 1000)
+                    Using g As Graphics = Graphics.FromImage(dummy)
+                        measuredSize = character.GetMeasuredSize(g)
+                    End Using
                 End Using
             End If
 
             Dim canvas As Bitmap
             If sizeToFit Then
-                ' パディングを足す。水平方向だけ5%くらい足りないので余分に補正
-                canvas = New Bitmap(CInt(measuredSize.Width + 2 * paddingX + measuredSize.Width * 0.05), CInt(measuredSize.Height + 2 * paddingY))
+                ' 上下左右にパディングを足す
+                canvas = New Bitmap(CInt(measuredSize.Width + 2 * paddingX), CInt(measuredSize.Height + 2 * paddingY))
             Else
                 canvas = New Bitmap(width, height)
             End If
 
-            ' 文字色と背景色
-            If fontColor = Nothing Then
-                fontColor = Color.Black
-            End If
+            character.Width = canvas.Width
+            character.Height = canvas.Height
+
+            ' 背景色
             If backgroundColor = Nothing Then
                 backgroundColor = Color.White
             End If
@@ -82,15 +91,17 @@ Namespace Messaging
             ' ビットマップに描画
             Using g As Graphics = Graphics.FromImage(canvas)
                 g.Clear(backgroundColor)
-                g.SmoothingMode = SmoothingMode.AntiAlias
-                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias
-                g.DrawString(text, font, New SolidBrush(fontColor), paddingX, paddingY)
+                character.Draw(g)
             End Using
 
             Return canvas
         End Function
 
-
+        Public Shared Function CreateFormImage(Of T As {ToolTipForm, New})() As Bitmap
+            Using frm = New T()
+                Return frm.GetBitmap()
+            End Using
+        End Function
     End Class
 
 End Namespace

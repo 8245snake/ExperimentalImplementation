@@ -83,7 +83,7 @@ Partial Class MainForm
         Me.btnHighlight = New System.Windows.Forms.Button()
         Me.btnHighlightEnd = New System.Windows.Forms.Button()
         Me.btnDialog = New System.Windows.Forms.Button()
-        Me.ToolTipMain = New SpecialControls.ToolTipEx()
+        Me.ToolTipMain = New SpecialControls.Messaging.ToolTipEx()
         Me.panelSplash.SuspendLayout()
         Me.panelToggle.SuspendLayout()
         CType(Me.ToggleSwitch1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -791,5 +791,5 @@ Partial Class MainForm
     Friend WithEvents btnHighlight As Button
     Friend WithEvents btnHighlightEnd As Button
     Friend WithEvents btnDialog As Button
-    Friend WithEvents ToolTipMain As SpecialControls.ToolTipEx
+    Friend WithEvents ToolTipMain As SpecialControls.Messaging.ToolTipEx
 End Class
