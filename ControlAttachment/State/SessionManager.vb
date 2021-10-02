@@ -4,7 +4,7 @@ Option Strict On
 Imports System.Windows.Forms
 
 Namespace State
-    Public Class SessionManeger
+    Public Class SessionManager
         Private Sessions As List(Of IControlEventSession)
 
         Private prevTime As DateTime

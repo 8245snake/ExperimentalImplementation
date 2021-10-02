@@ -3,6 +3,7 @@ Option Strict On
 
 Imports System.Drawing
 Imports System.Windows.Forms
+Imports ControlAttachment.State
 
 Namespace Validation.Embedded
 
@@ -29,7 +30,7 @@ Namespace Validation.Embedded
             BorderLineWidth = 3
         End Sub
 
-        Public Sub New(isBlinkEnable As Boolean)
+        Public Sub New(Optional isBlinkEnable As Boolean = False)
             MyClass.New()
 
             If isBlinkEnable Then
@@ -41,7 +42,7 @@ Namespace Validation.Embedded
         End Sub
 
         Private Sub BlinkTimerTick(sender As Object, e As EventArgs)
-            _TargetControl?.Invalidate()
+            _TargetControl?.Refresh()
         End Sub
 
         Public Sub ErrorAction(control As Control) Implements IErrorActionStrategy.ErrorAction
@@ -92,20 +93,32 @@ Namespace Validation.Embedded
 
         End Sub
 
-        Private Shared Function GetDrawingRectangle(control As Control, lineWidth As Integer) As Rectangle
+        Friend Shared Function GetDrawingRectangle(control As Control, lineWidth As Integer) As Rectangle
             Dim rect = New Rectangle(control.Left - lineWidth + 1, control.Top - lineWidth + 1, control.Width + lineWidth, control.Height + lineWidth)
             Return rect
         End Function
 
-        Private Shared Sub InvalidateControlRect(control As Control, lineWidth As Integer)
+        Friend Shared Sub InvalidateControlRect(control As Control, lineWidth As Integer)
             Dim rect = GetDrawingRectangle(control, lineWidth)
             rect.X -= lineWidth
             rect.Y -= lineWidth
             rect.Width += lineWidth * 2
             rect.Height += lineWidth * 2
             control.Parent.Invalidate(rect)
+            control.Parent.Update()
         End Sub
 
+        Public Sub BeginHighlight(control As Control) Implements IHighlightingActionStrategy.BeginHighlight
+            ErrorAction(control)
+        End Sub
+
+        Public Sub EndHighlight(control As Control) Implements IHighlightingActionStrategy.EndHighlight
+            SuccesAction(control)
+        End Sub
+
+        Public Sub Highlight(control As Control) Implements IHighlightingActionStrategy.Highlight
+            ErrorPainting(control)
+        End Sub
     End Class
 
 End Namespace

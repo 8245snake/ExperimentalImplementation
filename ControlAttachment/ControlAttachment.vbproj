@@ -83,8 +83,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="State\EventSessionListener.vb" />
+    <Compile Include="State\HighlightingAttachment.vb" />
+    <Compile Include="State\HighlightingManager.vb" />
     <Compile Include="State\IControlEventSession.vb" />
-    <Compile Include="State\SessionManeger.vb" />
+    <Compile Include="State\IHighlightingActionStrategy.vb" />
+    <Compile Include="State\SessionManager.vb" />
     <Compile Include="Text\WaterMarkAttachment.vb" />
     <Compile Include="Validation\Embedded\BorderDrawActionStrategy.vb" />
     <Compile Include="Validation\Embedded\NumericCheckStrategy.vb" />
