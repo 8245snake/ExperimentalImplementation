@@ -3,8 +3,6 @@ Option Strict On
 
 Imports System.Drawing
 Imports System.Windows.Forms
-Imports ControlAttachment.State
-Imports ControlAttachment.Validation
 
 Namespace Strategies
 
@@ -110,7 +108,7 @@ Namespace Strategies
             If drawOutside Then
                 Return New Rectangle(control.Left - lineWidth + 1, control.Top - lineWidth + 1, control.Width + lineWidth, control.Height + lineWidth)
             Else
-                Return New Rectangle(1, 1, control.Width - lineWidth, control.Height - lineWidth)
+                Return New Rectangle(1, 1, control.Width - lineWidth * 2, control.Height - lineWidth * 2)
             End If
         End Function
 

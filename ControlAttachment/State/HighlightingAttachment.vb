@@ -20,7 +20,8 @@ Namespace State
         Private Const WM_PAINT = &HF
 
         Public Sub New(Optional isBlinkEnable As Boolean = False)
-            _DrawActionStrategy = New BorderDrawActionStrategy(isBlinkEnable)
+            ' デフォルトは赤線で囲うやつにする
+            _DrawActionStrategy = New BorderDrawActionStrategy(isBlinkEnable, True)
         End Sub
 
         Public Sub New(drawActionStrategy As IHighlightingActionStrategy)

@@ -1,4 +1,7 @@
-﻿Imports System.Windows.Forms
+﻿Option Explicit On
+Option Strict On
+
+Imports System.Windows.Forms
 
 ''' <summary>
 ''' サンプル用アタッチメント

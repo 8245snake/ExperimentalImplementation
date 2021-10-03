@@ -182,7 +182,6 @@ Namespace Activity
         End Sub
 
 
-
         ''' <summary>
         ''' 子コントロールのウィンドウメッセージを親に伝えるためのインナークラス
         ''' </summary>

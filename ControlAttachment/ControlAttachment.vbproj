@@ -65,6 +65,7 @@
     <Compile Include="AttachmentAttribute.vb" />
     <Compile Include="AttachmentExtension.vb" />
     <Compile Include="Decoration\CheckBoxEnlargeAttachment.vb" />
+    <Compile Include="Decoration\HoverActionAttachment.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
