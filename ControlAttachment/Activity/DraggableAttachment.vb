@@ -122,7 +122,7 @@ Namespace Activity
 
         Private Sub OnMouseUp()
 
-            Dim dest = DropTargets.Where(Function(item) item.CanDrop).FirstOrDefault()
+            Dim dest = DropTargets.FirstOrDefault(Function(item) item.CanDrop)
             If dest IsNot Nothing Then
                 Dim screenPos = Cursor.Position
                 Dim clientPos = dest.TargetControl.PointToClient(screenPos)
