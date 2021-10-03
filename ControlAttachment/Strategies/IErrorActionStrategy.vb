@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms
 Imports ControlAttachment.State
 
-Namespace Validation
+Namespace Strategies
 
     Public Interface IErrorActionStrategy
         Inherits IHighlightingActionStrategy

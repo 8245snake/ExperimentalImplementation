@@ -3,6 +3,7 @@ Option Strict On
 
 Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports ControlAttachment.Strategies
 
 Namespace Validation
 

@@ -3,7 +3,7 @@ Option Strict On
 
 Imports ControlAttachment
 Imports ControlAttachment.State
-Imports ControlAttachment.Validation.Embedded
+Imports ControlAttachment.Strategies
 
 Public Class MainForm
 

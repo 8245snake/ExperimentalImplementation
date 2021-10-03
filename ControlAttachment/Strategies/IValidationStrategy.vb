@@ -1,6 +1,6 @@
 ﻿Imports System.Windows.Forms
 
-Namespace Validation
+Namespace Strategies
 
     Public Interface IValidationStrategy
         Enum ValidationTriggerType

@@ -2,7 +2,7 @@
 Option Strict On
 
 Imports System.Windows.Forms
-Imports ControlAttachment.Validation.Embedded
+Imports ControlAttachment.Strategies
 
 Namespace State
 

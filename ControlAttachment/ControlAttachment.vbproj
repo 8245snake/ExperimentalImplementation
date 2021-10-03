@@ -45,13 +45,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -86,14 +82,14 @@
     <Compile Include="State\HighlightingAttachment.vb" />
     <Compile Include="State\HighlightingManager.vb" />
     <Compile Include="State\IControlEventSession.vb" />
-    <Compile Include="State\IHighlightingActionStrategy.vb" />
+    <Compile Include="Strategies\IHighlightingActionStrategy.vb" />
     <Compile Include="State\SessionManager.vb" />
     <Compile Include="Text\WaterMarkAttachment.vb" />
-    <Compile Include="Validation\Embedded\BorderDrawActionStrategy.vb" />
-    <Compile Include="Validation\Embedded\NumericCheckStrategy.vb" />
-    <Compile Include="Validation\IErrorActionStrategy.vb" />
+    <Compile Include="Strategies\BorderDrawActionStrategy.vb" />
+    <Compile Include="Strategies\NumericCheckStrategy.vb" />
+    <Compile Include="Strategies\IErrorActionStrategy.vb" />
     <Compile Include="Validation\ValidationAttachment.vb" />
-    <Compile Include="Validation\IValidationStrategy.vb" />
+    <Compile Include="Strategies\IValidationStrategy.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

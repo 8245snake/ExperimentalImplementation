@@ -3,7 +3,7 @@ Option Strict On
 
 Imports System.Windows.Forms
 
-Namespace Validation.Embedded
+Namespace Strategies
 
     ''' <summary>
     ''' 数値チェック用のストラテジー

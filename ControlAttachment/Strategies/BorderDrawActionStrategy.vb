@@ -4,8 +4,9 @@ Option Strict On
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports ControlAttachment.State
+Imports ControlAttachment.Validation
 
-Namespace Validation.Embedded
+Namespace Strategies
 
     ''' <summary>
     ''' コントロールの周りを赤線で囲うアクション

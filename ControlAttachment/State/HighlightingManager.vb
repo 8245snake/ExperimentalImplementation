@@ -2,6 +2,7 @@
 Option Strict On
 
 Imports System.Windows.Forms
+Imports ControlAttachment.Strategies
 
 Namespace State
 
