@@ -30,7 +30,6 @@ Public Class SubForm
         a3.AddDropTarget(attachment2)
         a3.AddDropTarget(attachment3)
 
-
         Dim h1 = New HoverActionAttachment(Panel1, Color.AliceBlue)
         Dim h2 = New HoverActionAttachment(Panel2, Color.AliceBlue)
         Dim h3 = New HoverActionAttachment(Panel3, Color.AliceBlue)

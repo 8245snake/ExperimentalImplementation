@@ -33,6 +33,7 @@ Namespace Activity
 
         Public Sub New(targetControl As Control)
             _TargetControl = targetControl
+            _TargetControl.Cursor = Cursors.CustomCursor.Hand_Open
 
             AddHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
             AddHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
@@ -118,6 +119,8 @@ Namespace Activity
             _IsGrabbed = True
             NotifyReadyToDrop(True)
             _TargetControl.Invalidate()
+
+            _TargetControl.Cursor = Cursors.CustomCursor.Hand_Close
         End Sub
 
         Private Sub OnMouseUp()
@@ -136,6 +139,8 @@ Namespace Activity
             _IsGrabbed = False
             NotifyReadyToDrop(False)
             _HighlightingAction?.EndHighlight(_TargetControl)
+
+            _TargetControl.Cursor = Cursors.CustomCursor.Hand_Open
         End Sub
 
         Private Sub OnMouseMove()

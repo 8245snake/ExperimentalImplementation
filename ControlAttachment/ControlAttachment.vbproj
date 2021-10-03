@@ -64,6 +64,7 @@
     <Compile Include="Activity\DroppableAttachment.vb" />
     <Compile Include="AttachmentAttribute.vb" />
     <Compile Include="AttachmentExtension.vb" />
+    <Compile Include="Cursors\CustomCursor.vb" />
     <Compile Include="Decoration\CheckBoxEnlargeAttachment.vb" />
     <Compile Include="Decoration\HoverActionAttachment.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -115,5 +116,9 @@
     </None>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Cursors\Hand_Close.cur" />
+    <EmbeddedResource Include="Cursors\Hand_Open.cur" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

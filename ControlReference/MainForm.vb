@@ -2,6 +2,7 @@
 Option Strict On
 
 Imports ControlAttachment
+Imports ControlAttachment.Activity
 Imports ControlAttachment.State
 Imports ControlAttachment.Strategies
 
@@ -22,8 +23,8 @@ Public Class MainForm
         '_SessionManeger.Register(Button1)
         CheckBox1.Enlarge()
 
-
         _highlightingManager = New HighlightingManager(New HighlightingAttachment())
+        Dim a1 = New DraggableAttachment(CheckBox1)
 
     End Sub
 
