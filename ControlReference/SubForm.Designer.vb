@@ -26,11 +26,12 @@ Partial Class SubForm
         Me.frameSource = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.frameDest = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.frameDest1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.frameDest2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.frameSource.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -78,16 +79,6 @@ Partial Class SubForm
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Label1"
         '
-        'frameDest
-        '
-        Me.frameDest.AutoScroll = True
-        Me.frameDest.BackColor = System.Drawing.Color.White
-        Me.frameDest.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.frameDest.Location = New System.Drawing.Point(425, 63)
-        Me.frameDest.Name = "frameDest"
-        Me.frameDest.Size = New System.Drawing.Size(334, 316)
-        Me.frameDest.TabIndex = 2
-        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.White
@@ -130,12 +121,33 @@ Partial Class SubForm
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "Label3"
         '
+        'frameDest1
+        '
+        Me.frameDest1.AutoScroll = True
+        Me.frameDest1.BackColor = System.Drawing.Color.White
+        Me.frameDest1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
+        Me.frameDest1.Location = New System.Drawing.Point(412, 63)
+        Me.frameDest1.Name = "frameDest1"
+        Me.frameDest1.Size = New System.Drawing.Size(334, 149)
+        Me.frameDest1.TabIndex = 2
+        '
+        'frameDest2
+        '
+        Me.frameDest2.AutoScroll = True
+        Me.frameDest2.BackColor = System.Drawing.Color.White
+        Me.frameDest2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
+        Me.frameDest2.Location = New System.Drawing.Point(412, 230)
+        Me.frameDest2.Name = "frameDest2"
+        Me.frameDest2.Size = New System.Drawing.Size(334, 149)
+        Me.frameDest2.TabIndex = 3
+        '
         'SubForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Controls.Add(Me.frameDest)
+        Me.Controls.Add(Me.frameDest2)
+        Me.Controls.Add(Me.frameDest1)
         Me.Controls.Add(Me.frameSource)
         Me.Controls.Add(Me.TextBox1)
         Me.Name = "SubForm"
@@ -154,11 +166,12 @@ Partial Class SubForm
 
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents frameSource As FlowLayoutPanel
-    Friend WithEvents frameDest As FlowLayoutPanel
+    Friend WithEvents frameDest1 As FlowLayoutPanel
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Label3 As Label
+    Friend WithEvents frameDest2 As FlowLayoutPanel
 End Class
