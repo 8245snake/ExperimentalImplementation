@@ -31,7 +31,7 @@ Namespace Strategies
             BorderLineWidth = 3
         End Sub
 
-        Public Sub New(Optional isBlinkEnable As Boolean = False, Optional drawOutside As Boolean = False)
+        Public Sub New(Optional isBlinkEnable As Boolean = False, Optional drawOutside As Boolean = True)
             MyClass.New()
 
             If isBlinkEnable Then

@@ -13,7 +13,7 @@ Public Class MainForm
 
     Public Sub New()
         InitializeComponent()
-        TextBox1.AttachValidation(New NumericCheckStrategy(), New BorderDrawActionStrategy(True))
+        TextBox1.AttachValidation(New NumericCheckStrategy(), New BorderDrawActionStrategy())
         TextBox1.AttachWaterMark("数値を書いてください")
 
 
