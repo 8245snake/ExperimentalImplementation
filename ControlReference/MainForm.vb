@@ -32,12 +32,15 @@ Public Class MainForm
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        _highlightingManager.HighlightingControl = Button1
+        Using frm = New SubForm
+            frm.ShowDialog()
+        End Using
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         _highlightingManager.HighlightingControl = TextBox1
     End Sub
+
 End Class
 
 

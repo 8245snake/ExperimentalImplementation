@@ -27,7 +27,7 @@ Namespace Decoration
             AddHandler _CheckBox.HandleCreated, AddressOf OnHandleCreated
             AddHandler _CheckBox.HandleDestroyed, AddressOf OnHandleDestroyed
 
-            HoverColor = ColorTranslator.FromHtml("#d9ebf9")
+            HoverColor = ColorTranslator.FromHtml("#88d9ebf9")
         End Sub
 
 

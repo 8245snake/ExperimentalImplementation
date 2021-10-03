@@ -14,6 +14,8 @@ Namespace Strategies
     Public Class BorderDrawActionStrategy
         Implements IErrorActionStrategy
 
+        Private _DrawOutside As Boolean = True
+
         Private tmrBlink As Timer
         Private _IsBorderVisible As Boolean = False
         Private _TargetControl As Control
@@ -31,7 +33,7 @@ Namespace Strategies
             BorderLineWidth = 3
         End Sub
 
-        Public Sub New(Optional isBlinkEnable As Boolean = False)
+        Public Sub New(Optional isBlinkEnable As Boolean = False, Optional drawOutside As Boolean = False)
             MyClass.New()
 
             If isBlinkEnable Then
@@ -40,6 +42,8 @@ Namespace Strategies
                 tmrBlink.Interval = 800
                 AddHandler tmrBlink.Tick, AddressOf BlinkTimerTick
             End If
+
+            _DrawOutside = drawOutside
         End Sub
 
         Private Sub BlinkTimerTick(sender As Object, e As EventArgs)
@@ -60,7 +64,7 @@ Namespace Strategies
                 _TargetControl = Nothing
             End If
 
-            InvalidateControlRect(control, BorderLineWidth)
+            InvalidateControlRect(control, BorderLineWidth, _DrawOutside)
         End Sub
 
         Public Sub ErrorPainting(control As Control) Implements IErrorActionStrategy.ErrorPainting
@@ -78,29 +82,40 @@ Namespace Strategies
 
                 If _IsBorderVisible Then
                     ' 点滅させるために消す
-                    InvalidateControlRect(control, BorderLineWidth)
+                    InvalidateControlRect(control, BorderLineWidth, _DrawOutside)
                     _IsBorderVisible = False
                     Return
                 End If
             End If
 
-            ' テキストボックス内は狭いので親コントロールに描画する
-            Using g As Graphics = control.Parent.CreateGraphics
-                Dim pen As Pen = New Pen(Color.Red, BorderLineWidth)
-                g.DrawRectangle(pen, GetDrawingRectangle(control, BorderLineWidth))
-            End Using
+            If _DrawOutside Then
+                ' テキストボックス内は狭いので親コントロールに描画する
+                Using g As Graphics = control.Parent.CreateGraphics
+                    Dim pen As Pen = New Pen(Color.Red, BorderLineWidth)
+                    g.DrawRectangle(pen, GetDrawingRectangle(control, BorderLineWidth, _DrawOutside))
+                End Using
+            Else
+                ' コントロールの内側に描画するパターン
+                Using g As Graphics = control.CreateGraphics
+                    Dim pen As Pen = New Pen(Color.Red, BorderLineWidth)
+                    g.DrawRectangle(pen, GetDrawingRectangle(control, BorderLineWidth, _DrawOutside))
+                End Using
+            End If
 
             _IsBorderVisible = True
 
         End Sub
 
-        Friend Shared Function GetDrawingRectangle(control As Control, lineWidth As Integer) As Rectangle
-            Dim rect = New Rectangle(control.Left - lineWidth + 1, control.Top - lineWidth + 1, control.Width + lineWidth, control.Height + lineWidth)
-            Return rect
+        Friend Function GetDrawingRectangle(control As Control, lineWidth As Integer, drawOutside As Boolean) As Rectangle
+            If drawOutside Then
+                Return New Rectangle(control.Left - lineWidth + 1, control.Top - lineWidth + 1, control.Width + lineWidth, control.Height + lineWidth)
+            Else
+                Return New Rectangle(1, 1, control.Width - lineWidth, control.Height - lineWidth)
+            End If
         End Function
 
-        Friend Shared Sub InvalidateControlRect(control As Control, lineWidth As Integer)
-            Dim rect = GetDrawingRectangle(control, lineWidth)
+        Friend Sub InvalidateControlRect(control As Control, lineWidth As Integer, drawOutside As Boolean)
+            Dim rect = GetDrawingRectangle(control, lineWidth, drawOutside)
             rect.X -= lineWidth
             rect.Y -= lineWidth
             rect.Width += lineWidth * 2
