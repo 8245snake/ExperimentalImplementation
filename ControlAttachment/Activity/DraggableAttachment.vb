@@ -12,12 +12,8 @@ Namespace Activity
         Inherits NativeWindow
 
         Private _TargetControl As Control
-        Private _Parent As Control
-        Private _TopParent As Control
 
         Private _IsGrabbed As Boolean = False
-        Private _LocalPosition As Point
-        Private _BeforeChildIndex As Integer
 
         Private Const WM_PAINT = &HF
         Private Const WM_NCPAINT = &H85
@@ -25,15 +21,14 @@ Namespace Activity
         Private Const WM_LBUTTONDOWN = &H201
         Private Const WM_LBUTTONUP = &H202
 
-        Private DropTargets As List(Of DroppableAttachment) = New List(Of DroppableAttachment)()
-
         Private _HighlightingAction As IHighlightingActionStrategy
-
+        Private _DragAction As IDragActionStrategy
         Private _ChildNativeWindows As List(Of ChildNativeWindow) = New List(Of ChildNativeWindow)()
 
-        Public Sub New(targetControl As Control)
+        Public Sub New(targetControl As Control, dragActionStrategy As IDragActionStrategy)
             _TargetControl = targetControl
             _TargetControl.Cursor = Cursors.CustomCursor.Hand_Open
+            _DragAction = dragActionStrategy
 
             AddHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
             AddHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
@@ -45,7 +40,7 @@ Namespace Activity
             ' 最上位の親を探す
             Dim parent As Control = _TargetControl.Parent
             While parent IsNot Nothing
-                _TopParent = parent
+                _DragAction.TopParent = parent
                 parent = parent.Parent
             End While
 
@@ -56,8 +51,10 @@ Namespace Activity
 
         End Sub
 
-        Public Sub New(targetControl As Control, highlightingAction As IHighlightingActionStrategy)
-            MyClass.New(targetControl)
+
+
+        Public Sub New(targetControl As Control, dragActionStrategy As IDragActionStrategy, highlightingAction As IHighlightingActionStrategy)
+            MyClass.New(targetControl, dragActionStrategy)
             _HighlightingAction = highlightingAction
             _HighlightingAction?.BeginHighlight(_TargetControl)
 
@@ -68,7 +65,7 @@ Namespace Activity
             RemoveHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
 
             _TargetControl = Nothing
-            _TopParent = Nothing
+            _DragAction = Nothing
             _ChildNativeWindows.Clear()
 
             MyBase.ReleaseHandle()
@@ -88,102 +85,31 @@ Namespace Activity
             MyBase.WndProc(m)
 
             Select Case m.Msg
+                Case WM_LBUTTONDOWN
+                    _DragAction.BiginDrag()
+                    ' フラグセット
+                    _IsGrabbed = True
+
                 Case WM_MOUSEMOVE
                     If Not _IsGrabbed Then Return
-                    OnMouseMove()
-                Case WM_LBUTTONDOWN
-                    OnMouseDown()
+                    _DragAction.DragMoving()
+
                 Case WM_LBUTTONUP
                     If Not _IsGrabbed Then Return
-                    OnMouseUp()
+                    _DragAction.EndDrag()
+                    _IsGrabbed = False
+                    _HighlightingAction?.EndHighlight(_TargetControl)
+
                 Case WM_PAINT, WM_NCPAINT
                     If Not _IsGrabbed Then Return
                     _HighlightingAction?.Highlight(_TargetControl)
+
             End Select
 
         End Sub
 
-        Private Sub OnMouseDown()
-            ' 位置を保存
-            _LocalPosition = _TargetControl.PointToClient(Cursor.Position)
-            _BeforeChildIndex = _TargetControl.Parent.Controls.GetChildIndex(_TargetControl)
-            ' 親を保存
-            _Parent = _TargetControl.Parent
-            _Parent.Controls.Remove(_TargetControl)
-            _TopParent.Controls.Add(_TargetControl)
-            ' 一番上に持っていく
-            _TopParent.Controls.SetChildIndex(_TargetControl, 0)
-            ' マウスの位置に動かしておく
-            OnMouseMove()
-            ' フラグセット
-            _IsGrabbed = True
-            NotifyReadyToDrop(True)
-            _TargetControl.Invalidate()
-
-            _TargetControl.Cursor = Cursors.CustomCursor.Hand_Close
-        End Sub
-
-        Private Sub OnMouseUp()
-
-            Dim dest = DropTargets.FirstOrDefault(Function(item) item.CanDrop)
-            If dest IsNot Nothing Then
-                Dim screenPos = Cursor.Position
-                Dim clientPos = dest.TargetControl.PointToClient(screenPos)
-                dest.Drop(_TargetControl, clientPos)
-            Else
-                ' だめなら戻す
-                _Parent.Controls.Add(_TargetControl)
-                _Parent.Controls.SetChildIndex(_TargetControl, _BeforeChildIndex)
-            End If
-
-            _IsGrabbed = False
-            NotifyReadyToDrop(False)
-            _HighlightingAction?.EndHighlight(_TargetControl)
-
-            _TargetControl.Cursor = Cursors.CustomCursor.Hand_Open
-        End Sub
-
-        Private Sub OnMouseMove()
-            ' マウスの動きに追従させる
-            Dim screenPos = Cursor.Position
-            Dim clientPos = _TopParent.PointToClient(screenPos)
-            clientPos.X -= _LocalPosition.X
-            clientPos.Y -= _LocalPosition.Y
-            _TargetControl.Location = clientPos
-        End Sub
-
-
-        ''' <summary>
-        ''' ドロップ先コントロールのアタッチメントを追加すｓる
-        ''' </summary>
-        ''' <param name="drop"></param>
-        Public Sub AddDropTarget(drop As DroppableAttachment)
-            DropTargets.Add(drop)
-        End Sub
-
-        ''' <summary>
-        ''' ドロップ先コントロールにドロップ待受状態にするかを通知する
-        ''' </summary>
-        ''' <param name="isReady">ドロップ待受状態にするか</param>
-        Private Sub NotifyReadyToDrop(isReady As Boolean)
-            Dim padding As Padding
-
-            If isReady Then
-                padding = New Padding(_LocalPosition.X, _LocalPosition.Y, 0, 0)
-                padding.Right = _TargetControl.Width - padding.Left
-                padding.Bottom = _TargetControl.Height - padding.Top
-            End If
-
-            For Each attachment As DroppableAttachment In DropTargets
-                If attachment.TargetControl Is Me._Parent Then
-                    ' 自分が所属するフレームにはドロップできなくする
-                    attachment.ReadyToDrop = False
-                Else
-                    attachment.ReadyToDrop = isReady
-                End If
-
-                attachment.DropObjectPadding = padding
-            Next
+        Public Sub AddDropTarget(droppableAttachment As DroppableAttachment)
+            _DragAction.DropTargets.Add(droppableAttachment)
         End Sub
 
 
@@ -245,7 +171,6 @@ Namespace Activity
                 End Select
             End Sub
         End Class
-
 
     End Class
 
