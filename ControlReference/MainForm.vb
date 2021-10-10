@@ -16,9 +16,7 @@ Public Class MainForm
         InitializeComponent()
         TextBox1.AttachValidation(New NumericCheckStrategy(), New BorderDrawActionStrategy())
         TextBox1.AttachWaterMark("数値を書いてください")
-
-        Dim test = New TextSizeLimitAttachment(TextBox1, 10)
-        test.ErrorActionStrategy = New ErrorMessageActionStrategy()
+        TextBox1.AttachMaxByteSize(10, New ErrorMessageActionStrategy())
 
         ComboBox1.AttachValidation(New NumericCheckStrategy(), New BorderDrawActionStrategy())
 

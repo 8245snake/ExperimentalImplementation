@@ -21,6 +21,12 @@ Public Module AttachmentExtension
         AttachInternal(textbox, New WaterMarkAttachment(textbox, watermark))
     End Sub
 
+
+    <Extension()>
+    Public Sub AttachMaxByteSize(textbox As TextBox, maxByteSize As Integer, Optional errorActionStrategy As IErrorActionStrategy = Nothing)
+        AttachInternal(textbox, New TextSizeLimitAttachment(textbox, maxByteSize, errorActionStrategy))
+    End Sub
+
     <Extension()>
     Public Sub AttachValidation(target As Control, validationStrategy As IValidationStrategy, errorActionStrategy As IErrorActionStrategy)
         AttachInternal(target, New ValidationAttachment(target, validationStrategy, errorActionStrategy))

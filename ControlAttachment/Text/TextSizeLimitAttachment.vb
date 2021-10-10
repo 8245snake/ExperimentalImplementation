@@ -25,9 +25,10 @@ Namespace Text
         Public Property ErrorActionStrategy As IErrorActionStrategy
 
 
-        Public Sub New(targetControl As TextBox, maxByteLength As Integer)
+        Public Sub New(targetControl As TextBox, maxByteLength As Integer, Optional errorActionStrategy As IErrorActionStrategy = Nothing)
             _TargetControl = targetControl
             Me.MaxByteLength = maxByteLength
+            Me.ErrorActionStrategy = errorActionStrategy
 
             If _TargetControl.IsHandleCreated Then
                 AssignHandle(_TargetControl.Handle)
