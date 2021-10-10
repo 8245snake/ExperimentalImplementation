@@ -4,6 +4,7 @@ Option Strict On
 Imports ControlAttachment
 Imports ControlAttachment.State
 Imports ControlAttachment.Strategies
+Imports ControlAttachment.Text
 
 Public Class MainForm
 
@@ -16,6 +17,8 @@ Public Class MainForm
         TextBox1.AttachValidation(New NumericCheckStrategy(), New BorderDrawActionStrategy())
         TextBox1.AttachWaterMark("数値を書いてください")
 
+        Dim test = New TextSizeLimitAttachment(TextBox1, 10)
+        test.ErrorActionStrategy = New ErrorMessageActionStrategy()
 
         ComboBox1.AttachValidation(New NumericCheckStrategy(), New BorderDrawActionStrategy())
 
@@ -25,6 +28,7 @@ Public Class MainForm
         _highlightingManager = New HighlightingManager(New HighlightingAttachment())
 
     End Sub
+
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 

@@ -91,6 +91,7 @@
     <Compile Include="Strategies\IHighlightingActionStrategy.vb" />
     <Compile Include="State\SessionManager.vb" />
     <Compile Include="Strategies\StandardDragActionStrategy.vb" />
+    <Compile Include="Text\TextSizeLimitAttachment.vb" />
     <Compile Include="Text\WaterMarkAttachment.vb" />
     <Compile Include="Strategies\BorderDrawActionStrategy.vb" />
     <Compile Include="Strategies\NumericCheckStrategy.vb" />
