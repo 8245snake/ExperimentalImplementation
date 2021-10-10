@@ -1,6 +1,7 @@
 ﻿Option Explicit On
 Option Strict On
 
+Imports System.Drawing
 Imports System.Runtime.CompilerServices
 Imports System.Windows.Forms
 Imports ControlAttachment.Decoration
@@ -18,18 +19,22 @@ Public Module AttachmentExtension
 
     <Extension()>
     Public Sub AttachWaterMark(textbox As TextBox, watermark As String)
-        AttachInternal(textbox, New WaterMarkAttachment(textbox, watermark))
+        AttachmentManager.AttachInternal(textbox, New WaterMarkAttachment(textbox, watermark), _ConditionalWeakTable)
     End Sub
-
 
     <Extension()>
     Public Sub AttachMaxByteSize(textbox As TextBox, maxByteSize As Integer, Optional errorActionStrategy As IErrorActionStrategy = Nothing)
-        AttachInternal(textbox, New TextSizeLimitAttachment(textbox, maxByteSize, errorActionStrategy))
+        AttachmentManager.AttachInternal(textbox, New TextSizeLimitAttachment(textbox, maxByteSize, errorActionStrategy), _ConditionalWeakTable)
+    End Sub
+
+    <Extension()>
+    Public Sub AttachHoverColor(target As Control, color As Color)
+        AttachmentManager.AttachInternal(target, New HoverActionAttachment(target, color), _ConditionalWeakTable)
     End Sub
 
     <Extension()>
     Public Sub AttachValidation(target As Control, validationStrategy As IValidationStrategy, errorActionStrategy As IErrorActionStrategy)
-        AttachInternal(target, New ValidationAttachment(target, validationStrategy, errorActionStrategy))
+        AttachmentManager.AttachInternal(target, New ValidationAttachment(target, validationStrategy, errorActionStrategy), _ConditionalWeakTable)
     End Sub
 
     <Extension()>
@@ -53,46 +58,7 @@ Public Module AttachmentExtension
 
     <Extension()>
     Public Sub Enlarge(target As CheckBox)
-        AttachInternal(target, New CheckBoxEnlargeAttachment(target))
+        AttachmentManager.AttachInternal(target, New CheckBoxEnlargeAttachment(target), _ConditionalWeakTable)
     End Sub
 
-    Private Function AttachInternal(Of T As NativeWindow)(control As Control, obj As T) As List(Of NativeWindow)
-        Dim list As List(Of NativeWindow) = Nothing
-        If Not _ConditionalWeakTable.TryGetValue(control, list) Then
-            ' なければ新規エントリを追加して終わり
-            list = New List(Of NativeWindow)({obj})
-            _ConditionalWeakTable.Add(control, list)
-            Return list
-        End If
-
-        '' あった場合は重複していいか判断して追加か置換する
-
-        Dim item = list.OfType(Of T)?.FirstOrDefault()
-        If item Is Nothing Then
-            ' 含まれてないので追加して終了
-            list.Add(obj)
-            Return list
-        End If
-
-        Dim attribute As AttachmentAttribute = GetType(T).GetCustomAttributes(False)?.OfType(Of AttachmentAttribute)?.FirstOrDefault()
-        If attribute Is Nothing Then
-            ' 属性なしは重複を許すことにして終了
-            list.Add(obj)
-            Return list
-        End If
-
-        If attribute.AllowMultiple Then
-            ' 重複を許す指定なので追加して終了
-            list.Add(obj)
-            Return list
-        End If
-
-        ' 重複を許さない場合は置き換える
-        item.ReleaseHandle()
-        list.Remove(item)
-        list.Add(obj)
-
-        Return list
-
-    End Function
 End Module

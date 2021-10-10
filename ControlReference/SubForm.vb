@@ -42,9 +42,9 @@ Public Class SubForm
         a3.AddDropTarget(source)
 
         ' ホバー設定
-        Dim h1 = New HoverActionAttachment(Panel1, Color.AliceBlue)
-        Dim h2 = New HoverActionAttachment(Panel2, Color.AliceBlue)
-        Dim h3 = New HoverActionAttachment(Panel3, Color.AliceBlue)
+        Panel1.AttachHoverColor(Color.AliceBlue)
+        Panel2.AttachHoverColor(Color.AliceBlue)
+        Panel3.AttachHoverColor(Color.AliceBlue)
 
     End Sub
 

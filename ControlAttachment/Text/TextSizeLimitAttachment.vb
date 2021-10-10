@@ -11,7 +11,7 @@ Namespace Text
     ''' テキストの入力文字数をバイト単位で指定するアタッチメント
     ''' </summary>
     <Attachment(AllowMultiple:=False)>
-    Public Class TextSizeLimitAttachment
+    Friend Class TextSizeLimitAttachment
         Inherits NativeWindow
 
         Private _TargetControl As TextBox

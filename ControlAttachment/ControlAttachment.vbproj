@@ -64,6 +64,7 @@
     <Compile Include="Activity\DroppableAttachment.vb" />
     <Compile Include="AttachmentAttribute.vb" />
     <Compile Include="AttachmentExtension.vb" />
+    <Compile Include="AttachmentManager.vb" />
     <Compile Include="Cursors\CustomCursor.vb" />
     <Compile Include="Decoration\CheckBoxEnlargeAttachment.vb" />
     <Compile Include="Decoration\HoverActionAttachment.vb" />
