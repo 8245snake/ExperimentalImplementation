@@ -9,7 +9,7 @@ Namespace State
     Public Class HighlightingManager
 
         Private _HighlightingControl As Control
-        Private _HighlightingAction As IHighlightingActionStrategy
+        Private _HighlightingAction As HighlightingAttachment
 
         Public Property HighlightingControl As Control
             Get
@@ -31,7 +31,7 @@ Namespace State
             End Set
         End Property
 
-        Public Sub New(highlightingAction As IHighlightingActionStrategy)
+        Public Sub New(highlightingAction As HighlightingAttachment)
             _HighlightingAction = highlightingAction
         End Sub
 
