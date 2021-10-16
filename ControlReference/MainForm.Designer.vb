@@ -36,10 +36,14 @@ Partial Class MainForm
         Me.chkValidate1 = New System.Windows.Forms.CheckBox()
         Me.lblValidate = New System.Windows.Forms.Label()
         Me.txtValidation = New System.Windows.Forms.TextBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.btnEnlarge = New System.Windows.Forms.Button()
+        Me.chkDecoration = New System.Windows.Forms.CheckBox()
         Me.panelMain.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'panelMain
@@ -51,6 +55,7 @@ Partial Class MainForm
         Me.panelMain.Controls.Add(Me.GroupBox1)
         Me.panelMain.Controls.Add(Me.GroupBox2)
         Me.panelMain.Controls.Add(Me.GroupBox3)
+        Me.panelMain.Controls.Add(Me.GroupBox4)
         Me.panelMain.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
         Me.panelMain.Location = New System.Drawing.Point(12, 12)
         Me.panelMain.Name = "panelMain"
@@ -194,6 +199,37 @@ Partial Class MainForm
         Me.txtValidation.Size = New System.Drawing.Size(336, 28)
         Me.txtValidation.TabIndex = 1
         '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.btnEnlarge)
+        Me.GroupBox4.Controls.Add(Me.chkDecoration)
+        Me.GroupBox4.Location = New System.Drawing.Point(3, 370)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(348, 56)
+        Me.GroupBox4.TabIndex = 9
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "チェックボックスのデコレーション"
+        '
+        'btnEnlarge
+        '
+        Me.btnEnlarge.Location = New System.Drawing.Point(258, 24)
+        Me.btnEnlarge.Name = "btnEnlarge"
+        Me.btnEnlarge.Size = New System.Drawing.Size(75, 23)
+        Me.btnEnlarge.TabIndex = 6
+        Me.btnEnlarge.Text = "縮小"
+        Me.btnEnlarge.UseVisualStyleBackColor = True
+        '
+        'chkDecoration
+        '
+        Me.chkDecoration.AutoSize = True
+        Me.chkDecoration.Font = New System.Drawing.Font("Meiryo UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.chkDecoration.Location = New System.Drawing.Point(9, 24)
+        Me.chkDecoration.Name = "chkDecoration"
+        Me.chkDecoration.Size = New System.Drawing.Size(110, 23)
+        Me.chkDecoration.TabIndex = 5
+        Me.chkDecoration.Text = "チェックボックス"
+        Me.chkDecoration.UseVisualStyleBackColor = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -211,6 +247,8 @@ Partial Class MainForm
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -229,4 +267,7 @@ Partial Class MainForm
     Friend WithEvents chkAction1 As CheckBox
     Friend WithEvents chkValidate2 As CheckBox
     Friend WithEvents chkValidate1 As CheckBox
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents chkDecoration As CheckBox
+    Friend WithEvents btnEnlarge As Button
 End Class

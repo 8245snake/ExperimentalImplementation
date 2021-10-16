@@ -38,29 +38,14 @@ Public Module AttachmentExtension
 
     <Extension()>
     Friend Iterator Function GetValidationAttachments(target As Control) As IEnumerable(Of ValidationAttachment)
-        Dim list As List(Of NativeWindow) = Nothing
-        If Not _ConditionalWeakTable.TryGetValue(target, list) Then
-            Return
-        End If
-
-        For Each attachment As ValidationAttachment In list.OfType(Of ValidationAttachment)
+        For Each attachment As ValidationAttachment In AttachmentManager.GetAttachments(Of ValidationAttachment)(target, _ConditionalWeakTable)
             Yield attachment
         Next
     End Function
 
     <Extension()>
     Public Sub ClearValidationAttachments(target As Control)
-        Dim list As List(Of NativeWindow) = Nothing
-        If Not _ConditionalWeakTable.TryGetValue(target, list) Then
-            Return
-        End If
-
-        Dim deleteList = target.GetValidationAttachments().ToArray()
-        For Each attachment As ValidationAttachment In deleteList
-            attachment.ReleaseHandle()
-            list.Remove(attachment)
-        Next
-
+        AttachmentManager.ClearAttachments(Of ValidationAttachment)(target, _ConditionalWeakTable)
     End Sub
 
     <Extension()>
@@ -73,6 +58,11 @@ Public Module AttachmentExtension
     <Extension()>
     Public Sub Enlarge(target As CheckBox)
         AttachmentManager.AttachInternal(target, New CheckBoxEnlargeAttachment(target), _ConditionalWeakTable)
+    End Sub
+
+    <Extension()>
+    Public Sub Shrink(target As CheckBox)
+        AttachmentManager.ClearAttachments(Of CheckBoxEnlargeAttachment)(target, _ConditionalWeakTable)
     End Sub
 
 End Module

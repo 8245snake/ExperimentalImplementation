@@ -66,11 +66,20 @@ Public Class AttachmentManager
     ''' <param name="table">追加するConditionalWeakTable</param>
     ''' <returns>追加したConditionalWeakTableのValueにあたるListを返す</returns>
     Friend Shared Function AttachInternal(Of T As NativeWindow)(control As Control, attachment As T, table As ConditionalWeakTable(Of Control, List(Of NativeWindow))) As List(Of NativeWindow)
+
         Dim list As List(Of NativeWindow) = Nothing
+
         If Not table.TryGetValue(control, list) Then
             ' なければ新規エントリを追加して終わり
-            list = New List(Of NativeWindow)({attachment})
+            list = New List(Of NativeWindow)()
+            If attachment IsNot Nothing Then
+                list.Add(attachment)
+            End If
             table.Add(control, list)
+            Return list
+        End If
+
+        If attachment Is Nothing Then
             Return list
         End If
 
@@ -105,5 +114,29 @@ Public Class AttachmentManager
 
     End Function
 
+    Friend Shared Iterator Function GetAttachments(Of T As NativeWindow)(target As Control, table As ConditionalWeakTable(Of Control, List(Of NativeWindow))) As IEnumerable(Of T)
+        Dim list As List(Of NativeWindow) = Nothing
+        If Not table.TryGetValue(target, list) Then
+            Return
+        End If
+
+        For Each attachment As T In list.OfType(Of T)
+            Yield attachment
+        Next
+    End Function
+
+
+    Friend Shared Sub ClearAttachments(Of T As NativeWindow)(target As Control, table As ConditionalWeakTable(Of Control, List(Of NativeWindow)))
+        Dim list As List(Of NativeWindow) = Nothing
+        If Not table.TryGetValue(target, list) Then
+            Return
+        End If
+
+        Dim deleteList = GetAttachments(Of T)(target, table).ToArray()
+        For Each attachment As T In deleteList
+            attachment.ReleaseHandle()
+            list.Remove(attachment)
+        Next
+    End Sub
 
 End Class

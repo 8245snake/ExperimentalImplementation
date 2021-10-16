@@ -25,7 +25,8 @@ Public Class MainForm
         AddHandler chkAction1.CheckedChanged, AddressOf chkValidate_CheckedChanged
         AddHandler chkAction2.CheckedChanged, AddressOf chkValidate_CheckedChanged
         chkValidate_CheckedChanged(txtValidation, EventArgs.Empty)
-
+        ' チェックボックスデコレーション
+        btnEnlarge_Click(btnEnlarge, EventArgs.Empty)
     End Sub
 
 
@@ -87,6 +88,22 @@ Public Class MainForm
 
         txtValidation.AttachValidation(validationStrategy, errorActionStrategy)
         txtValidation.ForceValidate()
+    End Sub
+
+    Private Sub btnEnlarge_Click(sender As Object, e As EventArgs)
+        chkDecoration.Enlarge()
+        btnEnlarge.Text = "縮小"
+        chkDecoration.Text = "大きなチェックボックス"
+        RemoveHandler btnEnlarge.Click, AddressOf btnEnlarge_Click
+        AddHandler btnEnlarge.Click, AddressOf btnShrink_Click
+    End Sub
+
+    Private Sub btnShrink_Click(sender As Object, e As EventArgs)
+        chkDecoration.Shrink()
+        btnEnlarge.Text = "拡大"
+        chkDecoration.Text = "通常のチェックボックス"
+        RemoveHandler btnEnlarge.Click, AddressOf btnShrink_Click
+        AddHandler btnEnlarge.Click, AddressOf btnEnlarge_Click
     End Sub
 
 End Class
