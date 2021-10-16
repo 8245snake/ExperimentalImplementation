@@ -19,6 +19,9 @@ Namespace Strategies
         Private _TargetControl As Control
         Private _LastDrawTick As Long
 
+        Public Property Composit As IErrorActionStrategy Implements IErrorActionStrategy.Composit
+
+
         Private ReadOnly Property IsBlinkEnable As Boolean
             Get
                 Return tmrBlink IsNot Nothing
@@ -29,6 +32,11 @@ Namespace Strategies
 
         Sub New()
             BorderLineWidth = 3
+        End Sub
+
+        Public Sub New(composit As IErrorActionStrategy)
+            MyClass.New()
+            Me.Composit = composit
         End Sub
 
         Public Sub New(Optional isBlinkEnable As Boolean = False, Optional drawOutside As Boolean = True)
@@ -47,8 +55,6 @@ Namespace Strategies
         Private Sub BlinkTimerTick(sender As Object, e As EventArgs)
             _TargetControl?.Refresh()
         End Sub
-
-        Public Property IErrorActionStrategy_Composit As IErrorActionStrategy Implements IErrorActionStrategy.Composit
 
         Public Sub ErrorAction(control As Control) Implements IErrorActionStrategy.ErrorAction
             If IsBlinkEnable Then
@@ -123,8 +129,6 @@ Namespace Strategies
             control.Parent.Invalidate(rect)
             control.Parent.Update()
         End Sub
-
-        Public Property Composit As IHighlightingActionStrategy Implements IHighlightingActionStrategy.Composit
 
         Public Sub BeginHighlight(control As Control) Implements IHighlightingActionStrategy.BeginHighlight
             ErrorAction(control)

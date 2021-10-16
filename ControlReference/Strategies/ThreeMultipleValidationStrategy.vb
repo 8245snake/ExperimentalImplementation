@@ -1,14 +1,15 @@
 ﻿Option Explicit On
 Option Strict On
 
+Imports System.IO
 Imports ControlAttachment.Strategies
 
 Namespace Strategies
 
     ''' <summary>
-    ''' 数値チェック用のストラテジー
+    ''' ３の倍数かをチェックするストラテジ
     ''' </summary>
-    Public Class NumericCheckStrategy
+    Public Class ThreeMultipleValidationStrategy
         Implements IValidationStrategy
 
         Public Property ValidationTrigger As IValidationStrategy.ValidationTriggerType Implements IValidationStrategy.ValidationTrigger
@@ -19,8 +20,10 @@ Namespace Strategies
         End Sub
 
         Public Sub New(composit As IValidationStrategy)
+            MyClass.New()
             Me.Composit = composit
         End Sub
+
 
         Public Function Validate(control As Control) As Boolean Implements IValidationStrategy.Validate
 
@@ -28,9 +31,17 @@ Namespace Strategies
                 Return True
             End If
 
-            ' 整数かチェック
-            Return Integer.TryParse(control.Text, 1)
-        End Function
+            Dim val As Integer
+            If Not Integer.TryParse(control.Text, val) Then
+                Return False
+            End If
 
+            If val Mod 3 = 0 Then
+                Return True
+            End If
+
+            Return False
+
+        End Function
     End Class
 End Namespace

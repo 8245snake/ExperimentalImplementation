@@ -30,7 +30,8 @@ Partial Class MainForm
         Me.combSizeLimit = New System.Windows.Forms.ComboBox()
         Me.txtSizeLimited = New System.Windows.Forms.TextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.lblValidate = New System.Windows.Forms.Label()
+        Me.txtValidation = New System.Windows.Forms.TextBox()
         Me.panelMain.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -80,7 +81,7 @@ Partial Class MainForm
         Me.GroupBox2.Size = New System.Drawing.Size(348, 118)
         Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "バイト数制限テキスト"
+        Me.GroupBox2.Text = "バイト数制限"
         '
         'lblSizeError
         '
@@ -112,7 +113,8 @@ Partial Class MainForm
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.TextBox1)
+        Me.GroupBox3.Controls.Add(Me.lblValidate)
+        Me.GroupBox3.Controls.Add(Me.txtValidation)
         Me.GroupBox3.Location = New System.Drawing.Point(3, 233)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(348, 168)
@@ -120,13 +122,25 @@ Partial Class MainForm
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "バリデーション"
         '
-        'TextBox1
+        'lblValidate
         '
-        Me.TextBox1.Location = New System.Drawing.Point(6, 22)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(336, 57)
-        Me.TextBox1.TabIndex = 1
+        Me.lblValidate.AutoSize = True
+        Me.lblValidate.ForeColor = System.Drawing.Color.Red
+        Me.lblValidate.Location = New System.Drawing.Point(6, 53)
+        Me.lblValidate.Name = "lblValidate"
+        Me.lblValidate.Size = New System.Drawing.Size(45, 15)
+        Me.lblValidate.TabIndex = 4
+        Me.lblValidate.Text = "Label1"
+        Me.lblValidate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblValidate.Visible = False
+        '
+        'txtValidation
+        '
+        Me.txtValidation.Location = New System.Drawing.Point(6, 22)
+        Me.txtValidation.Multiline = True
+        Me.txtValidation.Name = "txtValidation"
+        Me.txtValidation.Size = New System.Drawing.Size(336, 28)
+        Me.txtValidation.TabIndex = 1
         '
         'MainForm
         '
@@ -157,5 +171,6 @@ Partial Class MainForm
     Friend WithEvents combSizeLimit As ComboBox
     Friend WithEvents lblSizeError As Label
     Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtValidation As TextBox
+    Friend WithEvents lblValidate As Label
 End Class

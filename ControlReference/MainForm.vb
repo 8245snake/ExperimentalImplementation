@@ -19,6 +19,9 @@ Public Class MainForm
         txtWaterMark.AttachWaterMark($"ウォーターマーク（英語: watermark）は、本来、紙の透かし（すかし）のことを指すが、著作権表示などのために静止画像や動画に写し込まれる小さな図案や文字を指すことが比較的多い。")
         ' バイト数制限
         SetupLimitedTextBox()
+        ' バリデーション(数値チェックと３の倍数チェックを複合し、赤枠とメッセージボックスのアクションを複合しする)
+        txtValidation.AttachValidation(New IntegerCheckStrategy(New ThreeMultipleValidationStrategy()),
+                                       New BorderDrawActionStrategy(New LabelWritingErrorActionStrategy(lblValidate, "3の倍数が必要です")))
     End Sub
 
 

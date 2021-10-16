@@ -4,7 +4,6 @@ Namespace Strategies
 
     Public Interface IValidationStrategy
         Enum ValidationTriggerType
-            Unknown
             Validating
             Validated
             TextChanged
