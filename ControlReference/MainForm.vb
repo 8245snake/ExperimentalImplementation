@@ -2,51 +2,64 @@
 Option Strict On
 
 Imports ControlAttachment
+Imports ControlAttachment.DataHolder
 Imports ControlAttachment.State
 Imports ControlAttachment.Strategies
 Imports ControlAttachment.Text
 
 Public Class MainForm
 
-    Private _sessionManager As SessionManager = New SessionManager()
-
-    Private _highlightingManager As HighlightingManager
+    Private _LimitSizes As ComboItemModelHolder(Of LimitSetterCommand)
+    Private _highlightingManager As HighlightingManager = New HighlightingManager(New BorderDrawActionStrategy())
 
     Public Sub New()
         InitializeComponent()
-        TextBox1.AttachValidation(New NumericCheckStrategy(), New BorderDrawActionStrategy())
-        TextBox1.AttachWaterMark("数値を書いてください")
-        TextBox1.AttachMaxByteSize(10, New ErrorMessageActionStrategy())
-
-        ComboBox1.AttachValidation(New NumericCheckStrategy(), New BorderDrawActionStrategy())
-
-        '_SessionManeger.Register(Button1)
-
-
-        _highlightingManager = New HighlightingManager(New BorderDrawActionStrategy())
-        _highlightingManager.HighlightingControl = TextBox1
-
+        ' ウォーターマーク
+        txtWaterMark.AttachWaterMark($"ウォーターマーク（英語: watermark）は、本来、紙の透かし（すかし）のことを指すが、著作権表示などのために静止画像や動画に写し込まれる小さな図案や文字を指すことが比較的多い。")
+        ' バイト数制限
+        SetupLimitedTextBox()
     End Sub
+
+
 
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        CheckBox1.Enlarge()
-        CheckBox1.SetHoverColor(Color.Yellow)
+
+
+
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Using frm = New SubForm
-            frm.ShowDialog()
-        End Using
-    End Sub
+    Private Sub SetupLimitedTextBox()
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        _highlightingManager.HighlightingControl = ComboBox1
+        _LimitSizes = New ComboItemModelHolder(Of LimitSetterCommand)(combSizeLimit)
+        combSizeLimit.Items.Clear()
+        For Each size As Integer In New Integer() {5, 10, 30}
+            Dim index = combSizeLimit.Items.Add($"{size} byte")
+            _LimitSizes.Data(index) = New LimitSetterCommand(size)
+        Next
+        AddHandler combSizeLimit.SelectedIndexChanged, Sub(sender, args)
+                                                           _LimitSizes.SelectedData.SetLimit(txtSizeLimited, lblSizeError)
+                                                       End Sub
 
+        combSizeLimit.SelectedIndex = 0
     End Sub
 
 End Class
 
+
+Class LimitSetterCommand
+
+    Private Size As Integer
+
+    Public Sub New(size As Integer)
+        Me.Size = size
+    End Sub
+
+    Public Sub SetLimit(textbox As TextBox, label As Label)
+        textbox.AttachMaxByteSize(Me.Size, New LabelWritingErrorActionStrategy(label, $"バイト数の最大値({Me.Size})を超えることはできません"))
+    End Sub
+
+End Class
 
 
 

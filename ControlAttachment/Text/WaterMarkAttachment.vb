@@ -14,6 +14,8 @@ Namespace Text
         Inherits NativeWindow
 
         Private _TextBox As System.Windows.Forms.TextBox
+        Private _Brush As Brush = Brushes.LightGray
+        Private _isWatermarkWritten As Boolean = False
 
         ''' <summary>
         ''' ウォーターマーク
@@ -22,17 +24,36 @@ Namespace Text
 
         Private Const WM_PAINT = &HF
 
-        Public Sub New(txt As TextBox, watermark As String)
-            _TextBox = txt
-            WatermarkText = watermark
-            AddHandler _TextBox.HandleCreated, AddressOf OnHandleCreated
+        Public Sub New(textBox As TextBox, watermarkText As String)
+            _TextBox = textBox
+            Me.WatermarkText = watermarkText
+
+            If _TextBox.IsHandleCreated Then
+                AssignHandle(_TextBox.Handle)
+            Else
+                AddHandler _TextBox.HandleCreated, AddressOf OnHandleCreated
+            End If
+
+            AddHandler _TextBox.KeyDown, AddressOf OnKeyDown
             AddHandler _TextBox.HandleDestroyed, AddressOf OnHandleDestroyed
+        End Sub
+
+        Private Sub OnKeyDown(sender As Object, e As KeyEventArgs)
+            If _isWatermarkWritten Then
+                ' 複数行のとき編集行以外のウォーターマークが消えないため再描画を促す
+                _TextBox.Invalidate()
+            End If
+        End Sub
+
+        Public Sub New(textBox As TextBox, watermarkText As String, fontColor As Color)
+            MyClass.New(textBox, watermarkText)
+            _Brush = New SolidBrush(fontColor)
         End Sub
 
 
         Private Sub OnHandleCreated(sender As Object, e As EventArgs)
-            Dim txt = TryCast(sender, System.Windows.Forms.TextBox)
-            AssignHandle(txt.Handle)
+            AssignHandle(_TextBox.Handle)
+            RemoveHandler _TextBox.HandleCreated, AddressOf OnHandleCreated
         End Sub
 
         Private Sub OnHandleDestroyed(sender As Object, e As EventArgs)
@@ -40,6 +61,7 @@ Namespace Text
         End Sub
 
         Public Overrides Sub ReleaseHandle()
+            RemoveHandler _TextBox.KeyDown, AddressOf OnKeyDown
             RemoveHandler _TextBox.HandleCreated, AddressOf OnHandleCreated
             RemoveHandler _TextBox.HandleDestroyed, AddressOf OnHandleDestroyed
             _TextBox = Nothing
@@ -61,6 +83,7 @@ Namespace Text
         ''' 可能ならばウォーターマークを表示する
         ''' </summary>
         Private Sub TryWriteWatermark()
+            _isWatermarkWritten = False
 
             If _TextBox Is Nothing Then Return
 
@@ -68,8 +91,10 @@ Namespace Text
                 Using g As Graphics = Graphics.FromHwnd(Me.Handle)
                     Dim rect As Rectangle = _TextBox.ClientRectangle
                     rect.Offset(1, 1)
-                    TextRenderer.DrawText(g, WatermarkText, _TextBox.Font, rect, Color.LightSlateGray, TextFormatFlags.Left)
+                    g.DrawString(WatermarkText, _TextBox.Font, _Brush, rect)
                 End Using
+
+                _isWatermarkWritten = True
             End If
         End Sub
 

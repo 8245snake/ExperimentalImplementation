@@ -28,11 +28,26 @@ Namespace Validation
             _TargetControl = targetControl
             _ValidationStrategy = validationStrategy
             _ErrorActionStrategy = errorActionStrategy
-            AddHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
+
+            If _TargetControl.IsHandleCreated Then
+                AssignHandle(_TargetControl.Handle)
+            Else
+                AddHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
+            End If
+
             AddHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
             AddHandler _TargetControl.Validating, AddressOf OnValidating
             AddHandler _TargetControl.Validated, AddressOf OnValidated
             AddHandler _TargetControl.TextChanged, AddressOf OnTextChanged
+        End Sub
+
+        Private Sub OnHandleCreated(sender As Object, e As EventArgs)
+            AssignHandle(_TargetControl.Handle)
+            RemoveHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
+        End Sub
+
+        Private Sub OnHandleDestroyed(sender As Object, e As EventArgs)
+            ReleaseHandle()
         End Sub
 
         Public Overrides Sub ReleaseHandle()
@@ -53,15 +68,6 @@ Namespace Validation
         Public Sub ForceValidate()
             If _ValidationStrategy Is Nothing Then Return
             ValidationProc(_ValidationStrategy.ValidationTrigger)
-        End Sub
-
-        Private Sub OnHandleCreated(sender As Object, e As EventArgs)
-            Dim ctrl = TryCast(sender, Control)
-            AssignHandle(ctrl.Handle)
-        End Sub
-
-        Private Sub OnHandleDestroyed(sender As Object, e As EventArgs)
-            ReleaseHandle()
         End Sub
 
         Protected Overrides Sub WndProc(ByRef m As Message)

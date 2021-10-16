@@ -22,82 +22,140 @@ Partial Class MainForm
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.panelMain = New System.Windows.Forms.FlowLayoutPanel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtWaterMark = New System.Windows.Forms.TextBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblSizeError = New System.Windows.Forms.Label()
+        Me.combSizeLimit = New System.Windows.Forms.ComboBox()
+        Me.txtSizeLimited = New System.Windows.Forms.TextBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.panelMain.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'panelMain
+        '
+        Me.panelMain.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.panelMain.AutoScroll = True
+        Me.panelMain.Controls.Add(Me.GroupBox1)
+        Me.panelMain.Controls.Add(Me.GroupBox2)
+        Me.panelMain.Controls.Add(Me.GroupBox3)
+        Me.panelMain.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
+        Me.panelMain.Location = New System.Drawing.Point(12, 12)
+        Me.panelMain.Name = "panelMain"
+        Me.panelMain.Size = New System.Drawing.Size(1078, 513)
+        Me.panelMain.TabIndex = 0
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.txtWaterMark)
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(348, 100)
+        Me.GroupBox1.TabIndex = 1
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "ウォーターマーク表示"
+        '
+        'txtWaterMark
+        '
+        Me.txtWaterMark.Location = New System.Drawing.Point(6, 22)
+        Me.txtWaterMark.Multiline = True
+        Me.txtWaterMark.Name = "txtWaterMark"
+        Me.txtWaterMark.Size = New System.Drawing.Size(336, 57)
+        Me.txtWaterMark.TabIndex = 1
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.lblSizeError)
+        Me.GroupBox2.Controls.Add(Me.combSizeLimit)
+        Me.GroupBox2.Controls.Add(Me.txtSizeLimited)
+        Me.GroupBox2.Location = New System.Drawing.Point(3, 109)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(348, 118)
+        Me.GroupBox2.TabIndex = 2
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "バイト数制限テキスト"
+        '
+        'lblSizeError
+        '
+        Me.lblSizeError.AutoSize = True
+        Me.lblSizeError.ForeColor = System.Drawing.Color.Red
+        Me.lblSizeError.Location = New System.Drawing.Point(99, 86)
+        Me.lblSizeError.Name = "lblSizeError"
+        Me.lblSizeError.Size = New System.Drawing.Size(45, 15)
+        Me.lblSizeError.TabIndex = 3
+        Me.lblSizeError.Text = "Label1"
+        Me.lblSizeError.Visible = False
+        '
+        'combSizeLimit
+        '
+        Me.combSizeLimit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.combSizeLimit.FormattingEnabled = True
+        Me.combSizeLimit.Location = New System.Drawing.Point(7, 86)
+        Me.combSizeLimit.Name = "combSizeLimit"
+        Me.combSizeLimit.Size = New System.Drawing.Size(86, 23)
+        Me.combSizeLimit.TabIndex = 2
+        '
+        'txtSizeLimited
+        '
+        Me.txtSizeLimited.Location = New System.Drawing.Point(6, 22)
+        Me.txtSizeLimited.Multiline = True
+        Me.txtSizeLimited.Name = "txtSizeLimited"
+        Me.txtSizeLimited.Size = New System.Drawing.Size(336, 57)
+        Me.txtSizeLimited.TabIndex = 1
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.TextBox1)
+        Me.GroupBox3.Location = New System.Drawing.Point(3, 233)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(348, 168)
+        Me.GroupBox3.TabIndex = 3
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "バリデーション"
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(12, 13)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TextBox1.Location = New System.Drawing.Point(6, 22)
+        Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(292, 23)
-        Me.TextBox1.TabIndex = 0
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(138, 113)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "選択"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(219, 113)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(85, 23)
-        Me.Button2.TabIndex = 2
-        Me.Button2.Text = "ハイライトする"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"あおえうふぉ", "11", "aaaa"})
-        Me.ComboBox1.Location = New System.Drawing.Point(12, 43)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(292, 23)
-        Me.ComboBox1.TabIndex = 4
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.CheckBox1.Font = New System.Drawing.Font("Meiryo UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(12, 72)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(149, 23)
-        Me.CheckBox1.TabIndex = 5
-        Me.CheckBox1.Text = "大きなチェックボックス"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.TextBox1.Size = New System.Drawing.Size(336, 57)
+        Me.TextBox1.TabIndex = 1
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(391, 177)
-        Me.Controls.Add(Me.CheckBox1)
-        Me.Controls.Add(Me.ComboBox1)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.TextBox1)
+        Me.ClientSize = New System.Drawing.Size(1102, 537)
+        Me.Controls.Add(Me.panelMain)
         Me.Font = New System.Drawing.Font("Meiryo UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "MainForm"
         Me.Text = "Form1"
+        Me.panelMain.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
+    Friend WithEvents panelMain As FlowLayoutPanel
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents txtWaterMark As TextBox
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents txtSizeLimited As TextBox
+    Friend WithEvents combSizeLimit As ComboBox
+    Friend WithEvents lblSizeError As Label
+    Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents CheckBox1 As CheckBox
 End Class

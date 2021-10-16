@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorMessageActionStrategy.vb" />
+    <Compile Include="LabelWritingErrorActionStrategy.vb" />
     <Compile Include="MainForm.vb">
       <SubType>Form</SubType>
     </Compile>

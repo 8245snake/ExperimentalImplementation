@@ -20,8 +20,14 @@ Namespace Text
         Private Const WM_CHAR = &H102
         Private _Encoding As Encoding = Encoding.GetEncoding("Shift_JIS")
 
+        ''' <summary>
+        ''' バイト数の最大値を取得または設定する
+        ''' </summary>
         Public Property MaxByteLength As Integer
 
+        ''' <summary>
+        ''' <see cref="MaxByteLength"/>を超えて入力しようとしたときに実行されるアクション
+        ''' </summary>
         Public Property ErrorActionStrategy As IErrorActionStrategy
 
 
@@ -48,8 +54,8 @@ Namespace Text
         End Sub
 
         Private Sub OnHandleCreated(sender As Object, e As EventArgs)
-            Dim ctrl = TryCast(sender, Control)
-            AssignHandle(ctrl.Handle)
+            AssignHandle(_TargetControl.Handle)
+            RemoveHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
         End Sub
 
         Private Sub OnHandleDestroyed(sender As Object, e As EventArgs)
@@ -64,7 +70,7 @@ Namespace Text
         ''' <returns>True:キャンセルすべし、False:通してOK</returns>
         Private Function ShouldCancel(chr As Char) As Boolean
 
-            If Char.IsControl(chr) Then
+            If Char.IsControl(chr) AndAlso chr <> vbCr Then
                 Return False
             End If
 
@@ -97,7 +103,6 @@ Namespace Text
             Dim remainByteCount As Integer = Me.MaxByteLength - (textByteCount - selectedTextByteCount)
 
             If remainByteCount <= 0 Then
-                ' キャンセルされたときにアラートを出す
                 Return
             End If
 
@@ -122,6 +127,8 @@ Namespace Text
                         ' キャンセルされたときにアラートを出す
                         ErrorActionStrategy?.ErrorAction(_TargetControl)
                         Return
+                    Else
+                        ErrorActionStrategy?.SuccessAction(_TargetControl)
                     End If
             End Select
 
