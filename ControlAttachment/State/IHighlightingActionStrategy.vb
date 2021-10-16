@@ -1,6 +1,6 @@
 ﻿Imports System.Windows.Forms
 
-Namespace Strategies
+Namespace State
     Public Interface IHighlightingActionStrategy
         Sub BeginHighlight(control As Control)
         Sub EndHighlight(control As Control)

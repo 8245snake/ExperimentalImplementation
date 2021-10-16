@@ -1,10 +1,9 @@
 ﻿Option Explicit On
 Option Strict On
 
-Imports System.Drawing
 Imports System.Runtime.InteropServices
 Imports System.Windows.Forms
-Imports ControlAttachment.Strategies
+Imports ControlAttachment.State
 
 Namespace Activity
 

@@ -1,7 +1,6 @@
 ﻿Imports System.Windows.Forms
-Imports ControlAttachment.Activity
 
-Namespace Strategies
+Namespace Activity
     Public Interface IDragActionStrategy
         Property TopParent As Control
         Property DropTargets As List(Of DroppableAttachment)

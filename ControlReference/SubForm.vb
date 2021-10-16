@@ -1,6 +1,5 @@
 ﻿Imports ControlAttachment
 Imports ControlAttachment.Activity
-Imports ControlAttachment.Decoration
 Imports ControlAttachment.State
 Imports ControlAttachment.Strategies
 

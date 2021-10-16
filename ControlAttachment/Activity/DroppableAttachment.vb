@@ -3,7 +3,7 @@ Option Strict On
 
 Imports System.Drawing
 Imports System.Windows.Forms
-Imports ControlAttachment.Strategies
+Imports ControlAttachment.State
 
 Namespace Activity
     Public Class DroppableAttachment

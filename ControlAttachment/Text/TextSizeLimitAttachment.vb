@@ -3,7 +3,7 @@ Option Strict On
 
 Imports System.Text
 Imports System.Windows.Forms
-Imports ControlAttachment.Strategies
+Imports ControlAttachment.Validation
 
 Namespace Text
 

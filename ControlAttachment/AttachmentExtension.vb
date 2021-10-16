@@ -5,7 +5,6 @@ Imports System.Drawing
 Imports System.Runtime.CompilerServices
 Imports System.Windows.Forms
 Imports ControlAttachment.Decoration
-Imports ControlAttachment.Strategies
 Imports ControlAttachment.Text
 Imports ControlAttachment.Validation
 

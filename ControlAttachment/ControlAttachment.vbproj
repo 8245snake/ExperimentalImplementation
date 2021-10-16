@@ -90,16 +90,16 @@
     <Compile Include="State\EventSessionListener.vb" />
     <Compile Include="State\HighlightingManager.vb" />
     <Compile Include="State\IControlEventSession.vb" />
-    <Compile Include="Strategies\IDragActionStrategy.vb" />
-    <Compile Include="Strategies\IHighlightingActionStrategy.vb" />
+    <Compile Include="Activity\IDragActionStrategy.vb" />
+    <Compile Include="State\IHighlightingActionStrategy.vb" />
     <Compile Include="State\SessionManager.vb" />
     <Compile Include="Strategies\StandardDragActionStrategy.vb" />
     <Compile Include="Text\TextSizeLimitAttachment.vb" />
     <Compile Include="Text\WaterMarkAttachment.vb" />
     <Compile Include="Strategies\BorderDrawActionStrategy.vb" />
-    <Compile Include="Strategies\IErrorActionStrategy.vb" />
+    <Compile Include="Validation\IErrorActionStrategy.vb" />
     <Compile Include="Validation\ValidationAttachment.vb" />
-    <Compile Include="Strategies\IValidationStrategy.vb" />
+    <Compile Include="Validation\IValidationStrategy.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

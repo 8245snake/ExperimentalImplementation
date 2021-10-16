@@ -1,7 +1,7 @@
 ﻿Option Explicit On
 Option Strict On
 
-Imports ControlAttachment.Strategies
+Imports ControlAttachment.Validation
 
 Namespace Strategies
 

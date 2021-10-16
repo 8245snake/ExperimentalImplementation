@@ -1,5 +1,4 @@
 ﻿Imports System.Reflection
-Imports System.Windows.Forms
 
 Namespace Cursors
     Public Class CustomCursor

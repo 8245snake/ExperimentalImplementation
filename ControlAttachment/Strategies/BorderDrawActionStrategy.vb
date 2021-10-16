@@ -3,6 +3,8 @@ Option Strict On
 
 Imports System.Drawing
 Imports System.Windows.Forms
+Imports ControlAttachment.State
+Imports ControlAttachment.Validation
 
 Namespace Strategies
 

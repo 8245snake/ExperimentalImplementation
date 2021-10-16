@@ -1,7 +1,6 @@
 ﻿Option Explicit On
 Option Strict On
 
-Imports SpecialControls
 Imports SpecialControls.CollectionViews
 Imports SpecialControls.GenericWrappers
 Imports SpecialControls.Inputting

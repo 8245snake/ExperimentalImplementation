@@ -1,6 +1,6 @@
 ﻿Imports System.Windows.Forms
 
-Namespace Strategies
+Namespace Validation
 
     Public Interface IErrorActionStrategy
         Property Composit As IErrorActionStrategy

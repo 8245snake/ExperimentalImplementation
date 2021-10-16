@@ -1,4 +1,4 @@
-﻿Imports SpecialControls
+﻿
 Imports SpecialControls.Messaging
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>

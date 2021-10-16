@@ -5,7 +5,6 @@ Imports ControlAttachment
 Imports ControlAttachment.DataHolder
 Imports ControlAttachment.State
 Imports ControlAttachment.Strategies
-Imports ControlAttachment.Text
 Imports ControlReference.Strategies
 
 Public Class MainForm
