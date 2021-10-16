@@ -42,12 +42,15 @@ Partial Class MainForm
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.btnHighlight = New System.Windows.Forms.Button()
         Me.chkBlink = New System.Windows.Forms.CheckBox()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.txtReizaeable = New System.Windows.Forms.TextBox()
         Me.panelMain.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
         'panelMain
@@ -61,6 +64,7 @@ Partial Class MainForm
         Me.panelMain.Controls.Add(Me.GroupBox3)
         Me.panelMain.Controls.Add(Me.GroupBox4)
         Me.panelMain.Controls.Add(Me.GroupBox5)
+        Me.panelMain.Controls.Add(Me.GroupBox6)
         Me.panelMain.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
         Me.panelMain.Location = New System.Drawing.Point(12, 12)
         Me.panelMain.Name = "panelMain"
@@ -227,6 +231,7 @@ Partial Class MainForm
         'chkDecoration
         '
         Me.chkDecoration.AutoSize = True
+        Me.chkDecoration.Cursor = System.Windows.Forms.Cursors.Hand
         Me.chkDecoration.Font = New System.Drawing.Font("Meiryo UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.chkDecoration.Location = New System.Drawing.Point(9, 24)
         Me.chkDecoration.Name = "chkDecoration"
@@ -265,6 +270,24 @@ Partial Class MainForm
         Me.chkBlink.Text = "点滅させる"
         Me.chkBlink.UseVisualStyleBackColor = True
         '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.txtReizaeable)
+        Me.GroupBox6.Location = New System.Drawing.Point(357, 109)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(348, 100)
+        Me.GroupBox6.TabIndex = 11
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "サイズ変更コントロール"
+        '
+        'txtReizaeable
+        '
+        Me.txtReizaeable.Location = New System.Drawing.Point(6, 22)
+        Me.txtReizaeable.Multiline = True
+        Me.txtReizaeable.Name = "txtReizaeable"
+        Me.txtReizaeable.Size = New System.Drawing.Size(336, 57)
+        Me.txtReizaeable.TabIndex = 1
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -286,6 +309,8 @@ Partial Class MainForm
         Me.GroupBox4.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -310,4 +335,6 @@ Partial Class MainForm
     Friend WithEvents GroupBox5 As GroupBox
     Friend WithEvents btnHighlight As Button
     Friend WithEvents chkBlink As CheckBox
+    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents txtReizaeable As TextBox
 End Class

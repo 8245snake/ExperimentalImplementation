@@ -4,6 +4,7 @@ Option Strict On
 Imports System.Drawing
 Imports System.Runtime.CompilerServices
 Imports System.Windows.Forms
+Imports ControlAttachment.Activity
 Imports ControlAttachment.Decoration
 Imports ControlAttachment.Text
 Imports ControlAttachment.Validation
@@ -65,4 +66,9 @@ Public Module AttachmentExtension
         AttachmentManager.ClearAttachments(Of CheckBoxEnlargeAttachment)(target, _ConditionalWeakTable)
     End Sub
 
+
+    <Extension()>
+    Public Sub AttachResizeable(target As Control)
+        AttachmentManager.AttachInternal(target, New ResizeableAttachment(target), _ConditionalWeakTable)
+    End Sub
 End Module

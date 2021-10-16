@@ -18,12 +18,13 @@ Friend Class SampleAttachment
     Public Sub New(targetControl As Control)
         _TargetControl = targetControl
 
-        AddHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
-        AddHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
-
         If _TargetControl.IsHandleCreated Then
             AssignHandle(_TargetControl.Handle)
+        Else
+            AddHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
         End If
+
+        AddHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
 
     End Sub
 
@@ -35,8 +36,8 @@ Friend Class SampleAttachment
     End Sub
 
     Private Sub OnHandleCreated(sender As Object, e As EventArgs)
-        Dim ctrl = TryCast(sender, Control)
-        AssignHandle(ctrl.Handle)
+        AssignHandle(_TargetControl.Handle)
+        RemoveHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
     End Sub
 
     Private Sub OnHandleDestroyed(sender As Object, e As EventArgs)

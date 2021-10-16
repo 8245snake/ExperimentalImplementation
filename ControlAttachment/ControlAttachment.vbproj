@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Activity\DraggableAttachment.vb" />
     <Compile Include="Activity\DroppableAttachment.vb" />
+    <Compile Include="Activity\ResizeableAttachment.vb" />
     <Compile Include="AttachmentAttribute.vb" />
     <Compile Include="AttachmentExtension.vb" />
     <Compile Include="AttachmentManager.vb" />

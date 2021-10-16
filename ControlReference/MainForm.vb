@@ -2,6 +2,7 @@
 Option Strict On
 
 Imports ControlAttachment
+Imports ControlAttachment.Activity
 Imports ControlAttachment.DataHolder
 Imports ControlAttachment.State
 Imports ControlAttachment.Strategies
@@ -27,6 +28,10 @@ Public Class MainForm
         chkValidate_CheckedChanged(txtValidation, EventArgs.Empty)
         ' チェックボックスデコレーション
         btnEnlarge_Click(btnEnlarge, EventArgs.Empty)
+        ' テキストボックスをサイズ変更可能にする
+        txtReizaeable.AttachResizeable()
+
+
     End Sub
 
 
