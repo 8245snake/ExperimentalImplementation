@@ -73,6 +73,8 @@ Namespace State
             If _HighlightingControl IsNot Nothing Then
                 RemoveHandler _HighlightingControl.HandleCreated, AddressOf OnHandleCreated
                 RemoveHandler _HighlightingControl.HandleDestroyed, AddressOf OnHandleDestroyed
+                RemoveHandler _HighlightingControl.LocationChanged, AddressOf OnLocationOrSizeChanged
+                RemoveHandler _HighlightingControl.SizeChanged, AddressOf OnLocationOrSizeChanged
                 _HighlightingControl = Nothing
             End If
 
@@ -95,7 +97,7 @@ Namespace State
         ''' <param name="control">対象コントロール</param>
         Private Sub BeginHighlight(control As Control)
             _HighlightingControl = control
-            AddHandler _HighlightingControl.HandleDestroyed, AddressOf OnHandleDestroyed
+            If _HighlightingControl Is Nothing Then Return
 
             If _HighlightingControl.IsHandleCreated Then
                 ' ハンドル紐付け＆再描画によりハイライトする
@@ -105,6 +107,17 @@ Namespace State
                 AddHandler _HighlightingControl.HandleCreated, AddressOf OnHandleCreated
             End If
 
+            AddHandler _HighlightingControl.HandleDestroyed, AddressOf OnHandleDestroyed
+            AddHandler _HighlightingControl.LocationChanged, AddressOf OnLocationOrSizeChanged
+            AddHandler _HighlightingControl.SizeChanged, AddressOf OnLocationOrSizeChanged
+
+        End Sub
+
+        Private Sub OnLocationOrSizeChanged(sender As Object, e As EventArgs)
+            ' 位置かサイズが変化したら再描画する
+            Dim ctl As Control = TryCast(sender, Control)
+            ctl?.Parent?.Refresh()
+            ctl?.Refresh()
         End Sub
 
         ''' <summary>

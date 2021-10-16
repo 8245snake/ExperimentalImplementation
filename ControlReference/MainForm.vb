@@ -106,6 +106,23 @@ Public Class MainForm
         AddHandler btnEnlarge.Click, AddressOf btnEnlarge_Click
     End Sub
 
+    Private Sub btnHighlight_Click(sender As Object, e As EventArgs) Handles btnHighlight.Click
+        ' 可視コントロールの中からランダムに１つ選んでハイライトする
+        Dim visibleControlsArray = ControlHelper.GetChildControls(Me).Where(Function(ctl) ctl.Visible).ToArray()
+        Dim rand = New Random()
+        Dim index = rand.Next(0, visibleControlsArray.Length - 1)
+        _highlightingManager.HighlightingControl = visibleControlsArray(index)
+    End Sub
+
+    Private Sub chkBlink_CheckedChanged(sender As Object, e As EventArgs) Handles chkBlink.CheckedChanged
+        Dim ctrl As Control = _highlightingManager.HighlightingControl
+        If chkBlink.Checked Then
+            _highlightingManager.HighlightingActionStrategy = New BorderDrawActionStrategy(isBlinkEnable:=True)
+        Else
+            _highlightingManager.HighlightingActionStrategy = New BorderDrawActionStrategy()
+        End If
+        _highlightingManager.HighlightingControl = ctrl
+    End Sub
 End Class
 
 
@@ -124,4 +141,16 @@ Class LimitSetterCommand
 End Class
 
 
+Class ControlHelper
+    Public Shared Iterator Function GetChildControls(control As Control) As IEnumerable(Of Control)
+        If control Is Nothing Then Return
 
+        For Each child As Control In control.Controls
+            Yield child
+            For Each childControl As Control In GetChildControls(child)
+                Yield childControl
+            Next
+        Next
+
+    End Function
+End Class

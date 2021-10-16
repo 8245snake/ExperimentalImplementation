@@ -39,11 +39,15 @@ Partial Class MainForm
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.btnEnlarge = New System.Windows.Forms.Button()
         Me.chkDecoration = New System.Windows.Forms.CheckBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.btnHighlight = New System.Windows.Forms.Button()
+        Me.chkBlink = New System.Windows.Forms.CheckBox()
         Me.panelMain.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
         Me.SuspendLayout()
         '
         'panelMain
@@ -56,6 +60,7 @@ Partial Class MainForm
         Me.panelMain.Controls.Add(Me.GroupBox2)
         Me.panelMain.Controls.Add(Me.GroupBox3)
         Me.panelMain.Controls.Add(Me.GroupBox4)
+        Me.panelMain.Controls.Add(Me.GroupBox5)
         Me.panelMain.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
         Me.panelMain.Location = New System.Drawing.Point(12, 12)
         Me.panelMain.Name = "panelMain"
@@ -230,6 +235,36 @@ Partial Class MainForm
         Me.chkDecoration.Text = "チェックボックス"
         Me.chkDecoration.UseVisualStyleBackColor = True
         '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.btnHighlight)
+        Me.GroupBox5.Controls.Add(Me.chkBlink)
+        Me.GroupBox5.Location = New System.Drawing.Point(357, 3)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(348, 100)
+        Me.GroupBox5.TabIndex = 10
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "ハイライト"
+        '
+        'btnHighlight
+        '
+        Me.btnHighlight.Location = New System.Drawing.Point(7, 24)
+        Me.btnHighlight.Name = "btnHighlight"
+        Me.btnHighlight.Size = New System.Drawing.Size(326, 45)
+        Me.btnHighlight.TabIndex = 6
+        Me.btnHighlight.Text = "ランダムにハイライトする"
+        Me.btnHighlight.UseVisualStyleBackColor = True
+        '
+        'chkBlink
+        '
+        Me.chkBlink.AutoSize = True
+        Me.chkBlink.Location = New System.Drawing.Point(7, 75)
+        Me.chkBlink.Name = "chkBlink"
+        Me.chkBlink.Size = New System.Drawing.Size(77, 19)
+        Me.chkBlink.TabIndex = 11
+        Me.chkBlink.Text = "点滅させる"
+        Me.chkBlink.UseVisualStyleBackColor = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -249,6 +284,8 @@ Partial Class MainForm
         Me.GroupBox3.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -270,4 +307,7 @@ Partial Class MainForm
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents chkDecoration As CheckBox
     Friend WithEvents btnEnlarge As Button
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents btnHighlight As Button
+    Friend WithEvents chkBlink As CheckBox
 End Class
