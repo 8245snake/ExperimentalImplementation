@@ -66,6 +66,9 @@
     <Compile Include="AttachmentExtension.vb" />
     <Compile Include="AttachmentManager.vb" />
     <Compile Include="Cursors\CustomCursor.vb" />
+    <Compile Include="DataHolder\ComboItemModelHolder.vb" />
+    <Compile Include="DataHolder\GridDataModelHolder.vb" />
+    <Compile Include="DataHolder\ListItemModelHolder.vb" />
     <Compile Include="Decoration\CheckBoxEnlargeAttachment.vb" />
     <Compile Include="Decoration\HoverActionAttachment.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
