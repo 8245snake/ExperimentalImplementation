@@ -88,7 +88,6 @@
     </Compile>
     <Compile Include="SampleAttachment.vb" />
     <Compile Include="State\EventSessionListener.vb" />
-    <Compile Include="State\HighlightingAttachment.vb" />
     <Compile Include="State\HighlightingManager.vb" />
     <Compile Include="State\IControlEventSession.vb" />
     <Compile Include="Strategies\IDragActionStrategy.vb" />
