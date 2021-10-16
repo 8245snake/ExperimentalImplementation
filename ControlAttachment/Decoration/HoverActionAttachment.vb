@@ -14,27 +14,13 @@ Namespace Decoration
         Public Property HoverColor As Color
         Public Property NormalColor As Color
 
-
         Public Sub New(targetControl As Control, hoverColor As Color)
             _TargetControl = targetControl
             Me.HoverColor = hoverColor
             Me.NormalColor = _TargetControl.BackColor
-            If _TargetControl.IsHandleCreated Then
-                Call AddHandlers()
-            Else
-                AddHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
-            End If
-
-        End Sub
-
-        Private Sub AddHandlers()
-            AddHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
             AddHandler _TargetControl.MouseEnter, AddressOf OnMouseEnter
             AddHandler _TargetControl.MouseLeave, AddressOf OnMouseLeave
-        End Sub
-
-        Private Sub OnHandleCreated(sender As Object, e As EventArgs)
-            Call AddHandlers()
+            AddHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
         End Sub
 
         Private Sub OnMouseLeave(sender As Object, e As EventArgs)
@@ -46,7 +32,6 @@ Namespace Decoration
         End Sub
 
         Public Overrides Sub ReleaseHandle()
-            RemoveHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
             RemoveHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
             RemoveHandler _TargetControl.MouseEnter, AddressOf OnMouseEnter
             RemoveHandler _TargetControl.MouseLeave, AddressOf OnMouseLeave

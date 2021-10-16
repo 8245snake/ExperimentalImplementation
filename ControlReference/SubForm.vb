@@ -15,7 +15,7 @@ Public Class SubForm
 
         ' InitializeComponent() 呼び出しの後で初期化を追加します。
 
-        _highlightingManager = New HighlightingManager(New HighlightingAttachment())
+        _highlightingManager = New HighlightingManager(New BorderDrawActionStrategy())
         TextBox1.AttachWaterMark("なにか入力してください")
 
         ' ドラッグ可能コントロール
@@ -42,9 +42,9 @@ Public Class SubForm
         a3.AddDropTarget(source)
 
         ' ホバー設定
-        Panel1.AttachHoverColor(Color.AliceBlue)
-        Panel2.AttachHoverColor(Color.AliceBlue)
-        Panel3.AttachHoverColor(Color.AliceBlue)
+        Panel1.SetHoverColor(Color.AliceBlue)
+        Panel2.SetHoverColor(Color.AliceBlue)
+        Panel3.SetHoverColor(Color.AliceBlue)
 
     End Sub
 

@@ -28,7 +28,7 @@ Public Module AttachmentExtension
     End Sub
 
     <Extension()>
-    Public Sub AttachHoverColor(target As Control, color As Color)
+    Public Sub SetHoverColor(target As Control, color As Color)
         AttachmentManager.AttachInternal(target, New HoverActionAttachment(target, color), _ConditionalWeakTable)
     End Sub
 

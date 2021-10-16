@@ -24,7 +24,11 @@ Namespace Decoration
 
         Public Sub New(checkBox As CheckBox)
             _CheckBox = checkBox
-            AddHandler _CheckBox.HandleCreated, AddressOf OnHandleCreated
+            If _CheckBox.IsHandleCreated Then
+                AssignHandle(_CheckBox.Handle)
+            Else
+                AddHandler _CheckBox.HandleCreated, AddressOf OnHandleCreated
+            End If
             AddHandler _CheckBox.HandleDestroyed, AddressOf OnHandleDestroyed
 
             HoverColor = ColorTranslator.FromHtml("#88d9ebf9")

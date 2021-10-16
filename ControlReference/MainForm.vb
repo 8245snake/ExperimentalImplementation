@@ -21,15 +21,17 @@ Public Class MainForm
         ComboBox1.AttachValidation(New NumericCheckStrategy(), New BorderDrawActionStrategy())
 
         '_SessionManeger.Register(Button1)
-        CheckBox1.Enlarge()
 
-        _highlightingManager = New HighlightingManager(New HighlightingAttachment())
+
+        _highlightingManager = New HighlightingManager(New BorderDrawActionStrategy())
+        _highlightingManager.HighlightingControl = TextBox1
 
     End Sub
 
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        CheckBox1.Enlarge()
+        CheckBox1.SetHoverColor(Color.Yellow)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -39,7 +41,8 @@ Public Class MainForm
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        _highlightingManager.HighlightingControl = TextBox1
+        _highlightingManager.HighlightingControl = ComboBox1
+
     End Sub
 
 End Class
