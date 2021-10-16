@@ -49,6 +49,21 @@ Public Module AttachmentExtension
     End Function
 
     <Extension()>
+    Public Sub ClearValidationAttachments(target As Control)
+        Dim list As List(Of NativeWindow) = Nothing
+        If Not _ConditionalWeakTable.TryGetValue(target, list) Then
+            Return
+        End If
+
+        Dim deleteList = target.GetValidationAttachments().ToArray()
+        For Each attachment As ValidationAttachment In deleteList
+            attachment.ReleaseHandle()
+            list.Remove(attachment)
+        Next
+
+    End Sub
+
+    <Extension()>
     Public Sub ForceValidate(target As Control)
         For Each attachment As ValidationAttachment In target.GetValidationAttachments()
             attachment.ForceValidate()

@@ -50,6 +50,8 @@ Namespace Validation
         End Sub
 
         Public Overrides Sub ReleaseHandle()
+            ' バリデーションを解除する前にもとの状態に戻す
+            SucceedAll()
             RemoveHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
             RemoveHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
             RemoveHandler _TargetControl.Validating, AddressOf OnValidating

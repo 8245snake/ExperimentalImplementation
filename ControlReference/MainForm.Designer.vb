@@ -30,6 +30,10 @@ Partial Class MainForm
         Me.combSizeLimit = New System.Windows.Forms.ComboBox()
         Me.txtSizeLimited = New System.Windows.Forms.TextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.chkAction2 = New System.Windows.Forms.CheckBox()
+        Me.chkAction1 = New System.Windows.Forms.CheckBox()
+        Me.chkValidate2 = New System.Windows.Forms.CheckBox()
+        Me.chkValidate1 = New System.Windows.Forms.CheckBox()
         Me.lblValidate = New System.Windows.Forms.Label()
         Me.txtValidation = New System.Windows.Forms.TextBox()
         Me.panelMain.SuspendLayout()
@@ -113,14 +117,62 @@ Partial Class MainForm
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.chkAction2)
+        Me.GroupBox3.Controls.Add(Me.chkAction1)
+        Me.GroupBox3.Controls.Add(Me.chkValidate2)
+        Me.GroupBox3.Controls.Add(Me.chkValidate1)
         Me.GroupBox3.Controls.Add(Me.lblValidate)
         Me.GroupBox3.Controls.Add(Me.txtValidation)
         Me.GroupBox3.Location = New System.Drawing.Point(3, 233)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(348, 168)
+        Me.GroupBox3.Size = New System.Drawing.Size(348, 131)
         Me.GroupBox3.TabIndex = 3
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "バリデーション"
+        '
+        'chkAction2
+        '
+        Me.chkAction2.AutoSize = True
+        Me.chkAction2.Location = New System.Drawing.Point(136, 100)
+        Me.chkAction2.Name = "chkAction2"
+        Me.chkAction2.Size = New System.Drawing.Size(78, 19)
+        Me.chkAction2.TabIndex = 8
+        Me.chkAction2.Text = "ラベル表示"
+        Me.chkAction2.UseVisualStyleBackColor = True
+        '
+        'chkAction1
+        '
+        Me.chkAction1.AutoSize = True
+        Me.chkAction1.Checked = True
+        Me.chkAction1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkAction1.Location = New System.Drawing.Point(136, 75)
+        Me.chkAction1.Name = "chkAction1"
+        Me.chkAction1.Size = New System.Drawing.Size(74, 19)
+        Me.chkAction1.TabIndex = 7
+        Me.chkAction1.Text = "赤枠表示"
+        Me.chkAction1.UseVisualStyleBackColor = True
+        '
+        'chkValidate2
+        '
+        Me.chkValidate2.AutoSize = True
+        Me.chkValidate2.Location = New System.Drawing.Point(7, 100)
+        Me.chkValidate2.Name = "chkValidate2"
+        Me.chkValidate2.Size = New System.Drawing.Size(103, 19)
+        Me.chkValidate2.TabIndex = 6
+        Me.chkValidate2.Text = "３の倍数チェック"
+        Me.chkValidate2.UseVisualStyleBackColor = True
+        '
+        'chkValidate1
+        '
+        Me.chkValidate1.AutoSize = True
+        Me.chkValidate1.Checked = True
+        Me.chkValidate1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkValidate1.Location = New System.Drawing.Point(9, 75)
+        Me.chkValidate1.Name = "chkValidate1"
+        Me.chkValidate1.Size = New System.Drawing.Size(81, 19)
+        Me.chkValidate1.TabIndex = 5
+        Me.chkValidate1.Text = "整数チェック"
+        Me.chkValidate1.UseVisualStyleBackColor = True
         '
         'lblValidate
         '
@@ -173,4 +225,8 @@ Partial Class MainForm
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents txtValidation As TextBox
     Friend WithEvents lblValidate As Label
+    Friend WithEvents chkAction2 As CheckBox
+    Friend WithEvents chkAction1 As CheckBox
+    Friend WithEvents chkValidate2 As CheckBox
+    Friend WithEvents chkValidate1 As CheckBox
 End Class
