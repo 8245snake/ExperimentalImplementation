@@ -24,17 +24,18 @@ Namespace Activity
         Private _DragAction As IDragActionStrategy
         Private _ChildNativeWindows As List(Of ChildNativeWindow) = New List(Of ChildNativeWindow)()
 
-        Public Sub New(targetControl As Control, dragActionStrategy As IDragActionStrategy)
+        Public Sub New(targetControl As Control, dragActionStrategy As IDragActionStrategy, Optional isHookChildren As Boolean = True)
             _TargetControl = targetControl
             _TargetControl.Cursor = Cursors.CustomCursor.Hand_Open
             _DragAction = dragActionStrategy
 
-            AddHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
-            AddHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
-
             If _TargetControl.IsHandleCreated Then
                 AssignHandle(_TargetControl.Handle)
+            Else
+                AddHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
             End If
+
+            AddHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
 
             ' 最上位の親を探す
             Dim parent As Control = _TargetControl.Parent
@@ -43,13 +44,14 @@ Namespace Activity
                 parent = parent.Parent
             End While
 
-            ' 子コントロールのウィンドウメッセージを受け取るため
-            For Each control As Control In _TargetControl.Controls
-                _ChildNativeWindows.Add(New ChildNativeWindow(_TargetControl.Handle, control))
-            Next
+            ' 子コントロールのウィンドウメッセージを受け取る
+            If isHookChildren Then
+                For Each control As Control In _TargetControl.Controls
+                    _ChildNativeWindows.Add(New ChildNativeWindow(_TargetControl.Handle, control))
+                Next
+            End If
 
         End Sub
-
 
 
         Public Sub New(targetControl As Control, dragActionStrategy As IDragActionStrategy, highlightingAction As IHighlightingActionStrategy)
@@ -72,8 +74,8 @@ Namespace Activity
 
 
         Private Sub OnHandleCreated(sender As Object, e As EventArgs)
-            Dim ctrl = TryCast(sender, Control)
-            AssignHandle(ctrl.Handle)
+            AssignHandle(_TargetControl.Handle)
+            RemoveHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
         End Sub
 
         Private Sub OnHandleDestroyed(sender As Object, e As EventArgs)

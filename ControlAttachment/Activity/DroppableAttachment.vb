@@ -115,6 +115,7 @@ Namespace Activity
         End Function
 
         Public Sub Drop(chiled As Control, dropPosition As Point)
+            chiled.Location = dropPosition
             _TargetControl.Controls.Add(chiled)
             CanDrop = False
         End Sub

@@ -30,7 +30,12 @@ Public Class MainForm
         btnEnlarge_Click(btnEnlarge, EventArgs.Empty)
         ' テキストボックスをサイズ変更可能にする
         txtReizaeable.AttachResizeable()
-
+        ' ドラッグ可能にする
+        Dim moving = New DraggableAttachment(panelMove1, New StandardDragActionStrategy(panelMove1))
+        Dim target1 = New DroppableAttachment(panelTarget1, New BorderDrawActionStrategy())
+        Dim target2 = New DroppableAttachment(panelTarget2, New BorderDrawActionStrategy())
+        moving.AddDropTarget(target1)
+        moving.AddDropTarget(target2)
 
     End Sub
 

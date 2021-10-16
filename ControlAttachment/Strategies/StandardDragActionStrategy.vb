@@ -16,6 +16,7 @@ Namespace Strategies
         Private _TargetControl As Control
         Private _Parent As Control
         Private _LocalPosition As Point
+        Private _BeforePosition As Point
         Private _BeforeChildIndex As Integer
 
         Public Sub New(targetControl As Control)
@@ -25,14 +26,18 @@ Namespace Strategies
 
         Public Sub BiginDrag() Implements IDragActionStrategy.BiginDrag
             ' 位置を保存
-            _LocalPosition = _TargetControl.PointToClient(Cursor.Position)
             _BeforeChildIndex = _TargetControl.Parent.Controls.GetChildIndex(_TargetControl)
+            _BeforePosition = _TargetControl.Location
+            _LocalPosition = _TargetControl.PointToClient(Cursor.Position)
+
             ' 親を保存
             _Parent = _TargetControl.Parent
             _Parent.Controls.Remove(_TargetControl)
             TopParent.Controls.Add(_TargetControl)
+
             ' 一番上に持っていく
             TopParent.Controls.SetChildIndex(_TargetControl, 0)
+
             ' マウスの位置に動かしておく
             DragMoving()
             NotifyReadyToDrop(True)
@@ -54,12 +59,16 @@ Namespace Strategies
 
             Dim dest = DropTargets.FirstOrDefault(Function(item) item.CanDrop)
             If dest IsNot Nothing Then
+                ' ドロップ先があればドロップする
                 Dim screenPos = Cursor.Position
                 Dim clientPos = dest.TargetControl.PointToClient(screenPos)
+                clientPos.X -= _LocalPosition.X
+                clientPos.Y -= _LocalPosition.Y
                 dest.Drop(_TargetControl, clientPos)
             Else
                 ' だめなら戻す
                 _Parent.Controls.Add(_TargetControl)
+                _TargetControl.Location = _BeforePosition
                 _Parent.Controls.SetChildIndex(_TargetControl, _BeforeChildIndex)
             End If
 

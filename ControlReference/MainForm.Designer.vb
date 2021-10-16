@@ -44,6 +44,11 @@ Partial Class MainForm
         Me.chkBlink = New System.Windows.Forms.CheckBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.txtReizaeable = New System.Windows.Forms.TextBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.panelTarget1 = New System.Windows.Forms.Panel()
+        Me.panelTarget2 = New System.Windows.Forms.Panel()
+        Me.lblMove = New System.Windows.Forms.Label()
+        Me.panelMove1 = New System.Windows.Forms.Panel()
         Me.panelMain.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -51,6 +56,8 @@ Partial Class MainForm
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
+        Me.panelMove1.SuspendLayout()
         Me.SuspendLayout()
         '
         'panelMain
@@ -65,6 +72,7 @@ Partial Class MainForm
         Me.panelMain.Controls.Add(Me.GroupBox4)
         Me.panelMain.Controls.Add(Me.GroupBox5)
         Me.panelMain.Controls.Add(Me.GroupBox6)
+        Me.panelMain.Controls.Add(Me.GroupBox7)
         Me.panelMain.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
         Me.panelMain.Location = New System.Drawing.Point(12, 12)
         Me.panelMain.Name = "panelMain"
@@ -288,6 +296,53 @@ Partial Class MainForm
         Me.txtReizaeable.Size = New System.Drawing.Size(336, 57)
         Me.txtReizaeable.TabIndex = 1
         '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.panelMove1)
+        Me.GroupBox7.Controls.Add(Me.panelTarget2)
+        Me.GroupBox7.Controls.Add(Me.panelTarget1)
+        Me.GroupBox7.Location = New System.Drawing.Point(357, 215)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(348, 167)
+        Me.GroupBox7.TabIndex = 12
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "ドラッグドロップ可能化"
+        '
+        'panelTarget1
+        '
+        Me.panelTarget1.BackColor = System.Drawing.Color.White
+        Me.panelTarget1.Location = New System.Drawing.Point(7, 79)
+        Me.panelTarget1.Name = "panelTarget1"
+        Me.panelTarget1.Size = New System.Drawing.Size(170, 70)
+        Me.panelTarget1.TabIndex = 1
+        '
+        'panelTarget2
+        '
+        Me.panelTarget2.BackColor = System.Drawing.Color.White
+        Me.panelTarget2.Location = New System.Drawing.Point(183, 79)
+        Me.panelTarget2.Name = "panelTarget2"
+        Me.panelTarget2.Size = New System.Drawing.Size(159, 70)
+        Me.panelTarget2.TabIndex = 2
+        '
+        'lblMove
+        '
+        Me.lblMove.AutoSize = True
+        Me.lblMove.Location = New System.Drawing.Point(4, 8)
+        Me.lblMove.Name = "lblMove"
+        Me.lblMove.Size = New System.Drawing.Size(63, 15)
+        Me.lblMove.TabIndex = 3
+        Me.lblMove.Text = "ドラッグ可能"
+        '
+        'panelMove1
+        '
+        Me.panelMove1.BackColor = System.Drawing.Color.MistyRose
+        Me.panelMove1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panelMove1.Controls.Add(Me.lblMove)
+        Me.panelMove1.Location = New System.Drawing.Point(17, 22)
+        Me.panelMove1.Name = "panelMove1"
+        Me.panelMove1.Size = New System.Drawing.Size(94, 31)
+        Me.panelMove1.TabIndex = 4
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -311,6 +366,9 @@ Partial Class MainForm
         Me.GroupBox5.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.panelMove1.ResumeLayout(False)
+        Me.panelMove1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -337,4 +395,9 @@ Partial Class MainForm
     Friend WithEvents chkBlink As CheckBox
     Friend WithEvents GroupBox6 As GroupBox
     Friend WithEvents txtReizaeable As TextBox
+    Friend WithEvents GroupBox7 As GroupBox
+    Friend WithEvents panelTarget2 As Panel
+    Friend WithEvents panelTarget1 As Panel
+    Friend WithEvents lblMove As Label
+    Friend WithEvents panelMove1 As Panel
 End Class
