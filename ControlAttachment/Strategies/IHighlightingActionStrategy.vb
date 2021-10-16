@@ -2,6 +2,7 @@
 
 Namespace Strategies
     Public Interface IHighlightingActionStrategy
+        Property Composit As IHighlightingActionStrategy
         Sub BeginHighlight(control As Control)
         Sub EndHighlight(control As Control)
         Sub Highlight(control As Control)

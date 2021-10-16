@@ -97,7 +97,6 @@
     <Compile Include="Text\TextSizeLimitAttachment.vb" />
     <Compile Include="Text\WaterMarkAttachment.vb" />
     <Compile Include="Strategies\BorderDrawActionStrategy.vb" />
-    <Compile Include="Strategies\NumericCheckStrategy.vb" />
     <Compile Include="Strategies\IErrorActionStrategy.vb" />
     <Compile Include="Validation\ValidationAttachment.vb" />
     <Compile Include="Strategies\IValidationStrategy.vb" />

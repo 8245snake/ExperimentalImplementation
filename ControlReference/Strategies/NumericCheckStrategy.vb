@@ -1,7 +1,7 @@
 ﻿Option Explicit On
 Option Strict On
 
-Imports System.Windows.Forms
+Imports ControlAttachment.Strategies
 
 Namespace Strategies
 
@@ -12,9 +12,14 @@ Namespace Strategies
         Implements IValidationStrategy
 
         Public Property ValidationTrigger As IValidationStrategy.ValidationTriggerType Implements IValidationStrategy.ValidationTrigger
+        Public Property Composit As IValidationStrategy Implements IValidationStrategy.Composit
 
         Public Sub New()
             ValidationTrigger = IValidationStrategy.ValidationTriggerType.TextChanged
+        End Sub
+
+        Public Sub New(composit As IValidationStrategy)
+            Me.Composit = composit
         End Sub
 
         Public Function Validate(control As Control) As Boolean Implements IValidationStrategy.Validate
@@ -28,5 +33,4 @@ Namespace Strategies
         End Function
 
     End Class
-
 End Namespace

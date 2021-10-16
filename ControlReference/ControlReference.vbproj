@@ -70,8 +70,9 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ErrorMessageActionStrategy.vb" />
-    <Compile Include="LabelWritingErrorActionStrategy.vb" />
+    <Compile Include="Strategies\NumericCheckStrategy.vb" />
+    <Compile Include="Strategies\ErrorMessageActionStrategy.vb" />
+    <Compile Include="Strategies\LabelWritingErrorActionStrategy.vb" />
     <Compile Include="MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -132,5 +133,6 @@
       <Name>ControlAttachment</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

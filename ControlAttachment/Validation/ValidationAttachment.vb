@@ -104,15 +104,56 @@ Namespace Validation
             Next
 
             ' エラー判定
-            _IsError = Not _ValidationStrategy.Validate(_TargetControl)
+            _IsError = ValidateAll()
+
             If _IsError Then
-                _ErrorActionStrategy?.ErrorAction(_TargetControl)
+                ' エラー時のアクション
+                ErrorAll()
             Else
-                _ErrorActionStrategy?.SuccessAction(_TargetControl)
+                ' 成功時のアクション
+                SucceedAll()
             End If
 
             _TargetControl.Invalidate()
         End Sub
+
+        Private Function ValidateAll() As Boolean
+            Dim isEroor = False
+            Dim strategy = _ValidationStrategy
+
+            While strategy IsNot Nothing
+                isEroor = Not strategy.Validate(_TargetControl)
+                strategy = strategy.Composit
+                If isEroor Then Exit While
+            End While
+
+            Return isEroor
+
+        End Function
+
+        Private Sub SucceedAll()
+
+            Dim strategy = _ErrorActionStrategy
+
+            While strategy IsNot Nothing
+                strategy.SuccessAction(_TargetControl)
+                strategy = strategy.Composit
+            End While
+
+        End Sub
+
+        Private Sub ErrorAll()
+
+            Dim strategy = _ErrorActionStrategy
+
+            While strategy IsNot Nothing
+                strategy.ErrorAction(_TargetControl)
+                strategy = strategy.Composit
+            End While
+
+        End Sub
+
+
     End Class
 
 End Namespace

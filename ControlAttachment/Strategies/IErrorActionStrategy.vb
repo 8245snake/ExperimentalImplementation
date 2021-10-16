@@ -1,11 +1,9 @@
 ﻿Imports System.Windows.Forms
-Imports ControlAttachment.State
 
 Namespace Strategies
 
     Public Interface IErrorActionStrategy
-        Inherits IHighlightingActionStrategy
-
+        Property Composit As IErrorActionStrategy
         Sub ErrorAction(control As Control)
         Sub SuccessAction(control As Control)
         Sub ErrorPainting(control As Control)

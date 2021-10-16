@@ -10,7 +10,7 @@ Namespace Strategies
     ''' コントロールの周りを赤線で囲うアクション
     ''' </summary>
     Public Class BorderDrawActionStrategy
-        Implements IErrorActionStrategy
+        Implements IErrorActionStrategy, IHighlightingActionStrategy
 
         Private _DrawOutside As Boolean = True
 
@@ -47,6 +47,8 @@ Namespace Strategies
         Private Sub BlinkTimerTick(sender As Object, e As EventArgs)
             _TargetControl?.Refresh()
         End Sub
+
+        Public Property IErrorActionStrategy_Composit As IErrorActionStrategy Implements IErrorActionStrategy.Composit
 
         Public Sub ErrorAction(control As Control) Implements IErrorActionStrategy.ErrorAction
             If IsBlinkEnable Then
@@ -121,6 +123,8 @@ Namespace Strategies
             control.Parent.Invalidate(rect)
             control.Parent.Update()
         End Sub
+
+        Public Property Composit As IHighlightingActionStrategy Implements IHighlightingActionStrategy.Composit
 
         Public Sub BeginHighlight(control As Control) Implements IHighlightingActionStrategy.BeginHighlight
             ErrorAction(control)
