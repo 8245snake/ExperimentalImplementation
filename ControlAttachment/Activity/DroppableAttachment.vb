@@ -17,6 +17,9 @@ Namespace Activity
 
         Private _HighlightingAction As IHighlightingActionStrategy
 
+        Public Event Droped(chiled As Control, dropPosition As Point)
+        Public Event DragEntered(chiled As Control, dragPosition As Point)
+
         Public Property ReadyToDrop As Boolean
             Get
                 Return _readyToDrop
@@ -83,6 +86,7 @@ Namespace Activity
                     If ReadyToDrop AndAlso IsRegionEnterd() Then
                         CanDrop = True
                         _HighlightingAction?.Highlight(_TargetControl)
+                        RaiseEvent DragEntered(_TargetControl, Cursor.Position)
                     Else
                         CanDrop = False
                         _HighlightingAction?.EndHighlight(_TargetControl)
@@ -117,6 +121,7 @@ Namespace Activity
         Public Sub Drop(chiled As Control, dropPosition As Point)
             chiled.Location = dropPosition
             _TargetControl.Controls.Add(chiled)
+            RaiseEvent Droped(chiled, dropPosition)
             CanDrop = False
         End Sub
 

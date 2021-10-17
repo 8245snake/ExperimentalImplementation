@@ -71,4 +71,15 @@ Public Module AttachmentExtension
     Public Sub AttachResizeable(target As Control)
         AttachmentManager.AttachInternal(target, New ResizeableAttachment(target), _ConditionalWeakTable)
     End Sub
+
+    <Extension()>
+    Public Function CompositActionStrategy(strategies As IEnumerable(Of IErrorActionStrategy)) As IErrorActionStrategy
+        Return AttachmentManager.CompositActionStrategy(strategies)
+    End Function
+
+    <Extension()>
+    Public Function CompositValidationStrategy(strategies As IEnumerable(Of IValidationStrategy)) As IValidationStrategy
+        Return AttachmentManager.CompositValidationStrategy(strategies)
+    End Function
+
 End Module

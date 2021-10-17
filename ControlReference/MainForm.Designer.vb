@@ -45,10 +45,11 @@ Partial Class MainForm
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.txtReizaeable = New System.Windows.Forms.TextBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.panelTarget1 = New System.Windows.Forms.Panel()
-        Me.panelTarget2 = New System.Windows.Forms.Panel()
-        Me.lblMove = New System.Windows.Forms.Label()
         Me.panelMove1 = New System.Windows.Forms.Panel()
+        Me.lblMove = New System.Windows.Forms.Label()
+        Me.panelTarget2 = New System.Windows.Forms.Panel()
+        Me.panelTarget1 = New System.Windows.Forms.Panel()
+        Me.chkAction3 = New System.Windows.Forms.CheckBox()
         Me.panelMain.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -139,6 +140,7 @@ Partial Class MainForm
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.chkAction3)
         Me.GroupBox3.Controls.Add(Me.chkAction2)
         Me.GroupBox3.Controls.Add(Me.chkAction1)
         Me.GroupBox3.Controls.Add(Me.chkValidate2)
@@ -147,7 +149,7 @@ Partial Class MainForm
         Me.GroupBox3.Controls.Add(Me.txtValidation)
         Me.GroupBox3.Location = New System.Drawing.Point(3, 233)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(348, 131)
+        Me.GroupBox3.Size = New System.Drawing.Size(348, 149)
         Me.GroupBox3.TabIndex = 3
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "バリデーション"
@@ -220,7 +222,7 @@ Partial Class MainForm
         '
         Me.GroupBox4.Controls.Add(Me.btnEnlarge)
         Me.GroupBox4.Controls.Add(Me.chkDecoration)
-        Me.GroupBox4.Location = New System.Drawing.Point(3, 370)
+        Me.GroupBox4.Location = New System.Drawing.Point(3, 388)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(348, 56)
         Me.GroupBox4.TabIndex = 9
@@ -308,21 +310,15 @@ Partial Class MainForm
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "ドラッグドロップ可能化"
         '
-        'panelTarget1
+        'panelMove1
         '
-        Me.panelTarget1.BackColor = System.Drawing.Color.White
-        Me.panelTarget1.Location = New System.Drawing.Point(7, 79)
-        Me.panelTarget1.Name = "panelTarget1"
-        Me.panelTarget1.Size = New System.Drawing.Size(170, 70)
-        Me.panelTarget1.TabIndex = 1
-        '
-        'panelTarget2
-        '
-        Me.panelTarget2.BackColor = System.Drawing.Color.White
-        Me.panelTarget2.Location = New System.Drawing.Point(183, 79)
-        Me.panelTarget2.Name = "panelTarget2"
-        Me.panelTarget2.Size = New System.Drawing.Size(159, 70)
-        Me.panelTarget2.TabIndex = 2
+        Me.panelMove1.BackColor = System.Drawing.Color.MistyRose
+        Me.panelMove1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panelMove1.Controls.Add(Me.lblMove)
+        Me.panelMove1.Location = New System.Drawing.Point(17, 22)
+        Me.panelMove1.Name = "panelMove1"
+        Me.panelMove1.Size = New System.Drawing.Size(94, 31)
+        Me.panelMove1.TabIndex = 4
         '
         'lblMove
         '
@@ -333,15 +329,33 @@ Partial Class MainForm
         Me.lblMove.TabIndex = 3
         Me.lblMove.Text = "ドラッグ可能"
         '
-        'panelMove1
+        'panelTarget2
         '
-        Me.panelMove1.BackColor = System.Drawing.Color.MistyRose
-        Me.panelMove1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.panelMove1.Controls.Add(Me.lblMove)
-        Me.panelMove1.Location = New System.Drawing.Point(17, 22)
-        Me.panelMove1.Name = "panelMove1"
-        Me.panelMove1.Size = New System.Drawing.Size(94, 31)
-        Me.panelMove1.TabIndex = 4
+        Me.panelTarget2.AutoScroll = True
+        Me.panelTarget2.BackColor = System.Drawing.Color.White
+        Me.panelTarget2.Location = New System.Drawing.Point(183, 79)
+        Me.panelTarget2.Name = "panelTarget2"
+        Me.panelTarget2.Size = New System.Drawing.Size(159, 70)
+        Me.panelTarget2.TabIndex = 2
+        '
+        'panelTarget1
+        '
+        Me.panelTarget1.AutoScroll = True
+        Me.panelTarget1.BackColor = System.Drawing.Color.White
+        Me.panelTarget1.Location = New System.Drawing.Point(7, 79)
+        Me.panelTarget1.Name = "panelTarget1"
+        Me.panelTarget1.Size = New System.Drawing.Size(170, 70)
+        Me.panelTarget1.TabIndex = 1
+        '
+        'chkAction3
+        '
+        Me.chkAction3.AutoSize = True
+        Me.chkAction3.Location = New System.Drawing.Point(136, 124)
+        Me.chkAction3.Name = "chkAction3"
+        Me.chkAction3.Size = New System.Drawing.Size(74, 19)
+        Me.chkAction3.TabIndex = 9
+        Me.chkAction3.Text = "塗りつぶし"
+        Me.chkAction3.UseVisualStyleBackColor = True
         '
         'MainForm
         '
@@ -400,4 +414,5 @@ Partial Class MainForm
     Friend WithEvents panelTarget1 As Panel
     Friend WithEvents lblMove As Label
     Friend WithEvents panelMove1 As Panel
+    Friend WithEvents chkAction3 As CheckBox
 End Class

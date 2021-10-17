@@ -139,4 +139,56 @@ Public Class AttachmentManager
         Next
     End Sub
 
+    Friend Shared Function CompositActionStrategy(strategies As IEnumerable(Of IErrorActionStrategy)) As IErrorActionStrategy
+
+        Dim errorActionStrategy As IErrorActionStrategy
+        Dim errorActionStrategyList = strategies.ToList()
+
+        If errorActionStrategyList.Count < 1 Then Return Nothing
+
+        Dim tmpstrategy As IErrorActionStrategy
+        For Each strategy As IErrorActionStrategy In errorActionStrategyList
+
+            If errorActionStrategy Is Nothing Then
+                errorActionStrategy = strategy
+                tmpstrategy = strategy
+                Continue For
+            End If
+
+            If tmpstrategy.Composit IsNot Nothing Then
+                tmpstrategy = tmpstrategy.Composit
+            End If
+
+            tmpstrategy.Composit = strategy
+            tmpstrategy = tmpstrategy.Composit
+        Next
+        Return errorActionStrategy
+    End Function
+
+    Friend Shared Function CompositValidationStrategy(strategies As IEnumerable(Of IValidationStrategy)) As IValidationStrategy
+
+        Dim validationStrategy As IValidationStrategy
+        Dim validationStrategiesList = strategies.ToList()
+
+        If validationStrategiesList.Count < 1 Then Return Nothing
+
+        Dim tmpstrategy As IValidationStrategy
+        For Each strategy As IValidationStrategy In validationStrategiesList
+
+            If validationStrategy Is Nothing Then
+                validationStrategy = strategy
+                tmpstrategy = strategy
+                Continue For
+            End If
+
+            If tmpstrategy.Composit IsNot Nothing Then
+                tmpstrategy = tmpstrategy.Composit
+            End If
+
+            tmpstrategy.Composit = strategy
+            tmpstrategy = tmpstrategy.Composit
+        Next
+        Return validationStrategy
+    End Function
+
 End Class

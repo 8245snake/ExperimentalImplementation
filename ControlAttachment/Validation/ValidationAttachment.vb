@@ -75,7 +75,7 @@ Namespace Validation
             MyBase.WndProc(m)
 
             If m.Msg = WM_PAINT AndAlso _IsError Then
-                _ErrorActionStrategy?.ErrorPainting(_TargetControl)
+                PaintAll()
             End If
 
         End Sub
@@ -154,6 +154,16 @@ Namespace Validation
 
         End Sub
 
+        Private Sub PaintAll()
+
+            Dim strategy = _ErrorActionStrategy
+
+            While strategy IsNot Nothing
+                strategy.ErrorPainting(_TargetControl)
+                strategy = strategy.Composit
+            End While
+
+        End Sub
 
     End Class
 

@@ -25,6 +25,7 @@ Public Class MainForm
         AddHandler chkValidate2.CheckedChanged, AddressOf chkValidate_CheckedChanged
         AddHandler chkAction1.CheckedChanged, AddressOf chkValidate_CheckedChanged
         AddHandler chkAction2.CheckedChanged, AddressOf chkValidate_CheckedChanged
+        AddHandler chkAction3.CheckedChanged, AddressOf chkValidate_CheckedChanged
         chkValidate_CheckedChanged(txtValidation, EventArgs.Empty)
         ' チェックボックスデコレーション
         btnEnlarge_Click(btnEnlarge, EventArgs.Empty)
@@ -64,41 +65,38 @@ Public Class MainForm
     Private Sub chkValidate_CheckedChanged(sender As Object, e As EventArgs)
         txtValidation.ClearValidationAttachments()
 
-        Dim validationStrategy As IValidationStrategy
-
-        If chkValidate1.Checked Then
-            validationStrategy = New IntegerCheckStrategy()
-        End If
-
-        If chkValidate2.Checked Then
-            If validationStrategy Is Nothing Then
-                validationStrategy = New ThreeMultipleValidationStrategy()
-            Else
-                validationStrategy.Composit = New ThreeMultipleValidationStrategy()
-            End If
-        End If
-
+        Dim validationStrategy As IValidationStrategy = GetValidationStrategy().CompositValidationStrategy()
         If validationStrategy Is Nothing Then Return
 
-        Dim errorActionStrategy As IErrorActionStrategy
-
-        If chkAction1.Checked Then
-            errorActionStrategy = New BorderDrawActionStrategy()
-        End If
-
-        If chkAction2.Checked Then
-            If errorActionStrategy Is Nothing Then
-                errorActionStrategy = New LabelWritingErrorActionStrategy(lblValidate, "エラー")
-            Else
-                errorActionStrategy.Composit = New LabelWritingErrorActionStrategy(lblValidate, "エラー")
-            End If
-        End If
-
+        Dim errorActionStrategy As IErrorActionStrategy = GetErrorActionStrategy().CompositActionStrategy()
         If errorActionStrategy Is Nothing Then Return
 
         txtValidation.AttachValidation(validationStrategy, errorActionStrategy)
         txtValidation.ForceValidate()
     End Sub
+
+    Private Iterator Function GetValidationStrategy() As IEnumerable(Of IValidationStrategy)
+        If chkValidate1.Checked Then
+            Yield New IntegerCheckStrategy()
+        End If
+        If chkValidate2.Checked Then
+            Yield New ThreeMultipleValidationStrategy()
+        End If
+    End Function
+
+    Private Iterator Function GetErrorActionStrategy() As IEnumerable(Of IErrorActionStrategy)
+        If chkAction1.Checked Then
+            Yield New BorderDrawActionStrategy()
+        End If
+        If chkAction2.Checked Then
+            Yield New LabelWritingErrorActionStrategy(lblValidate, "エラー")
+        End If
+        If chkAction3.Checked Then
+            Yield New FillActionStrategy()
+        End If
+    End Function
+
+
 
     Private Sub btnEnlarge_Click(sender As Object, e As EventArgs)
         chkDecoration.Enlarge()

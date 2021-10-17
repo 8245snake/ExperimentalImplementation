@@ -94,6 +94,7 @@
     <Compile Include="Activity\IDragActionStrategy.vb" />
     <Compile Include="State\IHighlightingActionStrategy.vb" />
     <Compile Include="State\SessionManager.vb" />
+    <Compile Include="Strategies\FillActionStrategy.vb" />
     <Compile Include="Strategies\StandardDragActionStrategy.vb" />
     <Compile Include="Text\TextSizeLimitAttachment.vb" />
     <Compile Include="Text\WaterMarkAttachment.vb" />
