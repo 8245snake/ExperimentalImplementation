@@ -143,7 +143,9 @@ Class LimitSetterCommand
     End Sub
 
     Public Sub SetLimit(textbox As TextBox, label As Label)
-        textbox.AttachMaxByteSize(Me.Size, New LabelWritingErrorActionStrategy(label, $"バイト数の最大値({Me.Size})を超えることはできません"))
+        ' 背景色塗りつぶしとラベルアラートを重ねがけ
+        Dim strategy = New FillActionStrategy(New LabelWritingErrorActionStrategy(label, $"バイト数の最大値({Me.Size})を超えることはできません"))
+        textbox.AttachMaxByteSize(Me.Size, strategy)
     End Sub
 
 End Class

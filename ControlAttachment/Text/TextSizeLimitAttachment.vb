@@ -125,14 +125,36 @@ Namespace Text
                 Case WM_CHAR
                     If ShouldCancel(ChrW(m.WParam.ToInt32())) Then
                         ' キャンセルされたときにアラートを出す
-                        ErrorActionStrategy?.ErrorAction(_TargetControl)
+                        ErrorAll()
                         Return
                     Else
-                        ErrorActionStrategy?.SuccessAction(_TargetControl)
+                        SucceedAll()
                     End If
             End Select
 
             MyBase.WndProc(m)
+
+        End Sub
+
+        Private Sub SucceedAll()
+
+            Dim strategy = ErrorActionStrategy
+
+            While strategy IsNot Nothing
+                strategy.SuccessAction(_TargetControl)
+                strategy = strategy.Composit
+            End While
+
+        End Sub
+
+        Private Sub ErrorAll()
+
+            Dim strategy = ErrorActionStrategy
+
+            While strategy IsNot Nothing
+                strategy.ErrorAction(_TargetControl)
+                strategy = strategy.Composit
+            End While
 
         End Sub
 

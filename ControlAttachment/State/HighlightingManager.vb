@@ -137,6 +137,7 @@ Namespace State
         Private Sub EndHighlight(control As Control)
             If control IsNot Nothing Then
                 _HighlightingActionStrategy.EndHighlight(control)
+                control.Invalidate()
             End If
             ReleaseHandle()
         End Sub

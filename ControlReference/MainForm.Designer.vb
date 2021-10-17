@@ -30,6 +30,7 @@ Partial Class MainForm
         Me.combSizeLimit = New System.Windows.Forms.ComboBox()
         Me.txtSizeLimited = New System.Windows.Forms.TextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.chkAction3 = New System.Windows.Forms.CheckBox()
         Me.chkAction2 = New System.Windows.Forms.CheckBox()
         Me.chkAction1 = New System.Windows.Forms.CheckBox()
         Me.chkValidate2 = New System.Windows.Forms.CheckBox()
@@ -49,7 +50,6 @@ Partial Class MainForm
         Me.lblMove = New System.Windows.Forms.Label()
         Me.panelTarget2 = New System.Windows.Forms.Panel()
         Me.panelTarget1 = New System.Windows.Forms.Panel()
-        Me.chkAction3 = New System.Windows.Forms.CheckBox()
         Me.panelMain.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -154,6 +154,18 @@ Partial Class MainForm
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "バリデーション"
         '
+        'chkAction3
+        '
+        Me.chkAction3.AutoSize = True
+        Me.chkAction3.Checked = True
+        Me.chkAction3.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkAction3.Location = New System.Drawing.Point(136, 124)
+        Me.chkAction3.Name = "chkAction3"
+        Me.chkAction3.Size = New System.Drawing.Size(74, 19)
+        Me.chkAction3.TabIndex = 9
+        Me.chkAction3.Text = "塗りつぶし"
+        Me.chkAction3.UseVisualStyleBackColor = True
+        '
         'chkAction2
         '
         Me.chkAction2.AutoSize = True
@@ -167,8 +179,6 @@ Partial Class MainForm
         'chkAction1
         '
         Me.chkAction1.AutoSize = True
-        Me.chkAction1.Checked = True
-        Me.chkAction1.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkAction1.Location = New System.Drawing.Point(136, 75)
         Me.chkAction1.Name = "chkAction1"
         Me.chkAction1.Size = New System.Drawing.Size(74, 19)
@@ -346,16 +356,6 @@ Partial Class MainForm
         Me.panelTarget1.Name = "panelTarget1"
         Me.panelTarget1.Size = New System.Drawing.Size(170, 70)
         Me.panelTarget1.TabIndex = 1
-        '
-        'chkAction3
-        '
-        Me.chkAction3.AutoSize = True
-        Me.chkAction3.Location = New System.Drawing.Point(136, 124)
-        Me.chkAction3.Name = "chkAction3"
-        Me.chkAction3.Size = New System.Drawing.Size(74, 19)
-        Me.chkAction3.TabIndex = 9
-        Me.chkAction3.Text = "塗りつぶし"
-        Me.chkAction3.UseVisualStyleBackColor = True
         '
         'MainForm
         '
