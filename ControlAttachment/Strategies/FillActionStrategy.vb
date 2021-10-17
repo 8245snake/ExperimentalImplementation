@@ -48,7 +48,9 @@ Namespace Strategies
         End Sub
 
         Public Sub SuccessAction(control As Control) Implements IErrorActionStrategy.SuccessAction
-            control.BackColor = NormalColor
+            If NormalColor <> Color.Empty AndAlso control.Handle = Handle Then
+                control.BackColor = NormalColor
+            End If
         End Sub
 
         Public Sub ErrorPainting(control As Control) Implements IErrorActionStrategy.ErrorPainting

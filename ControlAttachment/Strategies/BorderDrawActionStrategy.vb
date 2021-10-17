@@ -20,6 +20,7 @@ Namespace Strategies
         Private _IsBorderVisible As Boolean = False
         Private _TargetControl As Control
         Private _LastDrawTick As Long
+        Private _IsHighlighting As Boolean = False
 
         Public Property Composit As IErrorActionStrategy Implements IErrorActionStrategy.Composit
 
@@ -134,14 +135,18 @@ Namespace Strategies
 
         Public Sub BeginHighlight(control As Control) Implements IHighlightingActionStrategy.BeginHighlight
             ErrorAction(control)
+            _IsHighlighting = True
         End Sub
 
         Public Sub EndHighlight(control As Control) Implements IHighlightingActionStrategy.EndHighlight
             SuccesAction(control)
+            _IsHighlighting = False
         End Sub
 
         Public Sub Highlight(control As Control) Implements IHighlightingActionStrategy.Highlight
-            ErrorPainting(control)
+            If _IsHighlighting Then
+                ErrorPainting(control)
+            End If
         End Sub
     End Class
 

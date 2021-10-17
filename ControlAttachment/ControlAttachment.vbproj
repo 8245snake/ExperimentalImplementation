@@ -60,7 +60,9 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity\ChildNativeWindow.vb" />
     <Compile Include="Activity\DraggableAttachment.vb" />
+    <Compile Include="Activity\DragObjectBound.vb" />
     <Compile Include="Activity\DroppableAttachment.vb" />
     <Compile Include="Activity\ResizeableAttachment.vb" />
     <Compile Include="AttachmentAttribute.vb" />
@@ -95,7 +97,7 @@
     <Compile Include="State\IHighlightingActionStrategy.vb" />
     <Compile Include="State\SessionManager.vb" />
     <Compile Include="Strategies\FillActionStrategy.vb" />
-    <Compile Include="Strategies\StandardDragActionStrategy.vb" />
+    <Compile Include="Strategies\MovingDragActionStrategy.vb" />
     <Compile Include="Text\TextSizeLimitAttachment.vb" />
     <Compile Include="Text\WaterMarkAttachment.vb" />
     <Compile Include="Strategies\BorderDrawActionStrategy.vb" />

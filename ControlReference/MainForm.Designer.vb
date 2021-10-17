@@ -315,7 +315,7 @@ Partial Class MainForm
         Me.GroupBox7.Controls.Add(Me.panelTarget1)
         Me.GroupBox7.Location = New System.Drawing.Point(357, 215)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(348, 167)
+        Me.GroupBox7.Size = New System.Drawing.Size(348, 137)
         Me.GroupBox7.TabIndex = 12
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "ドラッグドロップ可能化"
@@ -343,7 +343,7 @@ Partial Class MainForm
         '
         Me.panelTarget2.AutoScroll = True
         Me.panelTarget2.BackColor = System.Drawing.Color.White
-        Me.panelTarget2.Location = New System.Drawing.Point(183, 79)
+        Me.panelTarget2.Location = New System.Drawing.Point(183, 59)
         Me.panelTarget2.Name = "panelTarget2"
         Me.panelTarget2.Size = New System.Drawing.Size(159, 70)
         Me.panelTarget2.TabIndex = 2
@@ -352,7 +352,7 @@ Partial Class MainForm
         '
         Me.panelTarget1.AutoScroll = True
         Me.panelTarget1.BackColor = System.Drawing.Color.White
-        Me.panelTarget1.Location = New System.Drawing.Point(7, 79)
+        Me.panelTarget1.Location = New System.Drawing.Point(7, 59)
         Me.panelTarget1.Name = "panelTarget1"
         Me.panelTarget1.Size = New System.Drawing.Size(170, 70)
         Me.panelTarget1.TabIndex = 1

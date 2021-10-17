@@ -7,7 +7,11 @@ Imports ControlAttachment.Activity
 
 Namespace Strategies
 
-    Public Class StandardDragActionStrategy
+    ''' <summary>
+    ''' ドラッグ移動移動のストラテジ。
+    ''' 複製せず常に１つのオブジェクトを移動させる操作に使用する。
+    ''' </summary>
+    Public Class MovingDragActionStrategy
         Implements IDragActionStrategy
 
         Public Property TopParent As Control Implements IDragActionStrategy.TopParent
@@ -15,8 +19,7 @@ Namespace Strategies
 
         Private _TargetControl As Control
         Private _Parent As Control
-        Private _LocalPosition As Point
-        Private _BeforePosition As Point
+        Private _BeforeBound As DragObjectBound
         Private _BeforeChildIndex As Integer
 
         Public Sub New(targetControl As Control)
@@ -25,34 +28,47 @@ Namespace Strategies
         End Sub
 
         Public Sub BiginDrag() Implements IDragActionStrategy.BiginDrag
+
             ' 位置を保存
             _BeforeChildIndex = _TargetControl.Parent.Controls.GetChildIndex(_TargetControl)
-            _BeforePosition = _TargetControl.Location
-            _LocalPosition = _TargetControl.PointToClient(Cursor.Position)
+            Dim localPos = _TargetControl.PointToClient(Cursor.Position)
+            _BeforeBound = New DragObjectBound(_TargetControl.Location, _TargetControl.Size, localPos.X, localPos.Y)
 
             ' 親を保存
             _Parent = _TargetControl.Parent
             _Parent.Controls.Remove(_TargetControl)
-            TopParent.Controls.Add(_TargetControl)
 
-            ' 一番上に持っていく
+            ' トップレベルのコントロール配下に置き、一番上に持っていく。ちらつくのを防ぐため一回画面外の座標に飛ばす
+            _TargetControl.Location = New Point(-100, -100)
+            TopParent.Controls.Add(_TargetControl)
             TopParent.Controls.SetChildIndex(_TargetControl, 0)
 
-            ' マウスの位置に動かしておく
+            ' マウスポインタの位置に持ってくる
             DragMoving()
-            NotifyReadyToDrop(True)
             _TargetControl.Invalidate()
-
             _TargetControl.Cursor = Cursors.CustomCursor.Hand_Close
         End Sub
 
         Public Sub DragMoving() Implements IDragActionStrategy.DragMoving
             ' マウスの動きに追従させる
-            Dim screenPos = Cursor.Position
-            Dim clientPos = TopParent.PointToClient(screenPos)
-            clientPos.X -= _LocalPosition.X
-            clientPos.Y -= _LocalPosition.Y
+            Dim clientPos = TopParent.PointToClient(Cursor.Position)
+            clientPos.X -= _BeforeBound.OffsetLeft
+            clientPos.Y -= _BeforeBound.OffsetTop
             _TargetControl.Location = clientPos
+
+            ' ドロップ可能なコントロールを探す
+            Dim targetFound As Boolean = False
+            For Each target As DroppableAttachment In DropTargets
+                If targetFound Then
+                    ' ドロップ先が見つかった以降は全てドロップ不可
+                    target.CanDrop = False
+                Else
+                    ' ドロップエリア内に入っているか判定
+                    targetFound = target.IsRegionEnterd(_BeforeBound)
+                    target.CanDrop = targetFound
+                End If
+            Next
+
         End Sub
 
         Public Sub EndDrag() Implements IDragActionStrategy.EndDrag
@@ -62,46 +78,19 @@ Namespace Strategies
                 ' ドロップ先があればドロップする
                 Dim screenPos = Cursor.Position
                 Dim clientPos = dest.TargetControl.PointToClient(screenPos)
-                clientPos.X -= _LocalPosition.X
-                clientPos.Y -= _LocalPosition.Y
+                clientPos.X -= _BeforeBound.OffsetLeft
+                clientPos.Y -= _BeforeBound.OffsetTop
                 dest.Drop(_TargetControl, clientPos)
             Else
                 ' だめなら戻す
                 _Parent.Controls.Add(_TargetControl)
-                _TargetControl.Location = _BeforePosition
+                _TargetControl.Location = _BeforeBound.Location
                 _Parent.Controls.SetChildIndex(_TargetControl, _BeforeChildIndex)
             End If
-
-            NotifyReadyToDrop(False)
 
             _TargetControl.Cursor = Cursors.CustomCursor.Hand_Open
         End Sub
 
-
-        ''' <summary>
-        ''' ドロップ先コントロールにドロップ待受状態にするかを通知する
-        ''' </summary>
-        ''' <param name="isReady">ドロップ待受状態にするか</param>
-        Private Sub NotifyReadyToDrop(isReady As Boolean)
-            Dim padding As Padding
-
-            If isReady Then
-                padding = New Padding(_LocalPosition.X, _LocalPosition.Y, 0, 0)
-                padding.Right = _TargetControl.Width - padding.Left
-                padding.Bottom = _TargetControl.Height - padding.Top
-            End If
-
-            For Each attachment As DroppableAttachment In DropTargets
-                If attachment.TargetControl Is Me._Parent Then
-                    ' 自分が所属するフレームにはドロップできなくする
-                    attachment.ReadyToDrop = False
-                Else
-                    attachment.ReadyToDrop = isReady
-                End If
-
-                attachment.DropObjectPadding = padding
-            Next
-        End Sub
 
     End Class
 End Namespace
