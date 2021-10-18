@@ -1,6 +1,7 @@
 ﻿Option Explicit On
 Option Strict On
 
+Imports System.ComponentModel
 Imports System.Windows.Forms
 Imports ControlAttachment.State
 
@@ -23,6 +24,9 @@ Namespace Activity
         Private _HighlightingAction As IHighlightingActionStrategy
         Private _DragAction As IDragActionStrategy
         Private _ChildNativeWindows As List(Of ChildNativeWindow)
+
+        Public Event BeforeDrag As EventHandler(Of CancelEventArgs)
+        Public Event AfterDrag As EventHandler(Of EventArgs)
 
         Public Sub New(targetControl As Control, dragActionStrategy As IDragActionStrategy, Optional isHookChildren As Boolean = True)
             _TargetControl = targetControl
@@ -86,11 +90,16 @@ Namespace Activity
 
             Select Case m.Msg
                 Case WM_LBUTTONDOWN
+                    ' ドラッグ開始してよいか判定
+                    Dim args As CancelEventArgs = New CancelEventArgs(False)
+                    RaiseEvent BeforeDrag(Me, args)
+                    If args.Cancel Then Return
                     ' ドラッグ開始
                     _DragAction.BiginDrag()
                     _IsGrabbed = True
                     ' ドラッグ対象のハイライト開始
                     _HighlightingAction?.BeginHighlight(_TargetControl)
+                    RaiseEvent AfterDrag(Me, EventArgs.Empty)
 
                 Case WM_MOUSEMOVE
                     If Not _IsGrabbed Then Return

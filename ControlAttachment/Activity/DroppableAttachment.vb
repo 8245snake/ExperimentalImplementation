@@ -16,7 +16,6 @@ Namespace Activity
         Private _HighlightingAction As IHighlightingActionStrategy
         Private _canDrop As Boolean
 
-
         Public Property CanDrop As Boolean
             Get
                 Return _canDrop
@@ -101,6 +100,7 @@ Namespace Activity
         End Function
 
         Public Sub Drop(chiled As Control, dropPosition As Point)
+            ' TODO ドロップ処理を汎用的に（ストラテジーに出す？）
             _TargetControl.Controls.Add(chiled)
             chiled.Location = dropPosition
             CanDrop = False
