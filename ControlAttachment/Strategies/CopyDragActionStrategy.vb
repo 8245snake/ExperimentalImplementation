@@ -8,10 +8,10 @@ Imports ControlAttachment.Activity
 Namespace Strategies
 
     ''' <summary>
-    ''' ドラッグ移動のストラテジ。
-    ''' 複製せず常に１つのオブジェクトを移動させる操作に使用する。
+    ''' ドラッグ複製のストラテジ。
+    ''' 複数回ドロップするときに使用する。
     ''' </summary>
-    Public Class MovingDragActionStrategy
+    Public Class CopyDragActionStrategy
         Implements IDragActionStrategy
 
         Public Property TopParent As Control Implements IDragActionStrategy.TopParent
@@ -22,9 +22,12 @@ Namespace Strategies
         Private _BeforeBound As DragObjectBound
         Private _BeforeChildIndex As Integer
 
+        Private _PictureBox As PictureBox
+
         Public Sub New(targetControl As Control)
             _TargetControl = targetControl
             DropTargets = New List(Of DroppableAttachment)()
+            _PictureBox = New PictureBox()
         End Sub
 
         Public Sub BiginDrag() Implements IDragActionStrategy.BiginDrag
@@ -37,6 +40,14 @@ Namespace Strategies
             ' 親を保存
             _Parent = _TargetControl.Parent
             _Parent.Controls.Remove(_TargetControl)
+
+            ' ゴーストを残す
+            _PictureBox.Size = _TargetControl.Size
+            Dim bmp As New Bitmap(_TargetControl.Width, _TargetControl.Height)
+            _TargetControl.DrawToBitmap(bmp, New Rectangle(0, 0, _TargetControl.Width, _TargetControl.Height))
+            _PictureBox.Image = bmp
+            _PictureBox.Location = _BeforeBound.Location
+            _Parent.Controls.Add(_PictureBox)
 
             ' トップレベルのコントロール配下に置き、一番上に持っていく。ちらつくのを防ぐため一回画面外の座標に飛ばす
             _TargetControl.Location = New Point(-100, -100)
@@ -72,24 +83,16 @@ Namespace Strategies
         End Sub
 
         Public Sub EndDrag() Implements IDragActionStrategy.EndDrag
-
-            Dim dest = DropTargets.FirstOrDefault(Function(item) item.CanDrop)
-            If dest IsNot Nothing Then
-                ' ドロップ先があればドロップする
-                Dim screenPos = Cursor.Position
-                Dim clientPos = dest.TargetControl.PointToClient(screenPos)
-                clientPos.X -= _BeforeBound.OffsetLeft
-                clientPos.Y -= _BeforeBound.OffsetTop
-                dest.Drop(_TargetControl, clientPos)
-            Else
-                ' だめなら戻す
+            Try
                 _Parent.Controls.Add(_TargetControl)
                 _TargetControl.Location = _BeforeBound.Location
                 _Parent.Controls.SetChildIndex(_TargetControl, _BeforeChildIndex)
-            End If
-
-            _TargetControl.Cursor = Cursors.CustomCursor.Hand_Open
+                _PictureBox.Image = Nothing
+                _TargetControl.Cursor = Cursors.CustomCursor.Hand_Open
+            Catch
+            End Try
         End Sub
+
 
 
     End Class

@@ -46,6 +46,8 @@ Partial Class MainForm
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.txtReizaeable = New System.Windows.Forms.TextBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.panelCopy1 = New System.Windows.Forms.Panel()
+        Me.lblCopy1 = New System.Windows.Forms.Label()
         Me.panelMove1 = New System.Windows.Forms.Panel()
         Me.lblMove = New System.Windows.Forms.Label()
         Me.panelTarget2 = New System.Windows.Forms.Panel()
@@ -58,6 +60,7 @@ Partial Class MainForm
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
+        Me.panelCopy1.SuspendLayout()
         Me.panelMove1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -310,6 +313,7 @@ Partial Class MainForm
         '
         'GroupBox7
         '
+        Me.GroupBox7.Controls.Add(Me.panelCopy1)
         Me.GroupBox7.Controls.Add(Me.panelMove1)
         Me.GroupBox7.Controls.Add(Me.panelTarget2)
         Me.GroupBox7.Controls.Add(Me.panelTarget1)
@@ -319,6 +323,25 @@ Partial Class MainForm
         Me.GroupBox7.TabIndex = 12
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "ドラッグドロップ可能化"
+        '
+        'panelCopy1
+        '
+        Me.panelCopy1.BackColor = System.Drawing.Color.MistyRose
+        Me.panelCopy1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panelCopy1.Controls.Add(Me.lblCopy1)
+        Me.panelCopy1.Location = New System.Drawing.Point(130, 22)
+        Me.panelCopy1.Name = "panelCopy1"
+        Me.panelCopy1.Size = New System.Drawing.Size(94, 31)
+        Me.panelCopy1.TabIndex = 5
+        '
+        'lblCopy1
+        '
+        Me.lblCopy1.AutoSize = True
+        Me.lblCopy1.Location = New System.Drawing.Point(4, 8)
+        Me.lblCopy1.Name = "lblCopy1"
+        Me.lblCopy1.Size = New System.Drawing.Size(58, 15)
+        Me.lblCopy1.TabIndex = 3
+        Me.lblCopy1.Text = "コピー可能"
         '
         'panelMove1
         '
@@ -335,9 +358,9 @@ Partial Class MainForm
         Me.lblMove.AutoSize = True
         Me.lblMove.Location = New System.Drawing.Point(4, 8)
         Me.lblMove.Name = "lblMove"
-        Me.lblMove.Size = New System.Drawing.Size(63, 15)
+        Me.lblMove.Size = New System.Drawing.Size(55, 15)
         Me.lblMove.TabIndex = 3
-        Me.lblMove.Text = "ドラッグ可能"
+        Me.lblMove.Text = "移動可能"
         '
         'panelTarget2
         '
@@ -381,6 +404,8 @@ Partial Class MainForm
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.GroupBox7.ResumeLayout(False)
+        Me.panelCopy1.ResumeLayout(False)
+        Me.panelCopy1.PerformLayout()
         Me.panelMove1.ResumeLayout(False)
         Me.panelMove1.PerformLayout()
         Me.ResumeLayout(False)
@@ -415,4 +440,6 @@ Partial Class MainForm
     Friend WithEvents lblMove As Label
     Friend WithEvents panelMove1 As Panel
     Friend WithEvents chkAction3 As CheckBox
+    Friend WithEvents panelCopy1 As Panel
+    Friend WithEvents lblCopy1 As Label
 End Class

@@ -16,6 +16,7 @@ Namespace Activity
         Private Const WM_PAINT = &HF
         Private Const WM_NCPAINT = &H85
         Private Const WM_MOUSEMOVE = &H200
+        Private Const WM_MOUSELEAVE = &H2A3
         Private Const WM_LBUTTONDOWN = &H201
         Private Const WM_LBUTTONUP = &H202
 
@@ -95,7 +96,7 @@ Namespace Activity
                     If Not _IsGrabbed Then Return
                     _DragAction.DragMoving()
 
-                Case WM_LBUTTONUP
+                Case WM_LBUTTONUP, WM_MOUSELEAVE
                     If Not _IsGrabbed Then Return
                     ' ドラッグ終了
                     _DragAction.EndDrag()
