@@ -12,7 +12,7 @@ Imports ControlReference.Strategies
 Public Class MainForm
 
     Private _LimitSizes As ComboItemModelHolder(Of LimitSetterCommand)
-    Private _highlightingManager As HighlightingManager = New HighlightingManager(New BorderDrawActionStrategy())
+    Private _highlightingManager As HighlightingManager = New HighlightingManager(New BorderDrawStrategy())
 
     Public Sub New()
         InitializeComponent()
@@ -34,8 +34,8 @@ Public Class MainForm
         ' ドラッグ可能にする
         Dim moving = New DraggableAttachment(panelMove1, New MovingDraggingMotionStrategy(panelMove1))
         Dim copy = New DraggableAttachment(panelCopy1, New CopyDraggingMotionStrategy(panelCopy1))
-        Dim target1 = New DroppableAttachment(panelTarget1, New BorderDrawActionStrategy())
-        Dim target2 = New DroppableAttachment(panelTarget2, New FillActionStrategy())
+        Dim target1 = New DroppableAttachment(panelTarget1, New BorderDrawStrategy())
+        Dim target2 = New DroppableAttachment(panelTarget2, New FillStrategy())
         moving.AddDropTarget(target1)
         moving.AddDropTarget(target2)
         copy.AddDropTarget(target1)
@@ -89,13 +89,13 @@ Public Class MainForm
 
     Private Iterator Function GetErrorActionStrategy() As IEnumerable(Of IErrorActionStrategy)
         If chkAction1.Checked Then
-            Yield New BorderDrawActionStrategy()
+            Yield New BorderDrawStrategy()
         End If
         If chkAction2.Checked Then
             Yield New LabelWritingErrorActionStrategy(lblValidate, "エラー")
         End If
         If chkAction3.Checked Then
-            Yield New FillActionStrategy()
+            Yield New FillStrategy()
         End If
     End Function
 
@@ -128,9 +128,9 @@ Public Class MainForm
     Private Sub chkBlink_CheckedChanged(sender As Object, e As EventArgs) Handles chkBlink.CheckedChanged
         Dim ctrl As Control = _highlightingManager.HighlightingControl
         If chkBlink.Checked Then
-            _highlightingManager.HighlightingActionStrategy = New BorderDrawActionStrategy(isBlinkEnable:=True)
+            _highlightingManager.HighlightingStrategy = New BorderDrawStrategy(isBlinkEnable:=True)
         Else
-            _highlightingManager.HighlightingActionStrategy = New BorderDrawActionStrategy()
+            _highlightingManager.HighlightingStrategy = New BorderDrawStrategy()
         End If
         _highlightingManager.HighlightingControl = ctrl
     End Sub
@@ -147,7 +147,7 @@ Class LimitSetterCommand
 
     Public Sub SetLimit(textbox As TextBox, label As Label)
         ' 背景色塗りつぶしとラベルアラートを重ねがけ
-        Dim strategy = New FillActionStrategy(New LabelWritingErrorActionStrategy(label, $"バイト数の最大値({Me.Size})を超えることはできません"))
+        Dim strategy = New FillStrategy(New LabelWritingErrorActionStrategy(label, $"バイト数の最大値({Me.Size})を超えることはできません"))
         textbox.AttachMaxByteSize(Me.Size, strategy)
     End Sub
 

@@ -12,22 +12,22 @@ Namespace State
         Inherits NativeWindow
 
         Private _HighlightingControl As Control
-        Private _HighlightingActionStrategy As IHighlightingActionStrategy
+        Private _highlightingStrategy As IHighlightingStrategy
 
         ''' <summary>
         ''' ハイライトするロジックを取得または設定する
         ''' </summary>
-        Public Property HighlightingActionStrategy As IHighlightingActionStrategy
+        Public Property HighlightingStrategy As IHighlightingStrategy
             Get
-                Return _HighlightingActionStrategy
+                Return _highlightingStrategy
             End Get
             Set
-                If _HighlightingActionStrategy IsNot Nothing Then
+                If _highlightingStrategy IsNot Nothing Then
                     ' ハイライト停止
                     EndHighlight(_HighlightingControl)
                 End If
-                _HighlightingActionStrategy = Value
-                If _HighlightingActionStrategy IsNot Nothing AndAlso _HighlightingControl IsNot Nothing Then
+                _highlightingStrategy = Value
+                If _highlightingStrategy IsNot Nothing AndAlso _HighlightingControl IsNot Nothing Then
                     ' ハイライト開始
                     BeginHighlight(_HighlightingControl)
                 End If
@@ -54,9 +54,9 @@ Namespace State
         ''' <summary>
         ''' ハイライトロジックを指定してオブジェクトを初期化する
         ''' </summary>
-        ''' <param name="highlightingActionStrategy">ハイライトロジック</param>
-        Public Sub New(highlightingActionStrategy As IHighlightingActionStrategy)
-            _HighlightingActionStrategy = highlightingActionStrategy
+        ''' <param name="highlightingStrategy">ハイライトロジック</param>
+        Public Sub New(highlightingStrategy As IHighlightingStrategy)
+            _highlightingStrategy = highlightingStrategy
         End Sub
 
         Private Sub OnHandleCreated(sender As Object, e As EventArgs)
@@ -86,7 +86,7 @@ Namespace State
 
             If m.Msg = WM_PAINT Then
                 ' ハイライト描画する
-                _HighlightingActionStrategy?.Highlight(_HighlightingControl)
+                _highlightingStrategy?.Highlight(_HighlightingControl)
             End If
 
         End Sub
@@ -126,7 +126,7 @@ Namespace State
         ''' <param name="control">対象コントロール</param>
         Private Sub AssignToHighlight(control As Control)
             AssignHandle(control.Handle)
-            _HighlightingActionStrategy.BeginHighlight(control)
+            _highlightingStrategy.BeginHighlight(control)
             control.Parent.Refresh()
         End Sub
 
@@ -136,7 +136,7 @@ Namespace State
         ''' <param name="control">対象コントロール</param>
         Private Sub EndHighlight(control As Control)
             If control IsNot Nothing Then
-                _HighlightingActionStrategy.EndHighlight(control)
+                _highlightingStrategy.EndHighlight(control)
                 control.Invalidate()
             End If
             ReleaseHandle()

@@ -13,7 +13,7 @@ Namespace Activity
 
         Private Const WM_PAINT = &HF
 
-        Private _HighlightingAction As IHighlightingActionStrategy
+        Private _highlighting As IHighlightingStrategy
         Private _canDrop As Boolean
 
         Public Property CanDrop As Boolean
@@ -23,9 +23,9 @@ Namespace Activity
             Set
                 _canDrop = Value
                 If _canDrop Then
-                    _HighlightingAction?.BeginHighlight(_TargetControl)
+                    _highlighting?.BeginHighlight(_TargetControl)
                 Else
-                    _HighlightingAction?.EndHighlight(_TargetControl)
+                    _highlighting?.EndHighlight(_TargetControl)
                 End If
                 _TargetControl.Invalidate()
             End Set
@@ -50,9 +50,9 @@ Namespace Activity
 
         End Sub
 
-        Public Sub New(targetControl As Control, highlightingAction As IHighlightingActionStrategy)
+        Public Sub New(targetControl As Control, highlighting As IHighlightingStrategy)
             MyClass.New(targetControl)
-            _HighlightingAction = highlightingAction
+            _highlighting = highlighting
         End Sub
 
         Public Overrides Sub ReleaseHandle()
@@ -79,7 +79,7 @@ Namespace Activity
             Select Case m.Msg
                 Case WM_PAINT
                     If CanDrop Then
-                        _HighlightingAction?.Highlight(_TargetControl)
+                        _highlighting?.Highlight(_TargetControl)
                     End If
             End Select
 

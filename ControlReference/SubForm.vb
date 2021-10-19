@@ -14,18 +14,18 @@ Public Class SubForm
 
         ' InitializeComponent() 呼び出しの後で初期化を追加します。
 
-        _highlightingManager = New HighlightingManager(New BorderDrawActionStrategy())
+        _highlightingManager = New HighlightingManager(New BorderDrawStrategy())
         TextBox1.AttachWaterMark("なにか入力してください")
 
         ' ドラッグ可能コントロール
-        Dim a1 = New DraggableAttachment(Panel1, New MovingDraggingMotionStrategy(Panel1), New BorderDrawActionStrategy(drawOutside:=False))
-        Dim a2 = New DraggableAttachment(Panel2, New MovingDraggingMotionStrategy(Panel2), New BorderDrawActionStrategy(drawOutside:=False))
-        Dim a3 = New DraggableAttachment(Panel3, New MovingDraggingMotionStrategy(Panel3), New BorderDrawActionStrategy(drawOutside:=False))
+        Dim a1 = New DraggableAttachment(Panel1, New MovingDraggingMotionStrategy(Panel1), New BorderDrawStrategy(drawOutside:=False))
+        Dim a2 = New DraggableAttachment(Panel2, New MovingDraggingMotionStrategy(Panel2), New BorderDrawStrategy(drawOutside:=False))
+        Dim a3 = New DraggableAttachment(Panel3, New MovingDraggingMotionStrategy(Panel3), New BorderDrawStrategy(drawOutside:=False))
 
         ' ドロップ先
-        Dim drop1 = New DroppableAttachment(frameDest1, New BorderDrawActionStrategy())
-        Dim drop2 = New DroppableAttachment(frameDest2, New BorderDrawActionStrategy())
-        Dim source = New DroppableAttachment(frameSource, New BorderDrawActionStrategy())
+        Dim drop1 = New DroppableAttachment(frameDest1, New BorderDrawStrategy())
+        Dim drop2 = New DroppableAttachment(frameDest2, New BorderDrawStrategy())
+        Dim source = New DroppableAttachment(frameSource, New BorderDrawStrategy())
 
         ' 紐付け
         a1.AddDropTarget(drop1)

@@ -11,8 +11,8 @@ Namespace Strategies
     ''' <summary>
     ''' コントロールの周りを赤線で囲うアクション
     ''' </summary>
-    Public Class BorderDrawActionStrategy
-        Implements IErrorActionStrategy, IHighlightingActionStrategy
+    Public Class BorderDrawStrategy
+        Implements IErrorActionStrategy, IHighlightingStrategy
 
         Private _DrawOutside As Boolean = True
 
@@ -133,17 +133,17 @@ Namespace Strategies
             control.Parent.Update()
         End Sub
 
-        Public Sub BeginHighlight(control As Control) Implements IHighlightingActionStrategy.BeginHighlight
+        Public Sub BeginHighlight(control As Control) Implements IHighlightingStrategy.BeginHighlight
             ErrorAction(control)
             _IsHighlighting = True
         End Sub
 
-        Public Sub EndHighlight(control As Control) Implements IHighlightingActionStrategy.EndHighlight
+        Public Sub EndHighlight(control As Control) Implements IHighlightingStrategy.EndHighlight
             SuccesAction(control)
             _IsHighlighting = False
         End Sub
 
-        Public Sub Highlight(control As Control) Implements IHighlightingActionStrategy.Highlight
+        Public Sub Highlight(control As Control) Implements IHighlightingStrategy.Highlight
             If _IsHighlighting Then
                 ErrorPainting(control)
             End If

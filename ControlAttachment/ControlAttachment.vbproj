@@ -63,6 +63,7 @@
     <Compile Include="Activity\ChildNativeWindow.vb" />
     <Compile Include="Activity\DraggableAttachment.vb" />
     <Compile Include="Activity\DragObjectBound.vb" />
+    <Compile Include="Activity\DropEventArgs.vb" />
     <Compile Include="Activity\DroppableAttachment.vb" />
     <Compile Include="Activity\ResizeableAttachment.vb" />
     <Compile Include="AttachmentAttribute.vb" />
@@ -94,14 +95,14 @@
     <Compile Include="State\HighlightingManager.vb" />
     <Compile Include="State\IControlEventSession.vb" />
     <Compile Include="Activity\IDraggingMotionStrategy.vb" />
-    <Compile Include="State\IHighlightingActionStrategy.vb" />
+    <Compile Include="State\IHighlightingStrategy.vb" />
     <Compile Include="State\SessionManager.vb" />
-    <Compile Include="Strategies\FillActionStrategy.vb" />
+    <Compile Include="Strategies\FillStrategy.vb" />
     <Compile Include="Strategies\CopyDraggingMotionStrategy.vb" />
     <Compile Include="Strategies\MovingDraggingMotionStrategy.vb" />
     <Compile Include="Text\TextSizeLimitAttachment.vb" />
     <Compile Include="Text\WaterMarkAttachment.vb" />
-    <Compile Include="Strategies\BorderDrawActionStrategy.vb" />
+    <Compile Include="Strategies\BorderDrawStrategy.vb" />
     <Compile Include="Validation\IErrorActionStrategy.vb" />
     <Compile Include="Validation\ValidationAttachment.vb" />
     <Compile Include="Validation\IValidationStrategy.vb" />

@@ -21,12 +21,11 @@ Namespace Activity
         Private Const WM_LBUTTONDOWN = &H201
         Private Const WM_LBUTTONUP = &H202
 
-        Private _HighlightingAction As IHighlightingActionStrategy
+        Private _highlightingStrategy As IHighlightingStrategy
         Private _draggingMotion As IDraggingMotionStrategy
         Private _ChildNativeWindows As List(Of ChildNativeWindow)
 
         Public Event BeforeDrag As EventHandler(Of CancelEventArgs)
-        Public Event AfterDrag As EventHandler(Of EventArgs)
 
         Public Sub New(targetControl As Control, draggingMotionStrategy As IDraggingMotionStrategy, Optional isHookChildren As Boolean = True)
             _TargetControl = targetControl
@@ -59,9 +58,9 @@ Namespace Activity
         End Sub
 
 
-        Public Sub New(targetControl As Control, draggingMotionStrategy As IDraggingMotionStrategy, highlightingAction As IHighlightingActionStrategy)
+        Public Sub New(targetControl As Control, draggingMotionStrategy As IDraggingMotionStrategy, highlightingStrategy As IHighlightingStrategy)
             MyClass.New(targetControl, draggingMotionStrategy)
-            _HighlightingAction = highlightingAction
+            _highlightingStrategy = highlightingStrategy
         End Sub
 
         Public Overrides Sub ReleaseHandle()
@@ -95,11 +94,10 @@ Namespace Activity
                     RaiseEvent BeforeDrag(Me, args)
                     If args.Cancel Then Return
                     ' ドラッグ開始
-                    _draggingMotion.BiginDrag()
+                    _draggingMotion.BeginDrag()
                     _IsGrabbed = True
                     ' ドラッグ対象のハイライト開始
-                    _HighlightingAction?.BeginHighlight(_TargetControl)
-                    RaiseEvent AfterDrag(Me, EventArgs.Empty)
+                    _highlightingStrategy?.BeginHighlight(_TargetControl)
 
                 Case WM_MOUSEMOVE
                     If Not _IsGrabbed Then Return
@@ -111,13 +109,13 @@ Namespace Activity
                     _draggingMotion.EndDrag()
                     _IsGrabbed = False
                     ' ドラッグ対象のハイライト終了
-                    _HighlightingAction?.EndHighlight(_TargetControl)
+                    _highlightingStrategy?.EndHighlight(_TargetControl)
                     _TargetControl.Invalidate()
 
                 Case WM_PAINT, WM_NCPAINT
                     If Not _IsGrabbed Then Return
                     ' ドラッグ対象のハイライト
-                    _HighlightingAction?.Highlight(_TargetControl)
+                    _highlightingStrategy?.Highlight(_TargetControl)
 
             End Select
 

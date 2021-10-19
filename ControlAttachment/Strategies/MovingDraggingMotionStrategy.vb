@@ -27,7 +27,7 @@ Namespace Strategies
             DropTargets = New List(Of DroppableAttachment)()
         End Sub
 
-        Public Sub BiginDrag() Implements IDraggingMotionStrategy.BiginDrag
+        Public Sub BeginDrag() Implements IDraggingMotionStrategy.BeginDrag
 
             ' 位置を保存
             _BeforeChildIndex = _TargetControl.Parent.Controls.GetChildIndex(_TargetControl)

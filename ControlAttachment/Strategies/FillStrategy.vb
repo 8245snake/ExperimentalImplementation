@@ -7,8 +7,8 @@ Imports ControlAttachment.State
 Imports ControlAttachment.Validation
 
 Namespace Strategies
-    Public Class FillActionStrategy
-        Implements IErrorActionStrategy, IHighlightingActionStrategy
+    Public Class FillStrategy
+        Implements IErrorActionStrategy, IHighlightingStrategy
 
         Public Property Composit As IErrorActionStrategy Implements IErrorActionStrategy.Composit
 
@@ -56,15 +56,15 @@ Namespace Strategies
         Public Sub ErrorPainting(control As Control) Implements IErrorActionStrategy.ErrorPainting
         End Sub
 
-        Public Sub BeginHighlight(control As Control) Implements IHighlightingActionStrategy.BeginHighlight
+        Public Sub BeginHighlight(control As Control) Implements IHighlightingStrategy.BeginHighlight
             ErrorAction(control)
         End Sub
 
-        Public Sub EndHighlight(control As Control) Implements IHighlightingActionStrategy.EndHighlight
+        Public Sub EndHighlight(control As Control) Implements IHighlightingStrategy.EndHighlight
             SuccessAction(control)
         End Sub
 
-        Public Sub Highlight(control As Control) Implements IHighlightingActionStrategy.Highlight
+        Public Sub Highlight(control As Control) Implements IHighlightingStrategy.Highlight
         End Sub
     End Class
 End Namespace
