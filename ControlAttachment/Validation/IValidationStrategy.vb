@@ -10,7 +10,7 @@ Namespace Validation
         End Enum
 
         Property ValidationTrigger As ValidationTriggerType
-        Property Composit As IValidationStrategy
+        Property Component As IValidationStrategy
         Function Validate(control As Control) As Boolean
 
     End Interface

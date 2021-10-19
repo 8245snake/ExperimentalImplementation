@@ -93,12 +93,12 @@
     <Compile Include="State\EventSessionListener.vb" />
     <Compile Include="State\HighlightingManager.vb" />
     <Compile Include="State\IControlEventSession.vb" />
-    <Compile Include="Activity\IDragActionStrategy.vb" />
+    <Compile Include="Activity\IDraggingMotionStrategy.vb" />
     <Compile Include="State\IHighlightingActionStrategy.vb" />
     <Compile Include="State\SessionManager.vb" />
     <Compile Include="Strategies\FillActionStrategy.vb" />
-    <Compile Include="Strategies\CopyDragActionStrategy.vb" />
-    <Compile Include="Strategies\MovingDragActionStrategy.vb" />
+    <Compile Include="Strategies\CopyDraggingMotionStrategy.vb" />
+    <Compile Include="Strategies\MovingDraggingMotionStrategy.vb" />
     <Compile Include="Text\TextSizeLimitAttachment.vb" />
     <Compile Include="Text\WaterMarkAttachment.vb" />
     <Compile Include="Strategies\BorderDrawActionStrategy.vb" />

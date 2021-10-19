@@ -124,7 +124,7 @@ Namespace Validation
 
             While strategy IsNot Nothing
                 isEroor = Not strategy.Validate(_TargetControl)
-                strategy = strategy.Composit
+                strategy = strategy.Component
                 If isEroor Then Exit While
             End While
 

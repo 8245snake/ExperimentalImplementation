@@ -11,11 +11,11 @@ Namespace Strategies
     ''' ドラッグ移動のストラテジ。
     ''' 複製せず常に１つのオブジェクトを移動させる操作に使用する。
     ''' </summary>
-    Public Class MovingDragActionStrategy
-        Implements IDragActionStrategy
+    Public Class MovingDraggingMotionStrategy
+        Implements IDraggingMotionStrategy
 
-        Public Property TopParent As Control Implements IDragActionStrategy.TopParent
-        Public Property DropTargets As List(Of DroppableAttachment) Implements IDragActionStrategy.DropTargets
+        Public Property TopParent As Control Implements IDraggingMotionStrategy.TopParent
+        Public Property DropTargets As List(Of DroppableAttachment) Implements IDraggingMotionStrategy.DropTargets
 
         Private _TargetControl As Control
         Private _Parent As Control
@@ -27,7 +27,7 @@ Namespace Strategies
             DropTargets = New List(Of DroppableAttachment)()
         End Sub
 
-        Public Sub BiginDrag() Implements IDragActionStrategy.BiginDrag
+        Public Sub BiginDrag() Implements IDraggingMotionStrategy.BiginDrag
 
             ' 位置を保存
             _BeforeChildIndex = _TargetControl.Parent.Controls.GetChildIndex(_TargetControl)
@@ -49,7 +49,7 @@ Namespace Strategies
             _TargetControl.Cursor = Cursors.CustomCursor.Hand_Close
         End Sub
 
-        Public Sub DragMoving() Implements IDragActionStrategy.DragMoving
+        Public Sub DragMoving() Implements IDraggingMotionStrategy.DragMoving
             ' マウスの動きに追従させる
             Dim clientPos = TopParent.PointToClient(Cursor.Position)
             clientPos.X -= _BeforeBound.OffsetLeft
@@ -71,7 +71,7 @@ Namespace Strategies
 
         End Sub
 
-        Public Sub EndDrag() Implements IDragActionStrategy.EndDrag
+        Public Sub EndDrag() Implements IDraggingMotionStrategy.EndDrag
 
             Dim dest = DropTargets.FirstOrDefault(Function(item) item.CanDrop)
             If dest IsNot Nothing Then

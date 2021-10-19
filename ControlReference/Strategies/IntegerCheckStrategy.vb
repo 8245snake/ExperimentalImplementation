@@ -12,7 +12,7 @@ Namespace Strategies
         Implements IValidationStrategy
 
         Public Property ValidationTrigger As IValidationStrategy.ValidationTriggerType Implements IValidationStrategy.ValidationTrigger
-        Public Property Composit As IValidationStrategy Implements IValidationStrategy.Composit
+        Public Property Component As IValidationStrategy Implements IValidationStrategy.Component
 
         Public Sub New()
             ValidationTrigger = IValidationStrategy.ValidationTriggerType.TextChanged
@@ -20,7 +20,7 @@ Namespace Strategies
 
         Public Sub New(composit As IValidationStrategy)
             MyClass.New()
-            Me.Composit = composit
+            Me.Component = composit
         End Sub
 
         Public Function Validate(control As Control) As Boolean Implements IValidationStrategy.Validate

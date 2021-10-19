@@ -32,8 +32,8 @@ Public Class MainForm
         ' テキストボックスをサイズ変更可能にする
         txtReizaeable.AttachResizeable()
         ' ドラッグ可能にする
-        Dim moving = New DraggableAttachment(panelMove1, New MovingDragActionStrategy(panelMove1))
-        Dim copy = New DraggableAttachment(panelCopy1, New CopyDragActionStrategy(panelCopy1))
+        Dim moving = New DraggableAttachment(panelMove1, New MovingDraggingMotionStrategy(panelMove1))
+        Dim copy = New DraggableAttachment(panelCopy1, New CopyDraggingMotionStrategy(panelCopy1))
         Dim target1 = New DroppableAttachment(panelTarget1, New BorderDrawActionStrategy())
         Dim target2 = New DroppableAttachment(panelTarget2, New FillActionStrategy())
         moving.AddDropTarget(target1)

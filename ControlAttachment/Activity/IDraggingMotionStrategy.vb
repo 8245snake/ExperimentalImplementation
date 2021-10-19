@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms
 
 Namespace Activity
-    Public Interface IDragActionStrategy
+    Public Interface IDraggingMotionStrategy
         Property TopParent As Control
         Property DropTargets As List(Of DroppableAttachment)
         Sub BiginDrag()

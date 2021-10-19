@@ -181,12 +181,12 @@ Public Class AttachmentManager
                 Continue For
             End If
 
-            If tmpstrategy.Composit IsNot Nothing Then
-                tmpstrategy = tmpstrategy.Composit
+            If tmpstrategy.Component IsNot Nothing Then
+                tmpstrategy = tmpstrategy.Component
             End If
 
-            tmpstrategy.Composit = strategy
-            tmpstrategy = tmpstrategy.Composit
+            tmpstrategy.Component = strategy
+            tmpstrategy = tmpstrategy.Component
         Next
         Return validationStrategy
     End Function

@@ -18,9 +18,9 @@ Public Class SubForm
         TextBox1.AttachWaterMark("なにか入力してください")
 
         ' ドラッグ可能コントロール
-        Dim a1 = New DraggableAttachment(Panel1, New MovingDragActionStrategy(Panel1), New BorderDrawActionStrategy(drawOutside:=False))
-        Dim a2 = New DraggableAttachment(Panel2, New MovingDragActionStrategy(Panel2), New BorderDrawActionStrategy(drawOutside:=False))
-        Dim a3 = New DraggableAttachment(Panel3, New MovingDragActionStrategy(Panel3), New BorderDrawActionStrategy(drawOutside:=False))
+        Dim a1 = New DraggableAttachment(Panel1, New MovingDraggingMotionStrategy(Panel1), New BorderDrawActionStrategy(drawOutside:=False))
+        Dim a2 = New DraggableAttachment(Panel2, New MovingDraggingMotionStrategy(Panel2), New BorderDrawActionStrategy(drawOutside:=False))
+        Dim a3 = New DraggableAttachment(Panel3, New MovingDraggingMotionStrategy(Panel3), New BorderDrawActionStrategy(drawOutside:=False))
 
         ' ドロップ先
         Dim drop1 = New DroppableAttachment(frameDest1, New BorderDrawActionStrategy())

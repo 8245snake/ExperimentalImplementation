@@ -22,16 +22,16 @@ Namespace Activity
         Private Const WM_LBUTTONUP = &H202
 
         Private _HighlightingAction As IHighlightingActionStrategy
-        Private _DragAction As IDragActionStrategy
+        Private _draggingMotion As IDraggingMotionStrategy
         Private _ChildNativeWindows As List(Of ChildNativeWindow)
 
         Public Event BeforeDrag As EventHandler(Of CancelEventArgs)
         Public Event AfterDrag As EventHandler(Of EventArgs)
 
-        Public Sub New(targetControl As Control, dragActionStrategy As IDragActionStrategy, Optional isHookChildren As Boolean = True)
+        Public Sub New(targetControl As Control, draggingMotionStrategy As IDraggingMotionStrategy, Optional isHookChildren As Boolean = True)
             _TargetControl = targetControl
             _TargetControl.Cursor = Cursors.CustomCursor.Hand_Open
-            _DragAction = dragActionStrategy
+            _draggingMotion = draggingMotionStrategy
 
             If _TargetControl.IsHandleCreated Then
                 AssignHandle(_TargetControl.Handle)
@@ -44,7 +44,7 @@ Namespace Activity
             ' 最上位の親を探す
             Dim parent As Control = _TargetControl.Parent
             While parent IsNot Nothing
-                _DragAction.TopParent = parent
+                _draggingMotion.TopParent = parent
                 parent = parent.Parent
             End While
 
@@ -59,8 +59,8 @@ Namespace Activity
         End Sub
 
 
-        Public Sub New(targetControl As Control, dragActionStrategy As IDragActionStrategy, highlightingAction As IHighlightingActionStrategy)
-            MyClass.New(targetControl, dragActionStrategy)
+        Public Sub New(targetControl As Control, draggingMotionStrategy As IDraggingMotionStrategy, highlightingAction As IHighlightingActionStrategy)
+            MyClass.New(targetControl, draggingMotionStrategy)
             _HighlightingAction = highlightingAction
         End Sub
 
@@ -69,7 +69,7 @@ Namespace Activity
             RemoveHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
 
             _TargetControl = Nothing
-            _DragAction = Nothing
+            _draggingMotion = Nothing
             _ChildNativeWindows?.Clear()
 
             MyBase.ReleaseHandle()
@@ -95,7 +95,7 @@ Namespace Activity
                     RaiseEvent BeforeDrag(Me, args)
                     If args.Cancel Then Return
                     ' ドラッグ開始
-                    _DragAction.BiginDrag()
+                    _draggingMotion.BiginDrag()
                     _IsGrabbed = True
                     ' ドラッグ対象のハイライト開始
                     _HighlightingAction?.BeginHighlight(_TargetControl)
@@ -103,12 +103,12 @@ Namespace Activity
 
                 Case WM_MOUSEMOVE
                     If Not _IsGrabbed Then Return
-                    _DragAction.DragMoving()
+                    _draggingMotion.DragMoving()
 
                 Case WM_LBUTTONUP, WM_MOUSELEAVE
                     If Not _IsGrabbed Then Return
                     ' ドラッグ終了
-                    _DragAction.EndDrag()
+                    _draggingMotion.EndDrag()
                     _IsGrabbed = False
                     ' ドラッグ対象のハイライト終了
                     _HighlightingAction?.EndHighlight(_TargetControl)
@@ -124,7 +124,7 @@ Namespace Activity
         End Sub
 
         Public Sub AddDropTarget(droppableAttachment As DroppableAttachment)
-            _DragAction.DropTargets.Add(droppableAttachment)
+            _draggingMotion.DropTargets.Add(droppableAttachment)
         End Sub
 
     End Class
