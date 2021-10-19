@@ -88,6 +88,17 @@ Namespace Strategies
                 _TargetControl.Location = _BeforeBound.Location
                 _Parent.Controls.SetChildIndex(_TargetControl, _BeforeChildIndex)
                 _PictureBox.Image = Nothing
+
+                Dim dest = DropTargets.FirstOrDefault(Function(item) item.CanDrop)
+                If dest IsNot Nothing Then
+                    Dim screenPos = Cursor.Position
+                    Dim clientPos = dest.TargetControl.PointToClient(screenPos)
+                    clientPos.X -= _BeforeBound.OffsetLeft
+                    clientPos.Y -= _BeforeBound.OffsetTop
+                    ' イベント発火
+                    dest.RaiseDrop(_TargetControl, clientPos)
+                End If
+
                 _TargetControl.Cursor = Cursors.CustomCursor.Hand_Open
             Catch
             End Try

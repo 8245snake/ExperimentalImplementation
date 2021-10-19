@@ -80,7 +80,9 @@ Namespace Strategies
                 Dim clientPos = dest.TargetControl.PointToClient(screenPos)
                 clientPos.X -= _BeforeBound.OffsetLeft
                 clientPos.Y -= _BeforeBound.OffsetTop
-                dest.Drop(_TargetControl, clientPos)
+                _TargetControl.Location = clientPos
+                dest.TargetControl.Controls.Add(_TargetControl)
+                dest.RaiseDrop(_TargetControl, clientPos)
             Else
                 ' だめなら戻す
                 _Parent.Controls.Add(_TargetControl)
