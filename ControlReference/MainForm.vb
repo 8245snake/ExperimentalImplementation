@@ -92,7 +92,7 @@ Public Class MainForm
             Yield New BorderDrawStrategy()
         End If
         If chkAction2.Checked Then
-            Yield New LabelWritingErrorActionStrategy(lblValidate, "エラー")
+            Yield New LabelWritingErrorActionStrategy(lblValidate)
         End If
         If chkAction3.Checked Then
             Yield New FillStrategy()
@@ -147,7 +147,7 @@ Class LimitSetterCommand
 
     Public Sub SetLimit(textbox As TextBox, label As Label)
         ' 背景色塗りつぶしとラベルアラートを重ねがけ
-        Dim strategy = New FillStrategy(New LabelWritingErrorActionStrategy(label, $"バイト数の最大値({Me.Size})を超えることはできません"))
+        Dim strategy = New FillStrategy(New LabelWritingErrorActionStrategy(label))
         textbox.AttachMaxByteSize(Me.Size, strategy)
     End Sub
 

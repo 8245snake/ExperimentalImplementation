@@ -23,14 +23,16 @@ Namespace Strategies
             Me.Component = composit
         End Sub
 
-        Public Function Validate(control As Control) As Boolean Implements IValidationStrategy.Validate
+        Public Function Validate(control As Control) As ValidationResult Implements IValidationStrategy.Validate
 
             If String.IsNullOrWhiteSpace(control.Text) Then
-                Return True
+                Return New ValidationResult(True, "")
             End If
 
             ' 整数かチェック
-            Return Integer.TryParse(control.Text, 1)
+            Dim success = Integer.TryParse(control.Text, 1)
+            Dim msg = If(success, "成功", "整数ではありません")
+            Return New ValidationResult(success, msg)
         End Function
 
     End Class

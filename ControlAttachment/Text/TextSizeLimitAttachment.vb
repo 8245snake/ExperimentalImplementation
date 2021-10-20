@@ -111,7 +111,7 @@ Namespace Text
             Else
                 _TargetControl.SelectedText = inputText.Substring(0, remainByteCount)
                 ' 切られたときにアラートを出す
-                ErrorActionStrategy?.ErrorAction(_TargetControl)
+                ErrorActionStrategy?.ErrorAction(_TargetControl, New ValidationResult(False, "文字数超過"))
             End If
         End Sub
 
@@ -141,7 +141,7 @@ Namespace Text
             Dim strategy = ErrorActionStrategy
 
             While strategy IsNot Nothing
-                strategy.SuccessAction(_TargetControl)
+                strategy.SuccessAction(_TargetControl, New ValidationResult(True, ""))
                 strategy = strategy.Composit
             End While
 
@@ -152,7 +152,7 @@ Namespace Text
             Dim strategy = ErrorActionStrategy
 
             While strategy IsNot Nothing
-                strategy.ErrorAction(_TargetControl)
+                strategy.ErrorAction(_TargetControl, New ValidationResult(False, "エラー"))
                 strategy = strategy.Composit
             End While
 

@@ -11,7 +11,7 @@ Namespace Validation
 
         Property ValidationTrigger As ValidationTriggerType
         Property Component As IValidationStrategy
-        Function Validate(control As Control) As Boolean
+        Function Validate(control As Control) As ValidationResult
 
     End Interface
 End Namespace

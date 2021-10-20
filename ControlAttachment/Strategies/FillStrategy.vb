@@ -38,7 +38,7 @@ Namespace Strategies
             Me.Composit = composit
         End Sub
 
-        Public Sub ErrorAction(control As Control) Implements IErrorActionStrategy.ErrorAction
+        Public Sub ErrorAction(control As Control, result As ValidationResult) Implements IErrorActionStrategy.ErrorAction
             If NormalColor = Color.Empty OrElse control.Handle <> Handle Then
                 ' 通常時の背景色を保持しておく
                 NormalColor = control.BackColor
@@ -47,7 +47,7 @@ Namespace Strategies
             control.BackColor = ErrorColor
         End Sub
 
-        Public Sub SuccessAction(control As Control) Implements IErrorActionStrategy.SuccessAction
+        Public Sub SuccessAction(control As Control, result As ValidationResult) Implements IErrorActionStrategy.SuccessAction
             If NormalColor <> Color.Empty AndAlso control.Handle = Handle Then
                 control.BackColor = NormalColor
             End If
@@ -57,11 +57,11 @@ Namespace Strategies
         End Sub
 
         Public Sub BeginHighlight(control As Control) Implements IHighlightingStrategy.BeginHighlight
-            ErrorAction(control)
+            ErrorAction(control, New ValidationResult(True, ""))
         End Sub
 
         Public Sub EndHighlight(control As Control) Implements IHighlightingStrategy.EndHighlight
-            SuccessAction(control)
+            SuccessAction(control, New ValidationResult(True, ""))
         End Sub
 
         Public Sub Highlight(control As Control) Implements IHighlightingStrategy.Highlight

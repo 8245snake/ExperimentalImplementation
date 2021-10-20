@@ -59,14 +59,14 @@ Namespace Strategies
             _TargetControl?.Refresh()
         End Sub
 
-        Public Sub ErrorAction(control As Control) Implements IErrorActionStrategy.ErrorAction
+        Public Sub ErrorAction(control As Control, result As ValidationResult) Implements IErrorActionStrategy.ErrorAction
             If IsBlinkEnable Then
                 _TargetControl = control
                 tmrBlink.Enabled = True
             End If
         End Sub
 
-        Public Sub SuccesAction(control As Control) Implements IErrorActionStrategy.SuccessAction
+        Public Sub SuccessAction(control As Control, result As ValidationResult) Implements IErrorActionStrategy.SuccessAction
 
             If IsBlinkEnable Then
                 tmrBlink.Enabled = False
@@ -134,12 +134,12 @@ Namespace Strategies
         End Sub
 
         Public Sub BeginHighlight(control As Control) Implements IHighlightingStrategy.BeginHighlight
-            ErrorAction(control)
+            ErrorAction(control, New ValidationResult(True, ""))
             _IsHighlighting = True
         End Sub
 
         Public Sub EndHighlight(control As Control) Implements IHighlightingStrategy.EndHighlight
-            SuccesAction(control)
+            SuccessAction(control, New ValidationResult(True, ""))
             _IsHighlighting = False
         End Sub
 

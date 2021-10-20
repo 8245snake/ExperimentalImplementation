@@ -51,7 +51,7 @@ Namespace Validation
 
         Public Overrides Sub ReleaseHandle()
             ' バリデーションを解除する前にもとの状態に戻す
-            SucceedAll()
+            SucceedAll(New ValidationResult(True, ""))
             RemoveHandler _TargetControl.HandleCreated, AddressOf OnHandleCreated
             RemoveHandler _TargetControl.HandleDestroyed, AddressOf OnHandleDestroyed
             RemoveHandler _TargetControl.Validating, AddressOf OnValidating
@@ -105,50 +105,53 @@ Namespace Validation
             Next
 
             ' エラー判定
-            _IsError = ValidateAll()
+            Dim result = ValidateAll()
+            _IsError = Not result.Success
 
             If _IsError Then
                 ' エラー時のアクション
-                ErrorAll()
+                ErrorAll(result)
             Else
                 ' 成功時のアクション
-                SucceedAll()
+                SucceedAll(result)
             End If
 
             _TargetControl.Invalidate()
         End Sub
 
-        Private Function ValidateAll() As Boolean
-            Dim isEroor = False
+        Private Function ValidateAll() As ValidationResult
+
             Dim strategy = _ValidationStrategy
 
             While strategy IsNot Nothing
-                isEroor = Not strategy.Validate(_TargetControl)
+                Dim result As ValidationResult = strategy.Validate(_TargetControl)
+                If Not result.Success Then
+                    Return result
+                End If
                 strategy = strategy.Component
-                If isEroor Then Exit While
             End While
 
-            Return isEroor
+            Return New ValidationResult(True, "")
 
         End Function
 
-        Private Sub SucceedAll()
+        Private Sub SucceedAll(result As ValidationResult)
 
             Dim strategy = _ErrorActionStrategy
 
             While strategy IsNot Nothing
-                strategy.SuccessAction(_TargetControl)
+                strategy.SuccessAction(_TargetControl, result)
                 strategy = strategy.Composit
             End While
 
         End Sub
 
-        Private Sub ErrorAll()
+        Private Sub ErrorAll(result As ValidationResult)
 
             Dim strategy = _ErrorActionStrategy
 
             While strategy IsNot Nothing
-                strategy.ErrorAction(_TargetControl)
+                strategy.ErrorAction(_TargetControl, result)
                 strategy = strategy.Composit
             End While
 

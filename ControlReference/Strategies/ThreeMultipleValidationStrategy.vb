@@ -24,22 +24,31 @@ Namespace Strategies
         End Sub
 
 
-        Public Function Validate(control As Control) As Boolean Implements IValidationStrategy.Validate
+        Public Function Validate(control As Control) As ValidationResult Implements IValidationStrategy.Validate
+            Dim result As ValidationResult
 
             If String.IsNullOrWhiteSpace(control.Text) Then
-                Return True
+                result.Success = True
+                result.Message = ""
+                Return result
             End If
 
             Dim val As Integer
             If Not Integer.TryParse(control.Text, val) Then
-                Return False
+                result.Success = False
+                result.Message = "整数ではありません"
+                Return result
             End If
 
             If val Mod 3 = 0 Then
-                Return True
+                result.Success = True
+                result.Message = ""
+                Return result
             End If
 
-            Return False
+            result.Success = False
+            result.Message = "3の倍数ではありません"
+            Return result
 
         End Function
     End Class
