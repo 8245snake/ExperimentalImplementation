@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30320.27
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ControlTest", "ControlTest\ControlTest.vbproj", "{C0D5FE2A-6953-432A-B13D-F94CB11656CE}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ControlReference", "ControlReference\ControlReference.vbproj", "{00EA0A1A-4DAA-45D6-8073-14D44157F751}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ControlAttachment", "ControlAttachment\ControlAttachment.vbproj", "{86D39686-4D7E-4745-B98B-5AEA3ECDF7A0}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DiagnosticLogging", "DiagnosticLogging\DiagnosticLogging.vbproj", "{8443D6FA-7923-493B-903B-2BA94DDB5907}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{86D39686-4D7E-4745-B98B-5AEA3ECDF7A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86D39686-4D7E-4745-B98B-5AEA3ECDF7A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86D39686-4D7E-4745-B98B-5AEA3ECDF7A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8443D6FA-7923-493B-903B-2BA94DDB5907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8443D6FA-7923-493B-903B-2BA94DDB5907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8443D6FA-7923-493B-903B-2BA94DDB5907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8443D6FA-7923-493B-903B-2BA94DDB5907}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
