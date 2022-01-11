@@ -13,6 +13,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ControlAttachment", "Contro
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DiagnosticLogging", "DiagnosticLogging\DiagnosticLogging.vbproj", "{8443D6FA-7923-493B-903B-2BA94DDB5907}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveProfiler", "ReactiveProfiler\ReactiveProfiler.csproj", "{8293515D-9D72-477D-A87F-C5F0C4663034}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{8443D6FA-7923-493B-903B-2BA94DDB5907}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8443D6FA-7923-493B-903B-2BA94DDB5907}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8443D6FA-7923-493B-903B-2BA94DDB5907}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8293515D-9D72-477D-A87F-C5F0C4663034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8293515D-9D72-477D-A87F-C5F0C4663034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8293515D-9D72-477D-A87F-C5F0C4663034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8293515D-9D72-477D-A87F-C5F0C4663034}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
